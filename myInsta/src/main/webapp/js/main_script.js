@@ -15,7 +15,7 @@ $(() => {
                 const cntlikes = $(newArticle).find(".con_cntlikes");
                 let numcnt = Number(cntlikes.text());
 
-                console.log(str);
+              
                 if ($(this).attr("src") == "./images/heart.png") {
                     $(this).attr("src", "./images/emptyheart.png");
                     cntlikes.text(numcnt - 1);
