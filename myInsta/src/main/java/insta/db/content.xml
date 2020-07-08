@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Content">
+
+  <select id="selectComment" resultType="com.koreait.CommentDTO" parameterType="int">
+	SELECT m_userid as coUserid, 
+	co_text as coText,
+	TIMESTAMPDIFF(MINUTE, NOW(),tb_comment.co_regdate) as coRegdate
+	FROM tb_comment JOIN tb_member 
+	ON m_idx=co_useridx WHERE co_mcidx=${mcidx};
+  </select>
+  
+  
+</mapper>

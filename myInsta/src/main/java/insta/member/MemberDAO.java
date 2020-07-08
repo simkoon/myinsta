@@ -5,15 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import insta.member.MemberDTO;
 
 import insta.db.DBConn;
+import insta.db.SqlMapConfig;
 
 public class MemberDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	MemberDTO member;
+	
+	
+	
+	
 	
 	public int join(MemberDTO member) {
 		String sql ="INSERT INTO tb_member(m_userid,m_password,m_username,m_email) VALUES (?,PASSWORD(?),?,?)";

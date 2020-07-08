@@ -1,28 +1,28 @@
 package com.koreait;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import insta.db.DBConn;
+import insta.db.SqlMapConfig;
 
 public class ContentDAO {
 	private static Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-		if (conn == null) {
-			String url = "jdbc:mariadb://localhost:3306/insta";
-			String id = "root";
-			String pw = "1234";
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection(url, id, pw);
+	SqlSessionFactory sessionf = SqlMapConfig.getSqlMapInstance();
+	SqlSession sqlsession;
 
-		}
-		return conn;
+	public ContentDAO() {
+		sqlsession = sessionf.openSession(true);
+		System.out.println("mybatis setting success!");
 	}
 
 	public List<Content> getContents(int start) {
@@ -34,7 +34,7 @@ public class ContentDAO {
 		Content con;
 		try {
 			System.out.println("자바 스타트:" + start);
-			conn = ContentDAO.getConnection();
+			conn = DBConn.getConnection();
 			sql = "SELECT mc_idx, m_userid, mc_content,mc_taggedid,mc_taggedname,"
 					+ "mc_regdate, mc_location, mc_imageurl" + " FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx"
 					+ " ORDER BY tb_mycontent.mc_regdate LIMIT ?, 5;";
@@ -71,7 +71,7 @@ public class ContentDAO {
 		ResultSet rs = null;
 		int cnt = 0;
 		try {
-			conn = ContentDAO.getConnection();
+			conn = DBConn.getConnection();
 
 			sql = "SELECT count(l_idx) FROM tb_like WHERE l_mcidx=? ";
 			pstmt = conn.prepareStatement(sql);
@@ -94,7 +94,7 @@ public class ContentDAO {
 		ResultSet rs = null;
 		boolean isOk = false;
 		try {
-			conn = ContentDAO.getConnection();
+			conn = DBConn.getConnection();
 
 			sql = "SELECT l_idx FROM tb_like WHERE l_mcidx=? AND l_useridx=?";
 			pstmt = conn.prepareStatement(sql);
@@ -120,7 +120,7 @@ public class ContentDAO {
 		try {
 			boolean isOk = getLikeById(contentidx, useridx);
 			if (!isOk) {
-				conn = ContentDAO.getConnection();
+				conn = DBConn.getConnection();
 				sql = "INSERT INTO tb_like (l_mcidx, l_useridx) VALUES (?,?);";
 
 				pstmt = conn.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class ContentDAO {
 				result = pstmt.executeUpdate();
 				System.out.println(result);
 			} else {
-				conn = ContentDAO.getConnection();
+				conn = DBConn.getConnection();
 				sql = "DELETE FROM tb_like WHERE l_mcidx=? AND l_useridx=?";
 
 				pstmt = conn.prepareStatement(sql);
@@ -152,7 +152,7 @@ public class ContentDAO {
 		ResultSet rs = null;
 		boolean isOk = false;
 		try {
-			conn = ContentDAO.getConnection();
+			conn = DBConn.getConnection();
 
 			sql = "SELECT s_idx FROM tb_save WHERE s_mcidx=? AND s_useridx=?";
 			pstmt = conn.prepareStatement(sql);
@@ -178,16 +178,15 @@ public class ContentDAO {
 		try {
 			boolean isOk = getSaveById(contentidx, useridx);
 			if (!isOk) {
-				conn = ContentDAO.getConnection();
+				conn = DBConn.getConnection();
 				sql = "INSERT INTO tb_save (s_mcidx, s_useridx) VALUES (?,?);";
-
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, contentidx);
 				pstmt.setInt(2, useridx);
 				result = pstmt.executeUpdate();
 				System.out.println(result);
 			} else {
-				conn = ContentDAO.getConnection();
+				conn = DBConn.getConnection();
 				sql = "DELETE FROM tb_save WHERE s_mcidx=? AND s_useridx=?";
 
 				pstmt = conn.prepareStatement(sql);
@@ -201,6 +200,12 @@ public class ContentDAO {
 		}
 		System.out.println("result=" + result);
 		return result;
+	}
+
+	public List<CommentDTO> getComment(int mcidx) {
+		List<CommentDTO> comList = sqlsession.selectList("Content.selectComment",mcidx);
+		System.out.println(comList);
+		return comList;
 	}
 
 }
