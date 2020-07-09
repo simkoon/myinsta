@@ -482,15 +482,17 @@ footer .footer_area {
     position: relative;
     width: 90%;
     margin: 0 auto;
+    overflow: hidden;
 }
 .wget_hot_carousel .carousel_imgs {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     position: relative;
-    width: 100%;
+    width: 784px;
     height: 100px;
-    overflow: hidden;
+    transition: 280ms;
+  
 }
 .wget_hot_carousel .carousel_imgs div {
     display: inline-block;

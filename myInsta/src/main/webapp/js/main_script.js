@@ -190,4 +190,13 @@ $(() => {
 
     getEle();
     window.addEventListener("scroll", getEle, true);
+
+    // 위젯 회전목마
+    (() => {
+        let rShift = 0;
+        $(".nav_btnNext").on("click", function () {
+            if (rShift < 478) rShift +=98;
+            $(".wget_hot_carousel .carousel_imgs").css("right", rShift + "px");
+        });
+    })();
 });

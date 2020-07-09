@@ -75,7 +75,7 @@
 											</div>
 										</div>
 										<div class="wget_hot_carousel">
-											<div class="carousel_imgs">
+											<div class="carousel_imgs" style="right: 0px;">
 												<div>
 													<a href=""><img
 														src="https://i.pinimg.com/originals/58/be/37/58be37b384c9232b8482d62053bac2fc.png"
@@ -116,19 +116,15 @@
 														src="https://file.moyiza.kr/data/moyiza/document_files/images/2017/04/26/33cff99aed5d97fd56ddbe933cbfd1b7.jpg"
 														alt="" /></a>
 												</div>
-												<div>
-													<a href=""><img
-														src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2016/0516/IE001963941_STD.jpg"
-														alt="" /></a>
-												</div>
+
 											</div>
 
 											<div class="carousel_nav">
 												<div class="car_nav_btnBefore">
-													<a class="nav_btnBefore" href=""></a>
+													<span class="nav_btnBefore" ></span>
 												</div>
 												<div class="car_nav_btnNext">
-													<a class="nav_btnNext" href=""></a>
+													<span class="nav_btnNext"></span>
 												</div>
 											</div>
 										</div>
