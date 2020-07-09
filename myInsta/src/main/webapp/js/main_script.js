@@ -96,7 +96,7 @@ $(() => {
         }
         let sumCmt = ``;
         for (let i = 0; i < times; i++) {
-            let oneCmt = cmts[1];
+            let oneCmt = cmts[i];
             console.log(oneCmt);
             let cmtHtml =
                 /*html*/
@@ -194,8 +194,16 @@ $(() => {
     // 위젯 회전목마
     (() => {
         let rShift = 0;
+        let lShift = 0;
         $(".nav_btnNext").on("click", function () {
-            if (rShift < 478) rShift +=98;
+            if (rShift <= 465) rShift += 96;
+            $(".wget_hot_carousel .carousel_imgs").css("right", rShift + "px");
+            if (rShift > 1) {
+                $(".nav_btnBefore").css("visibility", "visible");
+            }
+        });
+        $(".nav_btnBefore").on("click", function () {
+            if (rShift > 0) rShift -= 96;
             $(".wget_hot_carousel .carousel_imgs").css("right", rShift + "px");
         });
     })();

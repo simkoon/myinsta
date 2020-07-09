@@ -28,7 +28,7 @@ public class GetContentsServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
 		int useridx = (int) session.getAttribute("idx");
-
+		String userid = request.getParameter("userid");
 		int start = Integer.parseInt(request.getParameter("start"));
 		System.out.println("서블릿스타트:" + start);
 		System.out.println(useridx);
