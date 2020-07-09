@@ -15,7 +15,6 @@ $(() => {
                 const cntlikes = $(newArticle).find(".con_cntlikes");
                 let numcnt = Number(cntlikes.text());
 
-              
                 if ($(this).attr("src") == "./images/heart.png") {
                     $(this).attr("src", "./images/emptyheart.png");
                     cntlikes.text(numcnt - 1);
@@ -50,6 +49,7 @@ $(() => {
             $(newArticle).find(".con_btnSave").attr("src", "./images/save.png");
         }
     };
+    // 태그에 링크걸기
     const getTaglink = (str) => {
         const setlink = (tag) => {
             let link =
@@ -78,15 +78,35 @@ $(() => {
                     strmap += " ";
                     return;
                 }
-
                 strmap += setlink(x) + " ";
                 return;
             }
             strmap += x + " ";
             return;
         });
-
         return strmap;
+    };
+
+    // 코멘트 2개만 가져오기
+    const getCmttwo = (cmts) => {
+        let times = cmts.length;
+
+        if (cmts.length > 2) {
+            times = 2;
+        }
+        let sumCmt = ``;
+        for (let i = 0; i < times; i++) {
+            let oneCmt = cmts[1];
+            console.log(oneCmt);
+            let cmtHtml =
+                /*html*/
+                `<p>
+                    <a class="art_account" href="/${oneCmt.coUserid}">${oneCmt.coUserid}</a>
+                    <span>&nbsp;${oneCmt.coText}</span>
+                </p>`;
+            sumCmt += cmtHtml;
+        }
+        return sumCmt;
     };
 
     const getEle = async () => {
@@ -101,7 +121,8 @@ $(() => {
                 const newthing = response.data;
                 for (let i = 0; i < newthing.result.length; i++) {
                     let one_article = newthing.result[i];
-
+                    let cmts = getCmttwo(one_article.comment);
+                    //   console.log(cmts);
                     let strHtml =
                         /*html*/
                         `<div class="main_article">
@@ -141,14 +162,7 @@ $(() => {
                                         </p>
                                         <div>
                                             <div><a class="see_allCmt">댓글 2,032개 모두 보기</a></div>
-                                            <p>
-                                                <a class="art_account" href="">myname</a>
-                                                <span>&nbsp;eodododo</span>
-                                            </p>
-                                            <p>
-                                                <a class="art_account" href="">hihih_ujjugu</a>
-                                                <span>&nbsp;eodododo</span>
-                                            </p>
+                                            ${cmts}
                                             <p><a class="art_con_time" href="">5시간 전</a></p>
                                         </div>
                                     </div>
