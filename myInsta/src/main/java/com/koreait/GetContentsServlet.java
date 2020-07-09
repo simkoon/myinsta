@@ -44,12 +44,12 @@ public class GetContentsServlet extends HttpServlet {
 		List<Content> artList = dao.getContents(start);
 		ObjectNode article = mapper.createObjectNode();
 		for (int i = 0; i < artList.size(); i++) {
-			
+			int mcidx = artList.get(i).getMc_idx();
 			article.put("idx", artList.get(i).getMc_idx());
 			article.put("content", artList.get(i).getMc_content());
 			article.put("img", artList.get(i).getMc_imageurl());
 			article.put("account", artList.get(i).getMc_useridx());
-			article.put("like", artList.get(i).getCntLikes());
+			article.put("like", dao.getCntLikes(mcidx));
 			article.put("islikeon", dao.getLikeById(artList.get(i).getMc_idx(), useridx));
 			article.put("issaveon", dao.getSaveById(artList.get(i).getMc_idx(), useridx));
 			article.set("comment", convertList(dao.getComment(artList.get(i).getMc_idx())));

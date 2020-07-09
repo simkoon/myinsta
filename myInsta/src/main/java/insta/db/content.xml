@@ -12,5 +12,16 @@
 	ON m_idx=co_useridx WHERE co_mcidx=${mcidx};
   </select>
   
+  <select id="selectContent" resultType="com.koreait.Content" parameterType="int">
+  	SELECT mc_idx, m_userid as mc_useridx, 
+  	mc_content,mc_taggedid,mc_taggedname, 
+ 	mc_regdate, mc_location, mc_imageurl 
+ 	FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx 
+ 	ORDER BY tb_mycontent.mc_regdate LIMIT #{start}, 5;
+  </select>
   
+  <insert id="insertComment" useGeneratedKeys="true" keyProperty="id" parameterType="map">
+  	INSERT INTO tb_comment(co_useridx, co_mcidx, co_text)
+  	VALUES (#{co_useridx}, #{co_mcidx}, #{co_text}) 
+  </insert>
 </mapper>

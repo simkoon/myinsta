@@ -48,13 +48,30 @@ $(() => {
         if (issaveon) {
             $(newArticle).find(".con_btnSave").attr("src", "./images/save.png");
         }
+        // 댓글달기
+        (() => {
+            $(newArticle)
+                .find(".art_btnSubmitCmt")
+                .on("click", function () {
+                    let textVal = $(newArticle).find(".art_con_cmt").val();
+                    console.log(textVal);
+                    axios
+                        .post("./CommentServlet", "contentidx=" + contentidx + "&cotext=" + textVal)
+                        .then(function (response) {
+                            $(newArticle).find(".art_con_cmt").val("");
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+        })();
     };
     // 태그에 링크걸기
     const getTaglink = (str) => {
         const setlink = (tag) => {
             let link =
                 /*html*/
-                `<a style="color: skyblue" href="./${tag.substr(1)}">${tag}</a>`;
+                `<a style="color: #0095f6" href="./${tag.substr(1)}">${tag}</a>`;
             return link;
         };
         const emptyFilter = (arrs) => {
@@ -121,6 +138,8 @@ $(() => {
                 const newthing = response.data;
                 for (let i = 0; i < newthing.result.length; i++) {
                     let one_article = newthing.result[i];
+                    console.log("여기점");
+                    console.log(one_article);
                     let cmts = getCmttwo(one_article.comment);
                     //   console.log(cmts);
                     let strHtml =
@@ -168,7 +187,7 @@ $(() => {
                                     </div>
                                     <div class="art_content_insert">
                                         <textarea aria-label="댓글 달기..." autocomplete="off" autocorrect="off" class="art_con_cmt" placeholder="댓글 달기..."></textarea>
-                                        <button class="art_btnSubmitCmt" type="submit">게시</button>
+                                        <span class="art_btnSubmitCmt">게시</span>
                                     </div>
                                 </div>
                             </div>`;

@@ -492,7 +492,6 @@ footer .footer_area {
     width: 784px;
     height: 100px;
     transition: 280ms;
-  
 }
 .wget_hot_carousel .carousel_imgs div {
     display: inline-block;
@@ -519,6 +518,7 @@ footer .footer_area {
     right: 3%;
     background-image: url(../images/btn_next.png);
     background-size: cover;
+    cursor: pointer;
 }
 .wget_hot_carousel .carousel_nav .nav_btnBefore {
     visibility: hidden;
@@ -533,6 +533,7 @@ footer .footer_area {
     left: 3%;
     background-image: url(../images/btn_before.png);
     background-size: cover;
+    cursor: pointer;
 }
 /* 회원님을 위한 추천 */
 .widget_recommend_box {
@@ -724,6 +725,7 @@ footer .footer_area {
     flex-grow: 1;
     color: #0077fb;
     padding: 0;
+    cursor: pointer;
 }
 /* 메인 피드 끝*/
 div.con_header {

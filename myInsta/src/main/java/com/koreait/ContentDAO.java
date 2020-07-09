@@ -3,7 +3,7 @@ package com.koreait;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,45 +26,13 @@ public class ContentDAO {
 	}
 
 	public List<Content> getContents(int start) {
-		List<Content> conList = new ArrayList<Content>();
-		String sql;
-		PreparedStatement pstmt;
-		ResultSet rs;
-		Connection conn;
-		Content con;
-		try {
-			System.out.println("자바 스타트:" + start);
-			conn = DBConn.getConnection();
-			sql = "SELECT mc_idx, m_userid, mc_content,mc_taggedid,mc_taggedname,"
-					+ "mc_regdate, mc_location, mc_imageurl" + " FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx"
-					+ " ORDER BY tb_mycontent.mc_regdate LIMIT ?, 5;";
 
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				con = new Content();
-				con.setMc_idx(rs.getInt("mc_idx"));
-				con.setMc_useridx(rs.getString("m_userid"));
-				con.setMc_content(rs.getString("mc_content"));
-				con.setMc_taggedid(rs.getString("mc_taggedid"));
-				con.setMc_taggedname(rs.getString("mc_taggedname"));
-				con.setMc_regdate(rs.getString("mc_regdate"));
-				con.setMc_location("mc_location");
-				con.setMc_imageurl(rs.getString("mc_imageurl"));
-				con.setCntLikes(getCntLisks(con.getMc_idx()));
-				conList.add(con);
-				System.out.println(con);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		List<Content> conList = sqlsession.selectList("Content.selectContent", start);
+		System.out.println(conList);
 		return conList;
 	}
 
-	public int getCntLisks(int contentidx) {
+	public int getCntLikes(int contentidx) {
 		String sql;
 		PreparedStatement pstmt = null;
 		Connection conn = null;
@@ -203,9 +171,19 @@ public class ContentDAO {
 	}
 
 	public List<CommentDTO> getComment(int mcidx) {
-		List<CommentDTO> comList = sqlsession.selectList("Content.selectComment",mcidx);
+		List<CommentDTO> comList = sqlsession.selectList("Content.selectComment", mcidx);
 		System.out.println(comList);
 		return comList;
+	}
+
+	public int setComment(int co_useridx, int co_mcidx, String co_text) {
+		HashMap<String, String> dataMap = new HashMap<String, String>();
+		dataMap.put("co_useridx", String.valueOf(co_useridx));
+		dataMap.put("co_mcidx", String.valueOf(co_mcidx));
+		dataMap.put("co_text", co_text);
+		sqlsession.insert("Content.insertComment", dataMap);
+		System.out.println(String.valueOf(dataMap.get("id")));
+		return Integer.parseInt(String.valueOf(dataMap.get("id")));
 	}
 
 }
