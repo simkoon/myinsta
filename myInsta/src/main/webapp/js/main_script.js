@@ -2,80 +2,6 @@ $(() => {
     let start = 0;
     let pending = false;
 
-    const setbtnActions = function (newArticle, contentidx, islikeon, issaveon) {
-        $(newArticle)
-            .find(".con_btnLike")
-            .on("click", function () {
-                axios
-                    .post("./LikeServlet", "contentidx=" + contentidx)
-                    .then(function (response) {})
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                const cntlikes = $(newArticle).find(".con_cntlikes");
-                let numcnt = Number(cntlikes.text());
-
-                if ($(this).attr("src") == "./images/heart.png") {
-                    $(this).attr("src", "./images/emptyheart.png");
-                    cntlikes.text(numcnt - 1);
-                } else {
-                    $(this).attr("src", "./images/heart.png");
-                    cntlikes.text(numcnt + 1);
-                }
-            });
-
-        if (islikeon) {
-            $(newArticle).find(".con_btnLike").attr("src", "./images/heart.png");
-        }
-
-        $(newArticle)
-            .find(".con_btnSave")
-            .on("click", function () {
-                axios
-                    .post("./SaveServlet", "contentidx=" + contentidx)
-                    .then(function (response) {})
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-                if ($(this).attr("src") == "./images/save.png") {
-                    $(this).attr("src", "./images/emptysave.png");
-                } else {
-                    $(this).attr("src", "./images/save.png");
-                }
-            });
-
-        if (issaveon) {
-            $(newArticle).find(".con_btnSave").attr("src", "./images/save.png");
-        }
-        // 댓글달기
-        (() => {
-            $(newArticle)
-                .find(".art_btnSubmitCmt")
-                .on("click", function () {
-                    let textVal = $(newArticle).find(".art_con_cmt").val();
-                    console.log(textVal);
-                    axios
-                        .post("./CommentServlet", "contentidx=" + contentidx + "&cotext=" + textVal)
-                        .then(function (response) {
-                          
-                            $(newArticle).find(".art_con_cmt").val("");
-                            let myaccount = $("#myaccountId").text();
-                            console.log(myaccount);
-                            let cmtHtml =
-                            /*html*/
-                            `<p>
-                                <a class="art_account" href="/${myaccount}">${myaccount}</a>
-                                <span>&nbsp;${textVal}</span>
-                            </p>`;
-                            $(newArticle).find(".con_cmts").append(cmtHtml);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                });
-        })();
-    };
     // 태그에 링크걸기
     const getTaglink = (str) => {
         const setlink = (tag) => {
@@ -113,6 +39,99 @@ $(() => {
         });
         return strmap;
     };
+    // 게시물 액션 주기
+    const setbtnActions = function (newArticle, contentidx, islikeon, issaveon) {
+        $(newArticle)
+            .find(".con_btnLike")
+            .on("click", function () {
+                axios
+                    .post("./LikeServlet", "contentidx=" + contentidx)
+                    .then(function (response) {
+                        if ($(newArticle).find(".con_btnLike").attr("src") == "./images/heart.png") {
+                            $(newArticle).find(".con_btnLike").attr("src", "./images/emptyheart.png");
+                            cntlikes.text(numcnt - 1);
+                        } else {
+                            $(newArticle).find(".con_btnLike").attr("src", "./images/heart.png");
+                            cntlikes.text(numcnt + 1);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                const cntlikes = $(newArticle).find(".con_cntlikes");
+                let numcnt = Number(cntlikes.text());
+            });
+
+        if (islikeon) {
+            $(newArticle).find(".con_btnLike").attr("src", "./images/heart.png");
+        }
+
+        $(newArticle)
+            .find(".con_btnSave")
+            .on("click", function () {
+                axios
+                    .post("./SaveServlet", "contentidx=" + contentidx)
+                    .then(function (response) {
+                        if ($(newArticle).find(".con_btnSave").attr("src") == "./images/save.png") {
+                            $(newArticle).find(".con_btnSave").attr("src", "./images/emptysave.png");
+                        } else {
+                            $(newArticle).find(".con_btnSave").attr("src", "./images/save.png");
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            });
+
+        if (issaveon) {
+            $(newArticle).find(".con_btnSave").attr("src", "./images/save.png");
+        }
+        // 댓글달기
+        (() => {
+            $(newArticle)
+                .find(".art_btnSubmitCmt")
+                .on("click", function () {
+                    let textVal = $(newArticle).find(".art_con_cmt").val();
+                    console.log(textVal);
+                    axios
+                        .post("./CommentServlet", "contentidx=" + contentidx + "&cotext=" + textVal)
+                        .then(function (response) {
+                            $(newArticle).find(".art_con_cmt").val("");
+                            let myaccount = $("#myaccountId").text();
+                            console.log(myaccount);
+                            let cmtHtml =
+                                /*html*/
+                                `<p>
+                                <a class="art_account" href="/${myaccount}">${myaccount}</a>
+                                <span>&nbsp;${getTaglink(textVal)}</span>
+                            </p>`;
+                            $(newArticle).find(".con_cmts").append(cmtHtml);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+
+            $(newArticle)
+                .find(".art_con_cmt")
+                .on("keyup", function () {
+                    console.log($(this).val()!="");
+                    if ($(this).val() != "") {
+                        $(newArticle).find(".art_btnSubmitCmt").css({
+                           "pointer-events": "",
+                           "opacity": ""
+
+                        });
+                    }else if($(this).val()==""){
+                        $(newArticle).find(".art_btnSubmitCmt").css({
+                            "pointer-events": "none",
+                            "opacity": ".3"
+
+                        });
+                    }
+                });
+        })();
+    };
 
     // 코멘트 2개만 가져오기
     const getCmttwo = (cmts) => {
@@ -129,7 +148,7 @@ $(() => {
                 /*html*/
                 `<p>
                     <a class="art_account" href="/${oneCmt.coUserid}">${oneCmt.coUserid}</a>
-                    <span>&nbsp;${oneCmt.coText}</span>
+                    <span>&nbsp;${getTaglink(oneCmt.coText)}</span>
                 </p>`;
             sumCmt += cmtHtml;
         }
@@ -199,7 +218,10 @@ $(() => {
                                     </div>
                                     <div class="art_content_insert">
                                         <textarea aria-label="댓글 달기..." autocomplete="off" autocorrect="off" class="art_con_cmt" placeholder="댓글 달기..."></textarea>
-                                        <span class="art_btnSubmitCmt">게시</span>
+                                        <span class="art_btnSubmitCmt" style="
+                                        pointer-events: none;
+                                        opacity: .3;
+                                        ">게시</span>
                                     </div>
                                 </div>
                             </div>`;
