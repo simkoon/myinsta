@@ -58,9 +58,17 @@ $(() => {
                     axios
                         .post("./CommentServlet", "contentidx=" + contentidx + "&cotext=" + textVal)
                         .then(function (response) {
+                          
                             $(newArticle).find(".art_con_cmt").val("");
                             let myaccount = $("#myaccountId").text();
                             console.log(myaccount);
+                            let cmtHtml =
+                            /*html*/
+                            `<p>
+                                <a class="art_account" href="/${myaccount}">${myaccount}</a>
+                                <span>&nbsp;${textVal}</span>
+                            </p>`;
+                            $(newArticle).find(".con_cmts").append(cmtHtml);
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -181,9 +189,11 @@ $(() => {
                                             <a class="art_account" href=""><span>${one_article.account}</span></a>
                                             <span>&nbsp;${getTaglink(one_article.content)}</span>
                                         </p>
-                                        <div>
+                                        <div >
                                             <div><a class="see_allCmt">댓글 2,032개 모두 보기</a></div>
+                                            <div class="con_cmts">
                                             ${cmts}
+                                            </div>
                                             <p><a class="art_con_time" href="">5시간 전</a></p>
                                         </div>
                                     </div>
