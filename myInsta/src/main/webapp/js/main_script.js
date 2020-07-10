@@ -59,6 +59,8 @@ $(() => {
                         .post("./CommentServlet", "contentidx=" + contentidx + "&cotext=" + textVal)
                         .then(function (response) {
                             $(newArticle).find(".art_con_cmt").val("");
+                            let myaccount = $("#myaccountId").text();
+                            console.log(myaccount);
                         })
                         .catch(function (error) {
                             console.log(error);

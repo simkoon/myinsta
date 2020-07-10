@@ -182,7 +182,7 @@ public class ContentDAO {
 		dataMap.put("co_mcidx", String.valueOf(co_mcidx));
 		dataMap.put("co_text", co_text);
 		sqlsession.insert("Content.insertComment", dataMap);
-		System.out.println(String.valueOf(dataMap.get("id")));
+
 		return Integer.parseInt(String.valueOf(dataMap.get("id")));
 	}
 

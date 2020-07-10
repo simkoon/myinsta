@@ -39,7 +39,7 @@
 										</div>
 										<div class="widget_my_account">
 											<div>
-												<a href="All/mypage.jsp">${sessionScope.id }</a>
+												<a id="myaccountId" href="All/mypage.jsp">${sessionScope.id }</a>
 											</div>
 											<div class="my_account_name">심호길</div>
 										</div>
