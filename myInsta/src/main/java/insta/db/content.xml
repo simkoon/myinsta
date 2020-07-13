@@ -27,6 +27,6 @@
   </insert>
   <select id="selectSearch" resultType="com.koreait.SearchDTO" parameterType="_int">
   SELECT mc_idx,
-  mc_imageurl FROM tb_mycontent LIMIT #{start}, 3;
+  mc_imageurl FROM tb_mycontent LIMIT #{start}, 12;
   </select>
 </mapper>
