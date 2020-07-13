@@ -16,8 +16,8 @@ public class ContentDAO {
 	private static Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-
-	SqlSessionFactory sessionf = SqlMapConfig.getSqlMapInstance();
+	SqlMapConfig smc = new SqlMapConfig();
+	SqlSessionFactory sessionf = smc.getSqlMapInstance();
 	SqlSession sqlsession;
 
 	public ContentDAO() {
@@ -26,11 +26,13 @@ public class ContentDAO {
 	}
 
 	public List<Content> getContents(int start, int useridx) {
+		sqlsession = sessionf.openSession(true);
 		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
 		dataMap.put("useridx", useridx);
 		dataMap.put("start", start);
 		List<Content> conList = sqlsession.selectList("Content.selectContent", dataMap);
 		System.out.println(conList);
+		sqlsession.close();
 		return conList;
 	}
 
@@ -173,28 +175,31 @@ public class ContentDAO {
 	}
 
 	public List<CommentDTO> getComment(int mcidx) {
+		sqlsession = sessionf.openSession(true);
 		List<CommentDTO> comList = sqlsession.selectList("Content.selectComment", mcidx);
-
+		sqlsession.close();
 		return comList;
 	}
 
 	public int setComment(int co_useridx, int co_mcidx, String co_text) {
+		sqlsession = sessionf.openSession(true);
 		HashMap<String, String> dataMap = new HashMap<String, String>();
 		dataMap.put("co_useridx", String.valueOf(co_useridx));
 		dataMap.put("co_mcidx", String.valueOf(co_mcidx));
 		dataMap.put("co_text", co_text);
 		sqlsession.insert("Content.insertComment", dataMap);
-
+		sqlsession.close();
 		return Integer.parseInt(String.valueOf(dataMap.get("id")));
 	}
 
 	public List<SearchDTO> getSearchList(int start) {
+		sqlsession = sessionf.openSession(true);
 		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
 		dataMap.put("start", start);
 		System.out.println("dao에 start들어옴 " + start);
 		List<SearchDTO> schList = sqlsession.selectList("Content.selectSearch", start);
 		System.out.println(" 리스트 받아옴 " + schList);
-
+		sqlsession.close();
 		return schList;
 	}
 

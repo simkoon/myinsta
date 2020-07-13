@@ -7,10 +7,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class SqlMapConfig {
-	private SqlSessionFactory sqlsession;
+public class SqlMapConfig2 {
+	/*private static SqlSessionFactory sqlsession;
 
-	public SqlMapConfig() {
+	static {
 		try {
 			String resource = "insta/db/config.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
@@ -21,8 +21,8 @@ public class SqlMapConfig {
 
 	}
 
-	public SqlSessionFactory getSqlMapInstance() {
+	public static SqlSessionFactory getSqlMapInstance() {
 		return sqlsession;
-	}
+	}*/
 
 }
