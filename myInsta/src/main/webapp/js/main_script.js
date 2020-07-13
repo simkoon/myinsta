@@ -39,6 +39,43 @@ $(() => {
         });
         return strmap;
     };
+    
+    const getAtlink = (str) => {
+        const setlink = (tag) => {
+            let link =
+                /*html*/
+                `<a style="color: #0095f6" href="./${tag.substr(1)}">${tag}</a>`;
+            return link;
+        };
+        const emptyFilter = (arrs) => {
+            return arrs.filter(function (item) {
+                return item !== null && item !== undefined && item !== "";
+            });
+        };
+
+        str = str.split(" ");
+        let strmap = /*html*/ ``;
+        str.map((x) => {
+            if (x.includes("#")) {
+                if (x.match(/#/g).length > 1) {
+                    let sphash = x.trim().split("#");
+
+                    sphash = emptyFilter(sphash);
+
+                    for (strel of sphash) {
+                        strmap += setlink("#" + strel);
+                    }
+                    strmap += " ";
+                    return;
+                }
+                strmap += setlink(x) + " ";
+                return;
+            }
+            strmap += x + " ";
+            return;
+        });
+        return strmap;
+    };
     // 게시물 액션 주기
     const setbtnActions = function (newArticle, contentidx, islikeon, issaveon) {
         $(newArticle)

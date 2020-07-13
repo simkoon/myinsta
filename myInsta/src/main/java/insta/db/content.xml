@@ -23,6 +23,10 @@
   
   <insert id="insertComment" useGeneratedKeys="true" keyProperty="id" parameterType="map">
   	INSERT INTO tb_comment(co_useridx, co_mcidx, co_text)
-  	VALUES (#{co_useridx}, #{co_mcidx}, #{co_text}) 
+  	VALUES (#{co_useridx}, #{co_mcidx}, #{co_text});
   </insert>
+  <select id="selectSearch" resultType="com.koreait.SearchDTO" parameterType="_int">
+  SELECT mc_idx,
+  mc_imageurl FROM tb_mycontent LIMIT #{start}, 3;
+  </select>
 </mapper>

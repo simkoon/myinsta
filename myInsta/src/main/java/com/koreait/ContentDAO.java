@@ -174,6 +174,7 @@ public class ContentDAO {
 
 	public List<CommentDTO> getComment(int mcidx) {
 		List<CommentDTO> comList = sqlsession.selectList("Content.selectComment", mcidx);
+
 		return comList;
 	}
 
@@ -185,6 +186,16 @@ public class ContentDAO {
 		sqlsession.insert("Content.insertComment", dataMap);
 
 		return Integer.parseInt(String.valueOf(dataMap.get("id")));
+	}
+
+	public List<SearchDTO> getSearchList(int start) {
+		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
+		dataMap.put("start", start);
+		System.out.println("dao에 start들어옴 " + start);
+		List<SearchDTO> schList = sqlsession.selectList("Content.selectSearch", start);
+		System.out.println(" 리스트 받아옴 " + schList);
+
+		return schList;
 	}
 
 }

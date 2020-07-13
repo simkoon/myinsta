@@ -4,12 +4,7 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>GetContents</servlet-name>
-  	<display-name>GetContents</display-name>
-  	<description></description>
-  	<servlet-class>com.koreait.GetContents</servlet-class>
-  </servlet>
+ 
   <servlet>
   	<servlet-name>LikeServlet</servlet-name>
   	<display-name>LikeServlet</display-name>
@@ -28,10 +23,13 @@
   	<description></description>
   	<servlet-class>com.koreait.CommentServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-  	<servlet-name>GetContents</servlet-name>
-  	<url-pattern>/GetContents</url-pattern>
-  </servlet-mapping>
+  <servlet>
+  	<servlet-name>GetSearchServlet</servlet-name>
+  	<display-name>GetSearchServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.koreait.GetSearchServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
   	<servlet-name>LikeServlet</servlet-name>
   	<url-pattern>/LikeServlet</url-pattern>
@@ -43,5 +41,9 @@
   <servlet-mapping>
   	<servlet-name>CommentServlet</servlet-name>
   	<url-pattern>/CommentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GetSearchServlet</servlet-name>
+  	<url-pattern>/GetSearchServlet</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -36,7 +36,7 @@ public class GetContentsServlet extends HttpServlet {
 
 	}
 
-	public String getJSON(int start, int useridx) throws IOException {
+	protected String getJSON(int start, int useridx) throws IOException {
 		ContentDAO dao = new ContentDAO();
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -46,7 +46,7 @@ public class GetContentsServlet extends HttpServlet {
 		for (int i = 0; i < artList.size(); i++) {
 			int mcidx = artList.get(i).getMc_idx();
 			article.put("idx", artList.get(i).getMc_idx());
-			System.out.println("idx는 서블릿에서 : "+artList.get(i).getMc_idx() );
+			System.out.println("idx는 서블릿에서 : " + artList.get(i).getMc_idx());
 			article.put("content", artList.get(i).getMc_content());
 			article.put("img", artList.get(i).getMc_imageurl());
 			article.put("account", artList.get(i).getMc_useridx());
@@ -65,12 +65,12 @@ public class GetContentsServlet extends HttpServlet {
 		return strResult;
 	}
 
+	protected ArrayNode convertList(List<CommentDTO> list)
+			throws JsonGenerationException, JsonMappingException, IOException {
 
-	public ArrayNode convertList(List<CommentDTO> list) throws JsonGenerationException, JsonMappingException, IOException {
-		
 		ObjectMapper mapper = new ObjectMapper();
 		ArrayNode anode = mapper.valueToTree(list);
-		
+
 		return anode;
 	}
 }
