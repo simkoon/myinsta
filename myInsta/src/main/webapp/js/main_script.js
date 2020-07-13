@@ -115,18 +115,16 @@ $(() => {
             $(newArticle)
                 .find(".art_con_cmt")
                 .on("keyup", function () {
-                    console.log($(this).val()!="");
+                    console.log($(this).val() != "");
                     if ($(this).val() != "") {
                         $(newArticle).find(".art_btnSubmitCmt").css({
-                           "pointer-events": "",
-                           "opacity": ""
-
+                            "pointer-events": "",
+                            opacity: "",
                         });
-                    }else if($(this).val()==""){
+                    } else if ($(this).val() == "") {
                         $(newArticle).find(".art_btnSubmitCmt").css({
                             "pointer-events": "none",
-                            "opacity": ".3"
-
+                            opacity: ".3",
                         });
                     }
                 });
@@ -157,18 +155,21 @@ $(() => {
 
     const getEle = async () => {
         if (window.scrollY + 1000 > document.getElementById("feed_roll").offsetHeight) {
+            console.log("스타트는 " + start);
+            if (pending) {
+                console.log("취소됨");
+                return;
+            }
             try {
-                if (pending) {
-                    return;
-                }
+                console.log("여기들어오나");
                 pending = true;
                 const response = await axios.post("./GetContentsServlet", "start=" + start);
 
                 const newthing = response.data;
                 for (let i = 0; i < newthing.result.length; i++) {
                     let one_article = newthing.result[i];
-                    console.log("여기점");
-                    console.log(one_article);
+
+                    console.log("idx는" + one_article.idx);
                     let cmts = getCmttwo(one_article.comment);
                     //   console.log(cmts);
                     let strHtml =

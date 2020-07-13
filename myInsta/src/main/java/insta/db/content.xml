@@ -17,7 +17,7 @@
   	mc_content,mc_taggedid,mc_taggedname, 
  	mc_regdate, mc_location, mc_imageurl 
  	FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx 
- 	ORDER BY tb_mycontent.mc_regdate LIMIT #{start}, 5;
+ 	ORDER BY tb_mycontent.mc_idx DESC LIMIT #{start}, 5;
   </select>
   
   <insert id="insertComment" useGeneratedKeys="true" keyProperty="id" parameterType="map">
