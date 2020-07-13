@@ -168,7 +168,6 @@ $(() => {
                 const newthing = response.data;
                 for (let i = 0; i < newthing.result.length; i++) {
                     let one_article = newthing.result[i];
-
                     console.log("idx는" + one_article.idx);
                     let cmts = getCmttwo(one_article.comment);
                     //   console.log(cmts);
@@ -243,8 +242,8 @@ $(() => {
     };
 
     getEle();
-    window.addEventListener("scroll", getEle, true);
-
+    // window.addEventListener("scroll", getEle, true);
+    $(window).on("scroll", getEle);
     // 위젯 회전목마
     (() => {
         let rShift = 0;

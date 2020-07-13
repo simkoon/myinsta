@@ -41,7 +41,7 @@ public class GetContentsServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 
 		ArrayNode result = mapper.createArrayNode();
-		List<Content> artList = dao.getContents(start);
+		List<Content> artList = dao.getContents(start, useridx);
 		ObjectNode article = mapper.createObjectNode();
 		for (int i = 0; i < artList.size(); i++) {
 			int mcidx = artList.get(i).getMc_idx();
@@ -61,7 +61,7 @@ public class GetContentsServlet extends HttpServlet {
 		ObjectNode setResult = mapper.createObjectNode();
 		setResult.set("result", result);
 		String strResult = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(setResult);
-		//System.out.println(strResult);
+		System.out.println(strResult);
 		return strResult;
 	}
 

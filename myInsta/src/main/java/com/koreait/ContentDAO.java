@@ -25,9 +25,11 @@ public class ContentDAO {
 		System.out.println("mybatis setting success!");
 	}
 
-	public List<Content> getContents(int start) {
-
-		List<Content> conList = sqlsession.selectList("Content.selectContent", start);
+	public List<Content> getContents(int start, int useridx) {
+		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
+		dataMap.put("useridx", useridx);
+		dataMap.put("start", start);
+		List<Content> conList = sqlsession.selectList("Content.selectContent", dataMap);
 		System.out.println(conList);
 		return conList;
 	}
@@ -172,7 +174,6 @@ public class ContentDAO {
 
 	public List<CommentDTO> getComment(int mcidx) {
 		List<CommentDTO> comList = sqlsession.selectList("Content.selectComment", mcidx);
-		System.out.println(comList);
 		return comList;
 	}
 
