@@ -25,8 +25,8 @@
   	INSERT INTO tb_comment(co_useridx, co_mcidx, co_text)
   	VALUES (#{co_useridx}, #{co_mcidx}, #{co_text});
   </insert>
-  <select id="selectSearch" resultType="com.koreait.SearchDTO" parameterType="_int">
-  SELECT mc_idx,
-  mc_imageurl FROM tb_mycontent LIMIT #{start}, 12;
+  <select id="selectSearch" resultType="com.koreait.SearchDTO" parameterType="map">
+  	SELECT mc_idx,
+	mc_imageurl FROM tb_mycontent  WHERE mc_taggedname LIKE #{tag} LIMIT #{start}, 12;
   </select>
 </mapper>

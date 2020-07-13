@@ -19,30 +19,30 @@ import com.koreait.Content;
 
 public class GetSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-  
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
+
 		int start = Integer.parseInt(request.getParameter("start"));
+		String tag = String.valueOf(request.getParameter("tag"));
 		System.out.println("서블릿스타트:" + start);
-		
-		response.getWriter().write(getJSON(start));
+
+		response.getWriter().write(getJSON(start, tag));
 	}
-	
-	protected String getJSON(int start) throws IOException {
+
+	protected String getJSON(int start, String tag) throws IOException {
 		ContentDAO dao = new ContentDAO();
 		ObjectMapper mapper = new ObjectMapper();
 
 		ArrayNode result = mapper.createArrayNode();
-		List<SearchDTO> artList = dao.getSearchList(start);
+		List<SearchDTO> artList = dao.getSearchList(start, tag);
 		ObjectNode article = mapper.createObjectNode();
 		for (int i = 0; i < artList.size(); i++) {
-		
+
 			article.put("idx", artList.get(i).getMc_idx());
-			
+
 			article.put("img", artList.get(i).getMc_imageurl());
 			result.add(article);
 			article = mapper.createObjectNode();

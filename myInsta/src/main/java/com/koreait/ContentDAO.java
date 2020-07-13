@@ -192,12 +192,15 @@ public class ContentDAO {
 		return Integer.parseInt(String.valueOf(dataMap.get("id")));
 	}
 
-	public List<SearchDTO> getSearchList(int start) {
+	public List<SearchDTO> getSearchList(int start, String tag) {
 		sqlsession = sessionf.openSession(true);
-		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
+		StringBuilder tagSB = new StringBuilder();
+		tagSB.append("%#").append(tag).append(",%");
+		HashMap<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("start", start);
+		dataMap.put("tag", tagSB.toString());
 		System.out.println("dao에 start들어옴 " + start);
-		List<SearchDTO> schList = sqlsession.selectList("Content.selectSearch", start);
+		List<SearchDTO> schList = sqlsession.selectList("Content.selectSearch", dataMap);
 		System.out.println(" 리스트 받아옴 " + schList);
 		sqlsession.close();
 		return schList;
