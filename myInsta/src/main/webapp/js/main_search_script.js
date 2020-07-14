@@ -8,6 +8,21 @@ $(() => {
     (() => {
         $(".search_name_h1").text("#" + getParam("tag"));
     })();
+
+    const setEvent = function (newArticle) {
+        console.log($(newArticle).find(".boxs"));
+        $(newArticle)
+            .find(".boxs")
+            .on("mouseover", function () {
+                $(this).children(".popup_box").addClass("on");
+            });
+        $(newArticle)
+            .find(".boxs")
+            .on("mouseout", function () {
+                $(this).children(".popup_box").removeClass("on");
+            });
+    };
+
     const getEle = async () => {
         //    console.log("getele 실행됨");
         //   console.log(window.scrollY + 1000 > document.querySelector(".images_items").offsetHeight);
@@ -34,10 +49,20 @@ $(() => {
                     }
                     strHtml +=
                         /*html*/
-                        `<div>
-                                         <a href="#"><img src="${one_article.img ? one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="#" /></a>
-                                    </div>
-                                   `;
+                        ` <a href="#">
+                        <div class="boxs">
+                        <div class="popup_box">
+                         <p>
+                                <img src="./images/heart.png" alt="heart" />
+                                123
+                                <img src="./images/commentForPopup.png" alt="comment" />
+                                7
+                            </p>
+                           
+                        </div>
+                       <img src="${one_article.img ? one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="#" />
+                        </div></a>
+                        `;
                     if ((i + 1) % 3 == 0 || i + 1 == newthing.result.length) {
                         strHtml += /*html*/ `</div>`;
                     }
@@ -47,7 +72,9 @@ $(() => {
                 doc.innerHTML = strHtml;
                 let newArticle = doc.childNodes;
                 console.log(newArticle);
+                setEvent(newArticle);
                 $(".images_items").append(newArticle);
+
                 start += 12;
             } catch (e) {
                 console.log(e);

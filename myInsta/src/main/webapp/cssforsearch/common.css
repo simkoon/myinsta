@@ -306,7 +306,7 @@ padding: 0 !important; position: relative; }
 .search_content .search_header { display: flex; margin: 30px auto 44px; max-width: 935px; width: 100%; height: 157px; box-sizing: border-box;
 }
 .search_content .search_img {height: 152px; width: 152px; margin-right: 50px;}
-.search_content .search_img1 { background:  no-repeat center; height: 152px; width: 152px; border-radius: 50%; margin-right: 50px;
+.search_content .search_img1 { background: url(../images/sky.png) no-repeat center; height: 152px; width: 152px; border-radius: 50%; margin-right: 50px;
 border: 1px solid #f1f1f1;}
 .search_content .search_name h1 { font-size: 28px; font-weight: 300; height: 35px;}
 .search_content .search_name .search_name_p1 { font-size: 16px; font-weight: 400; height: 50px; letter-spacing: 0px;}
@@ -322,5 +322,15 @@ color: #fff; font-weight: bold; cursor: pointer;}
 /* 사진들 */
 .search_content .search_images h2 { margin-bottom: 12px; color: rgba(142, 142, 142, 1); font-weight: bold;}
 .search_content .search_images .box_h2 { margin: 80px 0 20px;}
-.search_content .search_images .images_items .items_box { margin-bottom: 28px; display: flex;}
+.search_content .search_images .images_items .items_box { margin-bottom: 28px; display: flex; box-sizing: border-box;}
 .search_content .search_images .images_items .items_box img { width: 293px; height: 293px; margin-right: 30px;}
+
+/* overpopup */
+.search_images .images_items .items_box .boxs { position: relative; z-index: 2;}
+.search_images .images_items .items_box .boxs .popup_box { position: absolute; top: 0; left: 0; width: 293px; height: 293px;  background-color: rgba(0, 0, 0, 0.5);
+display: none; z-index: 9999; color: rgba(255, 255, 255, 1); text-align: center; box-sizing: border-box; padding-top: 120px;}
+.search_images .images_items .items_box .boxs a#a_box { height: 294px !important; display: block; z-index: 1;}
+.search_images .images_items .items_box .boxs .popup_box img { width: 20px; height: 20px; margin-right: 0; }
+.search_images .images_items .items_box .boxs .popup_box.on{
+    z-index: 3000; display: inline-block;
+}

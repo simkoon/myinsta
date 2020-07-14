@@ -34,8 +34,15 @@
 					}
 				});
 	});
+	$(function() {
+		$(".boxs").on("mouseover", function() {
+			$(this).children(".popup_box").addClass("on");
+		});
+		$(".boxs").on("mouseout", function() {
+			$(this).children(".popup_box").removeClass("on");
+		});
+	});
 </script>
-
 </head>
 <body>
 	<ul class="skipnavi">
@@ -43,7 +50,8 @@
 	</ul>
 	<!-- wrap -->
 	<div id="wrap" class="search_wrap">
-		<form id="h_reform" action="./main_search.jsp" method="GET" name="searchform">
+		<form id="h_reform" action="./main_search.jsp" method="GET"
+			name="searchform">
 			<!-- 해더부분 -->
 			<%@ include file="mainHead.jsp"%>
 			<!-- 내용부분 -->
@@ -73,14 +81,38 @@
 							<h2>인기 게시물</h2>
 							<div class="images_items">
 								<div class="items_box">
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
+									<div class="boxs">
+										<div class="popup_box">
+											<p>
+												<img src="./images/heart.png" alt="heart" /> 123 <img
+													src="./images/heart.png" alt="comment" /> 7
+											</p>
+										</div>
+										<a href="#"><img
+											src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+											alt="#" /></a>
 									</div>
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
+									<div class="boxs">
+										<div class="popup_box">
+											<p>
+												<img src="./images/heart.png" alt="heart" /> 123 <img
+													src="./images/heart.png" alt="comment" /> 7
+											</p>
+										</div>
+										<a href="#"><img
+											src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+											alt="#" /></a>
 									</div>
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
+									<div class="boxs">
+										<div class="popup_box">
+											<p>
+												<img src="./images/heart.png" alt="heart" /> 123 <img
+													src="./images/heart.png" alt="comment" /> 7
+											</p>
+										</div>
+										<a href="#"><img
+											src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+											alt="#" /></a>
 									</div>
 								</div>
 								<div class="items_box">

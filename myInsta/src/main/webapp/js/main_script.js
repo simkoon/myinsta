@@ -7,7 +7,7 @@ $(() => {
         const setlink = (tag) => {
             let link =
                 /*html*/
-                `<a style="color: #0095f6" href="./${tag.substr(1)}">${tag}</a>`;
+                `<a style="color: #0095f6" href="./main_search.jsp?tag=${tag.substr(1)}">${tag}</a>`;
             return link;
         };
         const emptyFilter = (arrs) => {
@@ -56,14 +56,14 @@ $(() => {
         str = str.split(" ");
         let strmap = /*html*/ ``;
         str.map((x) => {
-            if (x.includes("#")) {
-                if (x.match(/#/g).length > 1) {
-                    let sphash = x.trim().split("#");
+            if (x.includes("@")) {
+                if (x.match(/@/g).length > 1) {
+                    let sphash = x.trim().split("@");
 
                     sphash = emptyFilter(sphash);
 
                     for (strel of sphash) {
-                        strmap += setlink("#" + strel);
+                        strmap += setlink("@" + strel);
                     }
                     strmap += " ";
                     return;
@@ -243,7 +243,7 @@ $(() => {
                                     <div class="art_content_summary">
                                         <p>
                                             <a class="art_account" href=""><span>${one_article.account}</span></a>
-                                            <span>&nbsp;${getTaglink(one_article.content)}</span>
+                                            <span>&nbsp;${getAtlink(getTaglink(one_article.content))}</span>
                                         </p>
                                         <div >
                                             <div><a class="see_allCmt">댓글 2,032개 모두 보기</a></div>

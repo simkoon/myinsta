@@ -199,6 +199,7 @@ public class ContentDAO {
 		HashMap<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("start", start);
 		dataMap.put("tag", tagSB.toString());
+		
 		System.out.println("dao에 start들어옴 " + start);
 		List<SearchDTO> schList = sqlsession.selectList("Content.selectSearch", dataMap);
 		System.out.println(" 리스트 받아옴 " + schList);
