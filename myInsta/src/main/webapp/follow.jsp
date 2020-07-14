@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+    <jsp:useBean id="contentDAO" class="com.koreait.ContentDAO"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -178,7 +179,7 @@
 
 									<li class="people__person">
 										<div class="people__column">
-											<a href="../mainfeed.jsp"> <input type="button"
+											<a href="./mainfeed.jsp"> <input type="button"
 												id="startbutton" value="시작하기" />
 											</a>
 										</div>

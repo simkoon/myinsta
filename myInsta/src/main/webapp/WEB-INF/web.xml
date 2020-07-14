@@ -29,6 +29,12 @@
   	<description></description>
   	<servlet-class>com.koreait.GetSearchServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>FollowServlet</servlet-name>
+  	<display-name>FollowServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.koreait.FollowServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>LikeServlet</servlet-name>
@@ -45,5 +51,9 @@
   <servlet-mapping>
   	<servlet-name>GetSearchServlet</servlet-name>
   	<url-pattern>/GetSearchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FollowServlet</servlet-name>
+  	<url-pattern>/FollowServlet</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -33,4 +33,7 @@
   <select id="selectCNTComment" resultType="String" parameterType="_int">
  	SELECT count(co_idx) FROM tb_comment WHERE co_mcidx=#{mcidx}
   </select>
+  <insert id="insertFollowing" parameterType="map">
+  	INSERT INTO tb_following(fi_useridx, fi_followingid) VALUES(#{fi_useridx}, #{fi_followingid) 
+  </insert>
 </mapper>

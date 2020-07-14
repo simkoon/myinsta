@@ -11,6 +11,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import insta.db.DBConn;
 import insta.db.SqlMapConfig;
+import insta.member.MemberDAO;
+import insta.member.MemberDTO;
 
 public class ContentDAO {
 	private static Connection conn;
@@ -212,4 +214,24 @@ public class ContentDAO {
 		sqlsession.close();
 		return cntComment;
 	}
+	//팔로잉 팔로우
+
+	public int setFollowing(int fi_useridx, int fi_followingid) {
+		sqlsession = sessionf.openSession(true);
+		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
+		dataMap.put("fi_useridx",fi_useridx);
+		dataMap.put("fi_followingid",fi_followingid);
+		int result = sqlsession.insert("Content.insertFollowing", dataMap);
+		sqlsession.close();
+		return result;
+	}
+	//팔로우 목록가져오기
+	public List<MemberDTO> getMemberList(int start){
+		sqlsession = sessionf.openSession(true);
+		List<MemberDTO> memberList = sqlsession.selectList("Content.selectMemberList",start);
+		sqlsession.close();
+		return memberList;
+	}
+	
+	
 }
