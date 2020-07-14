@@ -78,92 +78,35 @@
 							</div>
 						</div>
 						<div class="search_images">
-							<h2>인기 게시물</h2>
 							<div class="images_items">
 								<div class="items_box">
-									<div class="boxs">
-										<div class="popup_box">
-											<p>
-												<img src="./images/heart.png" alt="heart" /> 123 <img
-													src="./images/heart.png" alt="comment" /> 7
-											</p>
-										</div>
-										<a href="#"><img
-											src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
-											alt="#" /></a>
-									</div>
-									<div class="boxs">
-										<div class="popup_box">
-											<p>
-												<img src="./images/heart.png" alt="heart" /> 123 <img
-													src="./images/heart.png" alt="comment" /> 7
-											</p>
-										</div>
-										<a href="#"><img
-											src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
-											alt="#" /></a>
-									</div>
-									<div class="boxs">
-										<div class="popup_box">
-											<p>
-												<img src="./images/heart.png" alt="heart" /> 123 <img
-													src="./images/heart.png" alt="comment" /> 7
-											</p>
-										</div>
-										<a href="#"><img
-											src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
-											alt="#" /></a>
-									</div>
+									<h2 class="box_h2">최근 사진</h2>
 								</div>
-								<div class="items_box">
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
-									</div>
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
-									</div>
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
-									</div>
-								</div>
-								<div class="items_box">
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
-									</div>
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
-									</div>
-									<div>
-										<a href="#"><img src="./images/googleplay.png" alt="#" /></a>
-									</div>
-								</div>
-								<h2 class="box_h2">최근 사진</h2>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<footer id="footer">
-				<div class="footer_area box_inner clear">
-					<div class="f_area1">
-						<ul>
-							<li><a href="https://about.instagram.com/about-us">소개</a></li>
-							<li><a href="https://help.instagram.com/">도움말</a></li>
-							<li><a href="https://about.instagram.com/blog/">홍보 센터</a></li>
-							<li><a href="https://www.instagram.com/developer/">API</a></li>
-							<li><a href="https://www.instagram.com/about/jobs/">채용
-									정보</a></li>
-							<li><a href="https://help.instagram.com/519522125107875">개인정보처리방법</a></li>
-							<li><a href="https://help.instagram.com/581066165581870">약관</a></li>
-							<li><a href="https://www.instagram.com/explore/locations/">위치</a></li>
-							<li><a href="https://www.instagram.com/directory/profiles/">인기계정</a></li>
-							<li><a href="https://www.instagram.com/directory/hashtags/">해시태그</a></li>
-							<li><a href="">언어</a></li>
-						</ul>
+				<footer id="footer">
+					<div class="footer_area box_inner clear">
+						<div class="f_area1">
+							<ul>
+								<li><a href="https://about.instagram.com/about-us">소개</a></li>
+								<li><a href="https://help.instagram.com/">도움말</a></li>
+								<li><a href="https://about.instagram.com/blog/">홍보 센터</a></li>
+								<li><a href="https://www.instagram.com/developer/">API</a></li>
+								<li><a href="https://www.instagram.com/about/jobs/">채용
+										정보</a></li>
+								<li><a href="https://help.instagram.com/519522125107875">개인정보처리방법</a></li>
+								<li><a href="https://help.instagram.com/581066165581870">약관</a></li>
+								<li><a href="https://www.instagram.com/explore/locations/">위치</a></li>
+								<li><a href="https://www.instagram.com/directory/profiles/">인기계정</a></li>
+								<li><a href="https://www.instagram.com/directory/hashtags/">해시태그</a></li>
+								<li><a href="">언어</a></li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="f_area2">© 2020 INSTAGRAM FROM 페스타그램</div>
-			</footer>
+					<div class="f_area2">© 2020 INSTAGRAM FROM 페스타그램</div>
+				</footer>
 		</form>
 	</div>
 </body>

@@ -201,8 +201,9 @@ $(() => {
                 console.log("여기들어오나");
                 pending = true;
                 const response = await axios.post("./GetContentsServlet", "start=" + start);
-
+           
                 const newthing = response.data;
+                console.log(newthing);
                 for (let i = 0; i < newthing.result.length; i++) {
                     let one_article = newthing.result[i];
                     console.log("idx는" + one_article.idx);

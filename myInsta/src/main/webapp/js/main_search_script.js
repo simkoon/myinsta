@@ -54,9 +54,9 @@ $(() => {
                         <div class="popup_box">
                          <p>
                                 <img src="./images/heart.png" alt="heart" />
-                                123
+                                ${one_article.like}
                                 <img src="./images/commentForPopup.png" alt="comment" />
-                                7
+                                ${one_article.comment}
                             </p>
                            
                         </div>

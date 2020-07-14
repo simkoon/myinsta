@@ -35,18 +35,16 @@ public class GetSearchServlet extends HttpServlet {
 	protected String getJSON(int start, String tag) throws IOException {
 		ContentDAO dao = new ContentDAO();
 		ObjectMapper mapper = new ObjectMapper();
-
 		ArrayNode result = mapper.createArrayNode();
 		List<SearchDTO> artList = dao.getSearchList(start, tag);
 		ObjectNode article = mapper.createObjectNode();
 		for (int i = 0; i < artList.size(); i++) {
-
 			article.put("idx", artList.get(i).getMc_idx());
-
 			article.put("img", artList.get(i).getMc_imageurl());
+			article.put("like", dao.getCntLikes(artList.get(i).getMc_idx()));
+			article.put("comment", dao.getCntComment(artList.get(i).getMc_idx()));
 			result.add(article);
 			article = mapper.createObjectNode();
-
 		}
 		ObjectNode setResult = mapper.createObjectNode();
 		setResult.set("result", result);
