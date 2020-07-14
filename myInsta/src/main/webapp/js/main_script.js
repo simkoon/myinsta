@@ -247,11 +247,11 @@ $(() => {
                                             <span>&nbsp;${getAtlink(getTaglink(one_article.content))}</span>
                                         </p>
                                         <div >
-                                            <div><a class="see_allCmt">댓글 2,032개 모두 보기</a></div>
+                                            <div><a href="/" class="see_allCmt">댓글 ${one_article.cntcmt}개 모두 보기</a></div>
                                             <div class="con_cmts">
                                             ${cmts}
                                             </div>
-                                            <p><a class="art_con_time" href="">5시간 전</a></p>
+                                            <p><a class="art_con_time" href="">${one_article.date} 분 전</a></p>
                                         </div>
                                     </div>
                                     <div class="art_content_insert">
@@ -285,7 +285,7 @@ $(() => {
     // 위젯 회전목마
     (() => {
         let rShift = 0;
-        let lShift = 0;
+       
         $(".nav_btnNext").on("click", function () {
             if (rShift <= 465) rShift += 96;
             $(".wget_hot_carousel .carousel_imgs").css("right", rShift + "px");

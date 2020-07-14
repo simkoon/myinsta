@@ -13,9 +13,9 @@
   </select>
   
   <select id="selectContent" resultType="com.koreait.Content" parameterType="map">
- 		SELECT mc_idx, m_userid as mc_useridx, 
+ 	SELECT mc_idx, m_userid as mc_useridx, 
   	mc_content,mc_taggedid,mc_taggedname, 
- 	mc_regdate, mc_location, mc_imageurl 
+ 	TIMESTAMPDIFF(minute,mc_regdate,  NOW()) AS mc_regdate, mc_location, mc_imageurl 
  	FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx 
  	JOIN tb_following ON mc_useridx=fi_followingid AND fi_useridx = #{useridx} 
  	ORDER BY tb_mycontent.mc_idx DESC LIMIT #{start}, 5;

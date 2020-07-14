@@ -51,8 +51,10 @@ public class GetContentsServlet extends HttpServlet {
 			article.put("img", artList.get(i).getMc_imageurl());
 			article.put("account", artList.get(i).getMc_useridx());
 			article.put("like", dao.getCntLikes(mcidx));
+			article.put("cntcmt", dao.getCntComment(mcidx));
 			article.put("islikeon", dao.getLikeById(artList.get(i).getMc_idx(), useridx));
 			article.put("issaveon", dao.getSaveById(artList.get(i).getMc_idx(), useridx));
+			article.put("date", artList.get(i).getMc_regdate());
 			article.set("comment", convertList(dao.getComment(artList.get(i).getMc_idx())));
 			result.add(article);
 			article = mapper.createObjectNode();
