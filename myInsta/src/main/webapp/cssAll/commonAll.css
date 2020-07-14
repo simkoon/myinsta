@@ -1791,7 +1791,7 @@ line-height: 1.5em;
     color: #999;
 }
 
-#columnbutton,
+.btnFolloing,
 #startbutton {
     border: 1px solid #3897f0;
     background-color: #3897f0;

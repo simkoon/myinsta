@@ -57,14 +57,16 @@ public class ContentDAO {
 			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, pstmt, rs);
 		}
 		return cnt;
 	}
 
 	public boolean getLikeById(int contentidx, int useridx) {
 		String sql;
-		PreparedStatement pstmt;
-		Connection conn;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
 		ResultSet rs = null;
 		boolean isOk = false;
 		try {
@@ -81,15 +83,17 @@ public class ContentDAO {
 			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, pstmt,rs);
 		}
 		return isOk;
 	}
 
 	public int editLike(int contentidx, int useridx) {
 		String sql;
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		int result = -1;
-		Connection conn;
+		Connection conn = null;
 
 		try {
 			boolean isOk = getLikeById(contentidx, useridx);
@@ -114,6 +118,8 @@ public class ContentDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, pstmt);
 		}
 		System.out.println("result=" + result);
 		return result;
@@ -121,8 +127,8 @@ public class ContentDAO {
 
 	public boolean getSaveById(int contentidx, int useridx) {
 		String sql;
-		PreparedStatement pstmt;
-		Connection conn;
+		PreparedStatement pstmt = null;
+		Connection conn = null;
 		ResultSet rs = null;
 		boolean isOk = false;
 		try {
@@ -139,15 +145,17 @@ public class ContentDAO {
 			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, pstmt,rs);
 		}
 		return isOk;
 	}
 
 	public int editSave(int contentidx, int useridx) {
 		String sql;
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		int result = -1;
-		Connection conn;
+		Connection conn = null;
 
 		try {
 			boolean isOk = getSaveById(contentidx, useridx);
@@ -171,6 +179,8 @@ public class ContentDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			DBConn.close(conn, pstmt);
 		}
 		System.out.println("result=" + result);
 		return result;
@@ -214,24 +224,55 @@ public class ContentDAO {
 		sqlsession.close();
 		return cntComment;
 	}
-	//팔로잉 팔로우
+	// 팔로잉 팔로우
 
-	public int setFollowing(int fi_useridx, int fi_followingid) {
-		sqlsession = sessionf.openSession(true);
+	public int editFollowing(int fi_useridx, int fi_followingid) {
+		
 		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
-		dataMap.put("fi_useridx",fi_useridx);
-		dataMap.put("fi_followingid",fi_followingid);
-		int result = sqlsession.insert("Content.insertFollowing", dataMap);
+
+		dataMap.put("fi_useridx", fi_useridx);
+		dataMap.put("fi_followingid", fi_followingid);
+		int result = getFollowingById(fi_useridx, fi_followingid);
+		// System.out.println("result밖에 : " + result);
+		sqlsession = sessionf.openSession(true);
+		if (result == 0) {
+			sqlsession.insert("Content.insertFollowing", dataMap);
+			// System.out.println("result안쪽 : " + result);
+		} else {
+			sqlsession.delete("Content.deleteFollowing", dataMap);
+			// System.out.println("딜리트");
+		}
+
 		sqlsession.close();
 		return result;
 	}
-	//팔로우 목록가져오기
-	public List<MemberDTO> getMemberList(int start){
+
+	public int getFollowingById(int useridx, int followingid) {
 		sqlsession = sessionf.openSession(true);
-		List<MemberDTO> memberList = sqlsession.selectList("Content.selectMemberList",start);
+		System.out.println("useridx : " + useridx);
+		System.out.println("fi_followingid : " + followingid);
+		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
+		dataMap.put("useridx", useridx);
+		dataMap.put("followingid", followingid);
+		int result = Integer.parseInt(sqlsession.selectOne("Content.selectFollowingById", dataMap));
+		sqlsession.close();
+		return result;
+	}
+
+	// 멤버 목록가져오기
+	public List<MemberDTO> getMemberList(int start) {
+		sqlsession = sessionf.openSession(true);
+		List<MemberDTO> memberList = sqlsession.selectList("Content.selectMemberList", start);
 		sqlsession.close();
 		return memberList;
 	}
-	
-	
+	// 태그 게시물 수 가져오기
+	public String getCntTag(String tag) {
+		sqlsession = sessionf.openSession(true);
+		StringBuilder tagSB = new StringBuilder();
+		tagSB.append("%#").append(tag).append(",%");
+		String cntTag = sqlsession.selectOne("Content.selectCNTTag", tagSB.toString());
+		sqlsession.close();
+		return cntTag;
+	}
 }

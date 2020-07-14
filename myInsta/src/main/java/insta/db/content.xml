@@ -4,36 +4,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Content">
 
-  <select id="selectComment" resultType="com.koreait.CommentDTO" parameterType="int">
+	<select id="selectComment" resultType="com.koreait.CommentDTO" parameterType="int">
 	SELECT m_userid as coUserid, 
 	co_text as coText,
 	TIMESTAMPDIFF(MINUTE, NOW(),tb_comment.co_regdate) as coRegdate
 	FROM tb_comment JOIN tb_member 
 	ON m_idx=co_useridx WHERE co_mcidx=${mcidx};
-  </select>
-  
-  <select id="selectContent" resultType="com.koreait.Content" parameterType="map">
+	</select>
+
+	<select id="selectContent" resultType="com.koreait.Content" parameterType="map">
  	SELECT mc_idx, m_userid as mc_useridx, 
   	mc_content,mc_taggedid,mc_taggedname, 
  	TIMESTAMPDIFF(minute,mc_regdate,  NOW()) AS mc_regdate, mc_location, mc_imageurl 
  	FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx 
  	JOIN tb_following ON mc_useridx=fi_followingid AND fi_useridx = #{useridx} 
  	ORDER BY tb_mycontent.mc_idx DESC LIMIT #{start}, 5;
-  </select>
-  
-  <insert id="insertComment" useGeneratedKeys="true" keyProperty="id" parameterType="map">
+	</select>
+
+	<insert id="insertComment" useGeneratedKeys="true" keyProperty="id" parameterType="map">
   	INSERT INTO tb_comment(co_useridx, co_mcidx, co_text)
   	VALUES (#{co_useridx}, #{co_mcidx}, #{co_text});
-  </insert>
-  
-  <select id="selectSearch" resultType="com.koreait.SearchDTO" parameterType="map">
+	</insert>
+
+	<select id="selectSearch" resultType="com.koreait.SearchDTO" parameterType="map">
   	SELECT mc_idx,
 	mc_imageurl FROM tb_mycontent  WHERE mc_taggedname LIKE #{tag} LIMIT #{start}, 12;
-  </select>
-  <select id="selectCNTComment" resultType="String" parameterType="_int">
+	</select>
+	<select id="selectCNTComment" resultType="String" parameterType="_int">
  	SELECT count(co_idx) FROM tb_comment WHERE co_mcidx=#{mcidx}
-  </select>
-  <insert id="insertFollowing" parameterType="map">
-  	INSERT INTO tb_following(fi_useridx, fi_followingid) VALUES(#{fi_useridx}, #{fi_followingid) 
-  </insert>
+	</select>
+	<insert id="insertFollowing" parameterType="map">
+  	INSERT INTO tb_following(fi_useridx, fi_followingid) VALUES(#{fi_useridx}, #{fi_followingid}) 
+	</insert>
+	<select id="selectMemberList" resultType="insta.member.MemberDTO" parameterType="_int">
+ 	SELECT m_idx, m_userid, m_username FROM tb_member LIMIT ${start}, 5
+	</select>
+	<select id="selectFollowingById" resultType="String" parameterType="int">
+  	SELECT count(fi_idx) FROM tb_following WHERE  fi_followingid = #{followingid} AND fi_useridx = #{useridx} 
+	</select>
+	<delete id="deleteFollowing" parameterType="map">
+    DELETE FROM tb_following WHERE fi_useridx = #{fi_useridx} AND fi_followingid = #{fi_followingid}
+	</delete>
+	
+	<select id="selectCNTTag" resultType="String" parameterType="String">
+  	SELECT count(mc_idx)
+	FROM tb_mycontent  WHERE mc_taggedname LIKE #{tag}
+	</select>
+	
+	
+	
 </mapper>

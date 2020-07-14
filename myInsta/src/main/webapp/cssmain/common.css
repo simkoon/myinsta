@@ -537,7 +537,6 @@ footer .footer_area {
 }
 /* 회원님을 위한 추천 */
 .widget_recommend_box {
-    margin-top: 20px;
     padding: 20px;
 }
 .widget_recommend_box .wget_recommend_header {
@@ -580,8 +579,15 @@ footer .footer_area {
     font-weight: bold;
 }
 .recom_item_btnFollow .item_btnFollow {
-    border: none;
-    color: #0095f6;
+    border: 1px solid #3897f0;
+    background-color: #3897f0;
+    padding: 3px 10px;
+    color: white;
+    border-radius: 3px;
+    font-weight: 400;
+    transition: all .1s linear;
+    font-size: 12px;
+    
 }
 
 /* 위젯 끝 */

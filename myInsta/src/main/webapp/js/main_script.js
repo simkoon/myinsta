@@ -39,7 +39,7 @@ $(() => {
         });
         return strmap;
     };
-    
+
     const getAtlink = (str) => {
         const setlink = (tag) => {
             let link =
@@ -201,7 +201,7 @@ $(() => {
                 console.log("여기들어오나");
                 pending = true;
                 const response = await axios.post("./GetContentsServlet", "start=" + start);
-           
+
                 const newthing = response.data;
                 console.log(newthing);
                 for (let i = 0; i < newthing.result.length; i++) {
@@ -285,7 +285,7 @@ $(() => {
     // 위젯 회전목마
     (() => {
         let rShift = 0;
-       
+
         $(".nav_btnNext").on("click", function () {
             if (rShift <= 465) rShift += 96;
             $(".wget_hot_carousel .carousel_imgs").css("right", rShift + "px");
@@ -298,4 +298,25 @@ $(() => {
             $(".wget_hot_carousel .carousel_imgs").css("right", rShift + "px");
         });
     })();
+});
+//팔로우 버튼
+$(() => {
+    $(".item_btnFollow").on("click", function () {
+        const btnFi = $(this);
+        console.log($(this).text());
+        const followingid = $(this).next().val();
+        axios
+            .post("./FollowServlet", "followingid=" + followingid)
+            .then(function (response) {
+                console.log(btnFi.text());
+                if (btnFi.text() == "팔로우") {
+                    btnFi.text("팔로잉").css("backgroundColor", "white").css("color", "black");
+                } else if (btnFi.text() == "팔로잉") {
+                    btnFi.text("팔로우").css("backgroundColor", "#3897f0").css("color", "white").css("border", "1px solid #3897f0");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
 });

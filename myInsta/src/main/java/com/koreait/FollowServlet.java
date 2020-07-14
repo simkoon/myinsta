@@ -19,7 +19,7 @@ public class FollowServlet extends HttpServlet {
 		int useridx = (int) session.getAttribute("idx");
 		int followingid = Integer.parseInt(request.getParameter("followingid"));
 		ContentDAO dao = new ContentDAO();
-		dao.setFollowing(useridx, followingid);
+		dao.editFollowing(useridx, followingid);
 	}
 
 }

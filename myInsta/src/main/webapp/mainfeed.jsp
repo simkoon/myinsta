@@ -2,12 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+
 <c:if test="${empty sessionScope.id }">
-<script>
-alert("로그인 후 이용해주세요.");
-location.href="./login/login.jsp";
-</script>
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
 </c:if>
+
+<c:set var="memberList" value="${contentDAO.getMemberList(0) }" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,11 +24,13 @@ location.href="./login/login.jsp";
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="./js/main_script.js">
+	
 </script>
 </head>
 <body>
 	<div id="wrap">
-		<form id="h_reform" action="./main_search.jsp" method="GET" name="searchform">
+		<form id="h_reform" action="./main_search.jsp" method="GET"
+			name="searchform">
 			<%@ include file="mainHead.jsp"%>
 			<!-- 내용부분 -->
 			<div id="container">
@@ -127,7 +134,7 @@ location.href="./login/login.jsp";
 
 											<div class="carousel_nav">
 												<div class="car_nav_btnBefore">
-													<span class="nav_btnBefore" ></span>
+													<span class="nav_btnBefore"></span>
 												</div>
 												<div class="car_nav_btnNext">
 													<span class="nav_btnNext"></span>
@@ -141,30 +148,40 @@ location.href="./login/login.jsp";
 											<a href="" class="recommend_btnAll">모두 보기</a>
 										</div>
 										<div class="wget_recommend_list">
-											<div class="recom_list_item">
-												<div class="recom_item_img">
-													<a class="off_story" href="#"> <a class="on_story"
-														href=""> <img
-															src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/101066874_250369176291217_8457202342863831040_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=MIG0PVCGXmkAX_nqjce&oh=340b25f50b734ba354cb0dd7ee994921&oe=5F1DC758"
-															alt="" />
-													</a>
-													</a>
-												</div>
-												<div class="recom_item_account">
-													<div>
-														<a href="">rendiemmd</a>
+
+											<c:forEach var="item" items="${memberList }">
+												<div class="recom_list_item" style="margin-bottom: 5px;">
+													<div class="recom_item_img">
+														<a class="off_story" href="#"> <a class="on_story"
+															href=""> <img
+																src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/101066874_250369176291217_8457202342863831040_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=MIG0PVCGXmkAX_nqjce&oh=340b25f50b734ba354cb0dd7ee994921&oe=5F1DC758"
+																alt="" />
+														</a>
+														</a>
 													</div>
-													<div class="recom_account_reason">인기</div>
+													<div class="recom_item_account">
+														<div>
+															<a href="">${item.m_userid }</a>
+														</div>
+														<div class="recom_account_reason">회원님을 위한 추천</div>
+													</div>
+													<div class="recom_item_btnFollow">
+														<c:if
+															test="${0<contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+															<button class="item_btnFollow" style="background-Color: white; color:black;">팔로잉</button>
+														</c:if>
+															<c:if test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+															<button class="item_btnFollow">팔로우</button>
+															</c:if>
+														<input type="hidden" name="mIdx" value="${item.m_idx }">
+													</div>
 												</div>
-												<div class="recom_item_btnFollow">
-													<button class="item_btnFollow">팔로우</button>
-												</div>
-											</div>
+											</c:forEach>
 										</div>
 									</div>
 									<footer id="footer">
 										<div class="footer_area box_inner clear"
-											style="width: 100%; text-align: left;">
+											style="width: 100%; text-align: left; padding: 0px;">
 											<div class="f_area1">
 												<ul>
 													<li><a style="color: rgb(200, 200, 200);"

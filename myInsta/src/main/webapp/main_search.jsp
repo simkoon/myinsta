@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<c:set var="tag" value="${param.tag }" />
+<c:set var="cntTag" value="${contentDAO.getCntTag(tag) }" />
 <c:if test="${empty sessionScope.id }">
 	<script>
 		alert("로그인 후 이용해주세요.");
@@ -66,15 +69,10 @@
 							<div class="search_name">
 								<h1 class="search_name_h1">#하늘</h1>
 								<p class="search_name_p1">
-									게시물 <span>8,702,571</span>
+									게시물 <span>${cntTag }</span> 개
 								</p>
-								<p class="search_name_p2">
-									<input type="button" value="팔로우" id="f_btn" />
-								</p>
-								<p class="search_name_p3">
-									관련 해시태그 <span><a href="#">#구름</a></span> <span><a
-										href="#">#노을</a></span>
-								</p>
+								<p class="search_name_p2"></p>
+								<p class="search_name_p3"></p>
 							</div>
 						</div>
 						<div class="search_images">
