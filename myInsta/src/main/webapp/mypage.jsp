@@ -34,7 +34,7 @@
 </head>
 <body>
 <div id="wrap">
-<form id="h_reform">
+<form id="h_reform" action="./main_search.jsp" method="GET" name="searchform">
 	<%@ include file="mainHead.jsp" %>
     <div id="container">
         <div class="main_rolling_pc box_inner">
