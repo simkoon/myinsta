@@ -8,35 +8,52 @@
 	
 <%
 	request.setCharacterEncoding("UTF-8");
-	
-	if(mem_dao.idCheck((String)request.getParameter("m_userid"),(String)request.getParameter("m_email")) == 0){
-%>
-	<script>
-		alert("아이디가 중복됩니다.");		
-		history.back();
-	</script>		
-<%
+
+	String email = "";
+	if(request.getParameter("m_userid") != null){
+		
+		session.setAttribute("j_id", request.getParameter("m_userid"));
+		session.setAttribute("j_pw", request.getParameter("m_password"));
+		session.setAttribute("j_name", request.getParameter("m_username"));
+		session.setAttribute("j_email", request.getParameter("m_email"));
+		
+		email = request.getParameter("m_email");
+		
+	}else if(request.getParameter("m_userid") == null){
+		
+		email = (String)session.getAttribute("j_email");
+		
+	}else {
+		%>
+		<script>
+		alert("잘 못된 경로입니다.");
+		location.href="join.jsp";
+		</script>
+		<%
 	}
-
-	session.setAttribute("j_id", request.getParameter("m_userid"));
-	session.setAttribute("j_pw", request.getParameter("m_password"));
-	session.setAttribute("j_name", request.getParameter("m_username"));
-	session.setAttribute("j_email", request.getParameter("m_email") );
-	//out.println(request.getParameter("m_userid"));
-
+	
+	
+	// 코드번호 생성
+	String code = "";
+	String codenum = "";
+	for(int i=0; i<6; i++) {
+		
+		int num = (int)(Math.random()*10);
+		if(i<5) {
+			code += num + " ";
+		}else {
+			code += num;	
+		}
+	}
+	
+	session.setAttribute("code", code);
+	System.out.println(code);
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입 정보 DTO저장 </title>
-</head>
-<body>
 
 <script>
-location.href="code_email.jsp";
-</script>
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "../send?email=<%=email%>&code=<%=code%>", true);
+	xhr.send();
 	
-</body>
-</html>
+	location.href="code_email.jsp";
+</script>

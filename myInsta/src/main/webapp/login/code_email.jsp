@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+
+
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +13,7 @@
 </head>
 <body>
 <div id="wrap">
-<form id="h_reform" name="regform" method="post" action="code_email_ok.jsp" onsubmit="return checkForm()">
+<form id="h_reform" name="regform" onsubmit="return checkForm()">
    <div id="container">
         <div class="main_rolling_pc box_inner">
             <!-- 이 아래부터는 각자알아서 알맞게 -->
@@ -20,11 +26,12 @@
                         <p><span class="useremail"></span>으로 전송된 6자리 코드를 입력하세요</p>
                         <div class="authentication">
                             <div class="txtinput">
-                                <input name="email_code" class="aut_txt" type="text" placeholder="######" maxlength="6">
-                                <input type="submit" class="aut_btn on" value="확인">
+                                <input name="email_code" id="email_aut" class="aut_txt" type="text" placeholder="######" maxlength="6">
+                        		<div class="codeCheck_Text"></div>
+                                <input type="button" class="aut_btn on" id="emailaut_btn" value="확인"/>
                             </div>
                         </div>
-                        <a class="aut_newcode">새 코드 요청하기</a>
+                        <a class="aut_newcode" href="./join_ok.jsp">새 코드 요청하기</a>
                         </div>
                     </div>
                     <div class="aut_back">

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	session.invalidate();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +24,9 @@
                            <div class="joim_txtinput">
                                <div class="join_txt">
                                        <input class="join_phemail join_input" type="text" 
-                                       id="join_phemail"
+                                       id="join_email"
                                        placeholder="이메일 주소" name="m_email">
-                                       <div class="checkimg_phemail checkimg"></div>
+                                       <div class="checkimg_email checkimg"></div>
                                </div>
                                <div class="join_txt">                 
                                    <input class="join_name join_input" 
@@ -38,18 +41,8 @@
                                <input class="join_pw join_input" id="join_pw"type="password" placeholder="비밀번호" name="m_password">
                                <div class="checkimg_pw checkimg"></div>
                                </div>
-                               <p class="bir">생일</p>
-                               <div class="join_birthday">
-                                   <select id="join_month" title="월">
-                                       <option id="join_m"
-                                       value="none">월</option>
-                                   </select>
-                                   <select id="join_day" title="일">
-                                       <option id="join_d" value="none">일</option>
-                                   </select>
-                                   <select id="join_year" title="년">
-                                       <option id="join_y" value="none">년</option>
-                                   </select>
+                               <div class="idcheck_text" id="idcheck_text">
+                               	
                                </div>
                                <input type="submit" class="btn_join" value="회원가입" disabled >
                                <p>가입하면 Instagram의 <a href="https://help.instagram.com/581066165581870" target="_blank">약관</a>, <a href="https://help.instagram.com/519522125107875" target="_blank">데이터 정책</a> 및 <a href="https://help.instagram.com/1896641480634370" target="_blank">쿠키 정책</a>에 동의하게 됩니다.</p>

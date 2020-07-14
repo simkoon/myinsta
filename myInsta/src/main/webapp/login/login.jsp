@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	session.invalidate();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,18 +35,14 @@
                         <div class="login">
                             <input class="log_id " type="text" placeholder="닉네임 또는 이메일" name="m_userid">
                             <input class="log_pw " type="password" placeholder="비밀번호" name="m_password" >
-                            <input type="submit" class="btn_login " value="로그인" >
+                            <input type="submit" class="btn_login " value="로그인" disabled>
                             <div class="solied"></div>
-                            <a href="#" class="facebook">
-                                Facebook으로 로그인
-                            </a>
-                            <p class="txtalert on">안녕하세요</p>
                             <a class="passwordfind" href="./find_pw.jsp">비밀번호 찾기</a>
                         </div>
                     </div>
                 </div>
                 <div class="log_join">
-                    <a href="join.jsp"> 회원가입</a></p>
+                    <a href="join.jsp"> 회원가입</a>
                 </div>
                 <div class="log_app">
                     <p>앱 다운로드 하기</p>

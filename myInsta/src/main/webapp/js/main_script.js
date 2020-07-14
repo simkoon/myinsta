@@ -44,7 +44,7 @@ $(() => {
         const setlink = (tag) => {
             let link =
                 /*html*/
-                `<a style="color: #0095f6" href="./${tag.substr(1)}">${tag}</a>`;
+                `<a style="color: #0095f6" href="./main_search.jsp?tag=${tag.substr(1)}">${tag}</a>`;
             return link;
         };
         const emptyFilter = (arrs) => {

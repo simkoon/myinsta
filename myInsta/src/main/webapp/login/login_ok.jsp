@@ -14,7 +14,6 @@
 </head>
 <body>
 <%
-	System.out.println(member.getM_userid());
 	if(mem_dao.login(member) != null){
 		session.setAttribute("id", member.getM_userid());
 		session.setAttribute("idx", member.getM_idx());
