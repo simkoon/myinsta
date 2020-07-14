@@ -5,9 +5,123 @@
 <head>
 <%@ include file="mainTitle.jsp" %>
 </head>
+<script type="text/javascript">
+$(document).ready(function (e){
+    $("input[type='file']").change(function(e){
+
+      //div 내용 비워주기
+      $('.u_Bimg').empty();
+
+      var files = e.target.files;
+      var arr =Array.prototype.slice.call(files);
+      
+      //업로드 가능 파일인지 체크
+      for(var i=0;i<files.length;i++){
+        if(!checkExtension(files[i].name,files[i].size)){
+          return false;
+        }
+      }
+      
+      preview(arr);
+      
+      
+    });//file change
+    
+    function checkExtension(fileName,fileSize){
+
+      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+      var maxSize = 20971520;  //20MB
+      
+      if(fileSize >= maxSize){
+        alert('파일 사이즈 초과');
+        $("input[type='file']").val("");  //파일 초기화
+        return false;
+      }
+      
+      if(regex.test(fileName)){
+        alert('업로드 불가능한 파일이 있습니다.');
+        $("input[type='file']").val("");  //파일 초기화
+        return false;
+      }
+      return true;
+    }
+    
+   
+    
+    function preview(arr){
+      arr.forEach(function(f){      
+        //div에 이미지 추가
+        var str = '<div style="display: inline-flex; padding: 5px;"><li>';
+        
+        //이미지 파일 미리보기
+        if(f.type.match('image.*')){
+          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+            //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
+            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=100% height=100% />';
+            str += '</li></div>';
+            $(str).appendTo('.u_Bimg');
+          } 
+          reader.readAsDataURL(f);
+        }else{
+          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100% height=100% />';
+          $(str).appendTo('.imgboxs');
+        }
+      });//arr.forEach
+    }
+  });
+  
+$(function(){
+	
+	const setbtnAction = function(){
+		$(".modal2_close").on("click", function(){
+			$("#madallist").remove();
+			$(".taglist").css("display","block");
+		});
+	};
+	$("body").keyup(function(){
+		if($("#utextarea").val() != ""){
+			$(".upbtn_on").addClass("on");
+		}else{
+			$(".upbtn_on").removeClass("on");
+		}
+	});
+	$("#a_add").click(function(){
+		if($("#utextarea").val() != ""){
+			$(".upbtn_on").addClass("on");
+		}else{
+			$(".upbtn_on").removeClass("on");
+		}
+	});
+	
+	$(".taglist").click(function(){
+		$(".modal2__content").addClass("on");
+	});
+	
+	
+	let data;	
+	$(".taglist").on("click", function(){
+			$(".taglist").css("display","none");
+			data = $(".modal2__content.on").append('<p id="madallist" class="madallist">@ '+($(this).val())+'  <button type="button" class="modal2_close"> &times;</button></p>');
+			setbtnAction();
+			
+		$("#tagaddtn").click(function() {
+			$("#taglistvalue").append(data);
+			$(".modal2__content").removeClass("on");
+			if (data !=null) {
+				$(".upbtn_on").addClass("on");
+			}else {
+				$(".upbtn_on").removeClass("on");
+			}
+		});
+		
+	});
+	
+});
+
+</script>
 <body>
 <div id="wrap">
-<form id="h_reform">
 	<%@ include file="mainHead.jsp" %>
     <div id="container">
         <div class="main_rolling_pc box_inner">
@@ -48,22 +162,27 @@
                                 </span>
                             </a>
                         </div>
+                        <form method="post" action="myupdate_ok.jsp" enctype="multipart/form-data">
                         <div id="p_myContent">
                             <div class="udDate_Box">
                                 <div class="u_Box">
                                     <div class="u_Bimg">
-                                            <a href="#">
                                             <div class="imgBox">
-                                                <img src="images/camera.png" alt="사진 추가">
+                                                <img src="images/camera.png" id="display" alt="사진 추가">
                                             </div>
-                                            <p class="i_text">사진 추가하기</p>
-                                        </a>
+                                           	<div class="tbox">
+                                            <label for="ex_filename" name="mc_file">사진 추가하기</label>
+                           					<input type="file" id="ex_filename" name="mc_file"/>
+                                           	</div>
+                                    </div>
+                                    <div class="imgboxs">
                                     </div>
                                     <div class="u_text">
-                                        <textarea>What's happening?</textarea>
+                                        <textarea id="utextarea" name="mc_content"  placeholder="What's happening?"></textarea>
                                     </div>
-                                    <a href="#">
-                                    <div class="a_add">
+                                    <!-- 팝업 -->
+                                    <a href="#modal" class="modal-open">
+                                    <div class="a_add" name="mc_taggedid" id="a_add">
                                         <div class="a_imgBox1">
                                             <img src="images/tag_icon2.PNG" alt="사람태그하기">
                                         </div>
@@ -73,28 +192,52 @@
                                         </div>
                                     </div>
                                     </a>
-                                    <a href="#">
-                                    <div class="p_add">
-                                        <div class="p_imgBox1">
-                                            <img src="images/position_icon.png" alt="위치추가하기">
-                                        </div>
-                                        <p class="ap_text">위치 추가하기</p>
-                                        <div class="ap_imgBox2">
-                                            <img src="images/arrow_icon.png" alt="화살표 위치추가하기">
-                                        </div>
-                                    </div>
-                                    </a>
-                                    <div class="upbtn"><input type="button" value="게시물 올리기"></div>
+                                    
+                                    <!-- 팝업창  -->
+                                    <div class="modal" id="modal">
+									    <div class="modal__content">
+									        <div class="modal__haad">
+									            <div class="modal__heading">
+									                <input type="text" placeholder="사람검색..." class="modal__heading2">
+									                <a href="#" class="modal__close">&times;</a>
+									            </div>
+									        </div>
+									        <!-- 사람 목록 -->
+									        <div class="modal__paragraph">
+									            <ul>
+									                <li>
+									                	<button class="taglist" type="button" value="gyomin_s">
+									                    <div class="tag_userimg"><img src="./images/person_icon.jpg" alt="사람이미지"></div>
+									                    <p class="tag_userid">gyomin_s</p>
+									                    <p class="tag_username">백교민</p>
+									                    </button>
+									                </li>
+									            </ul>
+									        </div>
+									        <div class="modal2__content">
+									        <input class="tagvalue" type="hidden" >
+									        </div>
+									        <div class="tagadd"> 
+									        <a href="#">
+									        <input type="button" value="태그하기" id="tagaddtn">
+									        </a>
+									        </div>
+									    </div>
+									</div>
+                                    
+                                    
+                                    <div id="taglistvalue" class="taglistvalue"></div>
+                                    <div class="upbtn"><input type="submit" value="게시물 올리기" class="upbtn_on" ></div>
                                 </div>
                             </div>
                         </div>
+                        </form>
      			
              <!-- End -->   
             </div>
         </div>
     </div>
 	<%@ include file="mainFooter.jsp" %>
-</form>
 </div>
 </body>
 </html>
