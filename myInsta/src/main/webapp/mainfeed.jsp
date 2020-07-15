@@ -162,7 +162,6 @@
 													<div class="recom_item_account">
 														<div>
 															<a href="">${item.m_userid }</a>
-															
 														</div>
 														<div class="recom_account_reason">회원님을 위한 추천</div>
 													</div>
@@ -220,9 +219,6 @@
 
 		</form>
 		 
-		 <div class="num">
-		 <%@ include file="contentPage.jsp"%>
-		 </div>
 		
 	</div>
 </body>
