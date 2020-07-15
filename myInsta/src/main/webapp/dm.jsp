@@ -13,7 +13,7 @@
 		<!-- 내용부분 -->
 		<div class="dm_inner" id="container">
 			<div class="main_rolling_pc box_inner ">
-				<!-- 이 아래부터는 각자알아서 알맞게 -->
+				<!-- 이 아래부터는 각자알아서 알맞게  -->
 				<div class="dm_main">
 					<div class="dm_box">
 						<div class="dm_chatlist">
