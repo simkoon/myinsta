@@ -881,6 +881,7 @@ a.p_Using, a.p_Using:visited {
 #p_myContent {padding: 10px; margin-left: 10px;}
 #p_myContent .p_myCTitle {margin-bottom: 10px; font-weight: bold; font-size: 14px;}
 #p_myContent .p_myCBox {
+	background-color:#fff;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -906,7 +907,7 @@ a.p_Using, a.p_Using:visited {
     border: 1px solid transparent;
 }
 /* 게시물올리는 페이지 */
-.u_Box {border: 1px solid #dbdbdb; border-radius: 5px;}
+.u_Box {border: 1px solid #dbdbdb; border-radius: 5px; background-color: #fff;}
 .u_Box .u_Bimg{
     margin: 20px; 
     width: 200px; 
@@ -915,6 +916,7 @@ a.p_Using, a.p_Using:visited {
     border: 1px solid #dbdbdb;
     border-radius: 5px;
     float: left;
+    position: relative;
 }
 .u_Bimg .imgBox{
     height: 80px; width: 80px; 
@@ -924,7 +926,20 @@ a.p_Using, a.p_Using:visited {
     margin-top: 30px;
 }
 .u_Bimg .imgBox img {height: 100%;}
-.u_Bimg p {font-size: 16px; font-weight: 600; margin-top: 30px;}
+.u_Bimg .tbox{margin-top: 30px}
+.tbox label {font-size: 16px; font-weight: 600; padding-top: 30px;}
+.tbox input[type="file"] {  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top:0;
+  left:0;
+  padding: 0;
+  margin: -1px;
+  z-index:-1;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
 .u_text {margin: 20px;}
 .u_text textarea {
     margin: 0px;
@@ -934,14 +949,13 @@ a.p_Using, a.p_Using:visited {
     padding-left: 10px;
     font-size: 18px;
     font-weight: bold;
-    color: #8e8e8e;
     border: none;
     max-height: none;
     box-sizing: content-box;
 }
 .a_add {border-top: 1px solid #dbdbdb; margin-top: 10px;}
 .a_add .a_imgBox1 {height: 30px; width: 30px; float: left; 
-    margin: 10px 30px; padding-top: 10px; padding-left: 10px; padding-right: 2px;
+    margin: 10px 30px; padding-top: 10px; padding-left: 10px; padding-right: 2px; padding-bottom: 8px;
 }
 .a_add .a_imgBox1 img {height: 100%;}
 .p_add {border-top: 1px solid #dbdbdb; margin-top: 10px; clear: both;}
@@ -959,15 +973,6 @@ a.p_Using, a.p_Using:visited {
 }
 .ap_imgBox2 img {height: 70%;}
 .u_Box .upbtn {width: 100%;}
-/*.u_Box .upbtn input {
-    height: 50px;
-    width: 100%;
-    border: 1px solid #8e8e8e;
-    font-size: 16px;
-    background-color: #8e8e8e;
-    font-weight: 600;
-    color: #fff;
-}*/
 .u_Box .upbtn .upbtn_on {
     height: 50px;
     width: 100%;
@@ -989,9 +994,8 @@ a.p_Using, a.p_Using:visited {
 
 
 
-
-
 .upbtn {clear: both;}
+
 
 /* tagged페이지 화면부분 */
 .ts_Box{text-align: center;}

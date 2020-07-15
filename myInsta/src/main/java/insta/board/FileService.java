@@ -6,8 +6,7 @@ import java.util.Calendar;
 
 public class FileService {
 	private BoardDAO boardDAO =null;
-	public static String SAVE_PATH = "C:/baekgyo/JSP/m_Insta/insata/upload";
-	
+	public static String SAVE_PATH = "D:/javaCros/mytomcat/myinsta/myInsta/src/main/webapp/uploads";
 	public FileService() {
 		boardDAO = new BoardDAO();
 	}
@@ -18,13 +17,13 @@ public class FileService {
 		return sdf.format(c.getTime());
 	}
 	
-	public boolean  fileUpload(String mc_userid, String mc_content,String mc_regdate, String mc_taggedid, File file)  {
+	public boolean  fileUpload(int mc_useridx, String mc_content, String mc_taggedid, File file)  {
+		System.out.println("dddd");
 		BoardDTO boardDTO = new BoardDTO();
-		boardDTO.setMcUserid(mc_userid);
+		boardDTO.setMcUseridx(mc_useridx);
 		boardDTO.setMcContent(mc_content);
-		boardDTO.setMcRegdate(mc_regdate);
 		boardDTO.setMcTaggedid(mc_taggedid);
-		boardDTO.setMcFileoriginame(file.getName());
+		boardDTO.setMcImageurl(file.getName());
 		boardDTO = boardDAO.insertBoard(boardDTO);
 		System.out.println("최종 파일 정보 : " + boardDTO);
 		if(boardDTO != null) {

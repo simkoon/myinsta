@@ -18,18 +18,18 @@ public class BoardDAO {
 		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		try {
 			conn = DBConn.getConnection();
-			String sql = "SELECT mc_idx, mc_userid, mc_content, mc_regdate, mc_filepath, mc_fileoriginame, "
+			String sql = "SELECT mc_idx, mc_useridx, mc_content, mc_regdate, mc_filepath, mc_imageurl, "
 					+ "mc_taggedid FROM tb_myContent order by mc_idx desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO board = new BoardDTO();
 				board.setMcIdx(rs.getInt("mc_idx"));
-				board.setMcUserid(rs.getString("mc_userid"));
+				board.setMcUseridx(rs.getInt("mc_useridx"));
 				board.setMcContent(rs.getString("mc_content"));
 				board.setMcRegdate(rs.getString("mc_regdate"));
 				board.setMcFilepath(rs.getString("mc_filepath"));
-				board.setMcFileoriginame(rs.getString("mc_fileoriginame"));
+				board.setMcImageurl(rs.getString("mc_imageurl"));
 				board.setMcTaggedid(rs.getString("mc_taggedid"));
 				boardList.add(board);
 			}
@@ -49,13 +49,13 @@ public class BoardDAO {
 		try {
 
 			conn = DBConn.getConnection();
-			String sql = "INSERT INTO tb_myContent(mc_userid, mc_content, mc_regdate, mc_fileoriginame, mc_taggedid) "
+			String sql = "INSERT INTO tb_myContent(mc_useridx, mc_content, mc_regdate, mc_imageurl, mc_taggedid) "
 					+ " values (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql, generatedColumns);
-			pstmt.setString(1, boardDTO.getMcUserid());
+			pstmt.setInt(1, boardDTO.getMcUseridx());
 			pstmt.setString(2, boardDTO.getMcContent());
 			pstmt.setString(3, boardDTO.getMcRegdate());
-			pstmt.setString(4, boardDTO.getMcFileoriginame());
+			pstmt.setString(4, boardDTO.getMcImageurl());
 			pstmt.setString(5, boardDTO.getMcTaggedid());
 			rows = pstmt.executeUpdate();
 		
@@ -84,16 +84,16 @@ public class BoardDAO {
 		BoardDTO board = new BoardDTO();
 		try {
 			conn = DBConn.getConnection();
-			String sql = "SELECT mc_idx, mc_userid, mc_content, mc_regdate, mc_fileoriginame, mc_taggedid FROM tb_myContent WHERE mc_idx=?";
+			String sql = "SELECT mc_idx, mc_useridx, mc_content, mc_regdate, mc_imageurl, mc_taggedid FROM tb_myContent WHERE mc_idx=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, board.getMcIdx());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				board.setMcIdx(rs.getInt("mc_idx"));
-				board.setMcUserid(rs.getString("mc_userid"));
+				board.setMcUseridx(rs.getInt("mc_useridx"));
 				board.setMcContent(rs.getString("mc_content"));
 				board.setMcRegdate(rs.getString("mc_regdate"));
-				board.setMcFileoriginame(rs.getString("mc_fileoriginame"));
+				board.setMcImageurl(rs.getString("mc_imageurl"));
 				board.setMcTaggedid(rs.getString("mc_taggedid"));				
 			}
 		}catch(Exception e) {
@@ -109,12 +109,12 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		try {
 			conn = DBConn.getConnection();
-			String sql = "UPDATE tb_myContent SET mc_filepath=? WHERE mc_idx=?";
+			String sql = "UPDATE tb_myContent SET mc_imageurl=? WHERE mc_idx=?";
 			pstmt = conn.prepareStatement(sql);
 			String tmp = "/" + FileService.getToday() + "/" + boardDTO.getMcIdx() + ".dev";
 			boardDTO.setMcFilepath(tmp);
 			pstmt.setString(1, tmp);
-			pstmt.setLong(2, boardDTO.getMcIdx());
+			pstmt.setInt(2, boardDTO.getMcIdx());
 			pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

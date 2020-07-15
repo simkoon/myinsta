@@ -1,5 +1,17 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<% request.setCharacterEncoding("UTF-8"); %>
+<jsp:useBean class="insta.member.MemberDAO" id="mem_dao"/>
+<jsp:useBean class="insta.member.MemberDTO" id="member"/>
+
+<jsp:setProperty property="*" name="member"/>
+<jsp:useBean class="insta.board.BoardDTO" id="boardDTO"/>
+<%
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +20,6 @@
 <script type="text/javascript">
 $(document).ready(function (e){
     $("input[type='file']").change(function(e){
-
-      //div 내용 비워주기
-      $('.u_Bimg').empty();
 
       var files = e.target.files;
       var arr =Array.prototype.slice.call(files);
@@ -51,13 +60,13 @@ $(document).ready(function (e){
     function preview(arr){
       arr.forEach(function(f){      
         //div에 이미지 추가
-        var str = '<div style="display: inline-flex; padding: 5px;"><li>';
+        var str = '<div style="display: inline-flex;padding: 5px;position: absolute;top: 0;left: 0;"><li>';
         
         //이미지 파일 미리보기
         if(f.type.match('image.*')){
           var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
           reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-            //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
+
             str += '<img src="'+e.target.result+'" title="'+f.name+'" width=100% height=100% />';
             str += '</li></div>';
             $(str).appendTo('.u_Bimg');
@@ -104,15 +113,18 @@ $(function(){
 			$(".taglist").css("display","none");
 			data = $(".modal2__content.on").append('<p id="madallist" class="madallist">@ '+($(this).val())+'  <button type="button" class="modal2_close"> &times;</button></p>');
 			setbtnAction();
-			
+			let dataforinpout =$(this).val();
 		$("#tagaddtn").click(function() {
 			$("#taglistvalue").append(data);
+			$(".taglistvalue1").val(dataforinpout);
+			console.log(dataforinpout);
 			$(".modal2__content").removeClass("on");
 			if (data !=null) {
 				$(".upbtn_on").addClass("on");
 			}else {
 				$(".upbtn_on").removeClass("on");
 			}
+		
 		});
 		
 	});
@@ -162,6 +174,8 @@ $(function(){
                                 </span>
                             </a>
                         </div>
+                        
+                        
                         <form method="post" action="myupdate_ok.jsp" enctype="multipart/form-data">
                         <div id="p_myContent">
                             <div class="udDate_Box">
@@ -171,7 +185,7 @@ $(function(){
                                                 <img src="images/camera.png" id="display" alt="사진 추가">
                                             </div>
                                            	<div class="tbox">
-                                            <label for="ex_filename" name="mc_file">사진 추가하기</label>
+                                            <label for="ex_filename">사진 추가하기</label>
                            					<input type="file" id="ex_filename" name="mc_file"/>
                                            	</div>
                                     </div>
@@ -182,7 +196,7 @@ $(function(){
                                     </div>
                                     <!-- 팝업 -->
                                     <a href="#modal" class="modal-open">
-                                    <div class="a_add" name="mc_taggedid" id="a_add">
+                                    <div class="a_add" id="a_add">
                                         <div class="a_imgBox1">
                                             <img src="images/tag_icon2.PNG" alt="사람태그하기">
                                         </div>
@@ -226,7 +240,8 @@ $(function(){
 									</div>
                                     
                                     
-                                    <div id="taglistvalue" class="taglistvalue"></div>
+                                    <div id="taglistvalue" class="taglistvalue" ></div>
+                                    <input class="taglistvalue1" type="hidden"  name="mc_taggedid" value="">
                                     <div class="upbtn"><input type="submit" value="게시물 올리기" class="upbtn_on" ></div>
                                 </div>
                             </div>

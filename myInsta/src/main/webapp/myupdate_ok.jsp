@@ -16,21 +16,20 @@
 	try{
 		MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, format,
 				new DefaultFileRenamePolicy());
-		String mc_userid = multi.getParameter("mc_userid");
+		int mc_useridx = (int)session.getAttribute("idx");
 		String mc_content = multi.getParameter("mc_content");
-		String mc_regdate = multi.getParameter("mc_regdate");
 		String mc_taggedid = multi.getParameter("mc_taggedid");
-		uploadFile = multi.getFilesystemName("f_file"); // form의 input file객체이며, 실제로 업로드된 파일명
+		uploadFile = multi.getFilesystemName("mc_file"); // form의 input file객체이며, 실제로 업로드된 파일명
 
-//		out.println("f_name : " + f_name);
-//		out.println("f_title : " + f_title);
-//		out.println("f_content : " + f_content);
-//		out.println("uploadFile : " + uploadFile);
+		System.out.println("mc_useridx : " + mc_useridx);
+		System.out.println("mc_content : " + mc_content);
+		System.out.println("mc_taggedid : " + mc_taggedid);
+		System.out.println("uploadFile : " + uploadFile);
 
 		File file = new File(savePath + "/" + uploadFile);
 		out.println("file : " + file);
-		if(fs.fileUpload(mc_userid, mc_content, mc_regdate, mc_taggedid, file)){
-			response.sendRedirect("list.jsp");
+		if(fs.fileUpload(mc_useridx, mc_content, mc_taggedid, file)){
+			response.sendRedirect("mypage.jsp");
 		}else{
 			out.print("<script>history.back();</script>");
 		}
