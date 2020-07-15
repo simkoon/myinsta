@@ -49,14 +49,14 @@ public class BoardDAO {
 		try {
 
 			conn = DBConn.getConnection();
-			String sql = "INSERT INTO tb_myContent(mc_useridx, mc_content, mc_regdate, mc_imageurl, mc_taggedid) "
-					+ " values (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO tb_myContent(mc_useridx, mc_content,  mc_imageurl, mc_taggedid) "
+					+ " values (?, ?,  ?, ?)";
 			pstmt = conn.prepareStatement(sql, generatedColumns);
 			pstmt.setInt(1, boardDTO.getMcUseridx());
 			pstmt.setString(2, boardDTO.getMcContent());
-			pstmt.setString(3, boardDTO.getMcRegdate());
-			pstmt.setString(4, boardDTO.getMcImageurl());
-			pstmt.setString(5, boardDTO.getMcTaggedid());
+		//	pstmt.setString(3, boardDTO.getMcRegdate());
+			pstmt.setString(3, boardDTO.getMcImageurl());
+			pstmt.setString(4, boardDTO.getMcTaggedid());
 			rows = pstmt.executeUpdate();
 		
 			try (ResultSet geneResultKey = pstmt.getGeneratedKeys()){

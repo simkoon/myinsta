@@ -247,7 +247,7 @@ $(() => {
                                             <span>&nbsp;${getAtlink(getTaglink(one_article.content))}</span>
                                         </p>
                                         <div >
-                                            <div><a href="/" class="see_allCmt">댓글 ${one_article.cntcmt}개 모두 보기</a></div>
+                                            <div><a href="./" class="see_allCmt">댓글 ${one_article.cntcmt}개 모두 보기</a></div>
                                             <div class="con_cmts">
                                             ${cmts}
                                             </div>

@@ -12,7 +12,7 @@
 	String uploadFile = "";
 	int read = 0;
 	byte[] buf = new byte[1024]; // 한번에 읽어들일 버퍼의 크기
-	
+
 	try{
 		MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, format,
 				new DefaultFileRenamePolicy());

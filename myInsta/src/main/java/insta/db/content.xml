@@ -20,6 +20,12 @@
  	JOIN tb_following ON mc_useridx=fi_followingid AND fi_useridx = #{useridx} 
  	ORDER BY tb_mycontent.mc_idx DESC LIMIT #{start}, 5;
 	</select>
+	
+	<select id="selectOneContent" resultType="com.koreait.Content" parameterType="_int">
+ 		SELECT mc_idx, m_userid as mc_useridx, 
+  	mc_content, mc_regdate, mc_location, mc_imageurl 
+ 	FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx WHERE mc_idx = #{b_idx};
+  </select>
 
 	<insert id="insertComment" useGeneratedKeys="true" keyProperty="id" parameterType="map">
   	INSERT INTO tb_comment(co_useridx, co_mcidx, co_text)

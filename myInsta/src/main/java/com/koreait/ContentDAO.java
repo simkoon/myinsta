@@ -275,4 +275,13 @@ public class ContentDAO {
 		sqlsession.close();
 		return cntTag;
 	}
+	
+	// mc_idx, m_userid as mc_useridx, mc_content, mc_regdate, mc_location, mc_imageurl 가져오기
+		public List<Content> getOneContent(int b_idx) {
+			sqlsession = sessionf.openSession(true);
+			List<Content> conList = sqlsession.selectList("Content.selectOneContent", b_idx);
+			System.out.println(conList);
+			sqlsession.close();
+			return conList;
+		}
 }

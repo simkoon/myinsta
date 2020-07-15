@@ -188,6 +188,12 @@ function drag_drop(event) {
     readURL(event.dataTransfer);
 }
 
+//게시물 페이지
+//댓글 달기
 $(function() {
-
+	$(".reply_button").click(function(){
+		if(($(".reply_textarea").val() != "")){
+			$(location).attr("href","replyInput.jsp?text="+($(".reply_textarea").val())+"&bidx="+($("#content_bidx").val())+"&midx="+($("#content_midx").val()));
+		}
+	});
 });
