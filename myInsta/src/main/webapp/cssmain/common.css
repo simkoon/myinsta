@@ -332,7 +332,31 @@ header .header_area {
 .my_p {
     width: 100%;
 }
-
+.hd_heart { position: relative;}
+.hd_heart_sub {
+    max-height: 360px;
+    min-height: 100px;
+    border: 1px solid #f1f1f1;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 1px 1px 1px 1px rgba(38, 38, 38, .1);
+    display: none; 
+    position: absolute;
+    top: 42px;
+    left: -257px;
+    width: 470px;}
+.hd_heart_sub .sub_prices { display: flex; border: none;   }
+.hd_heart_sub .sub_prices { width: 98%; height: 63px;  padding: 10px 16px 12px; box-sizing: border-box; border-bottom: 1px solid #ccc; }
+.hd_heart_sub .sub_prices .pr1 a img { display: inline-block; width: 30px; height: 30px;}
+.hd_heart_sub .sub_prices .pr1 { width: 13%; height: 100%; padding-top: 5px;}
+.hd_heart_sub .sub_prices .pr2 { width: 75%; height: 100%; font-size: 16px; line-height: 20px;}
+.hd_heart_sub .sub_prices .pr3 { width: 10%; height: 100%;}
+.hd_heart_sub .sub_prices .pr3 input[type='button'] { width: 62px; height: 30px; background-color: white; font-size: 14px; font-weight: bold;
+border: 1px solid #ccc; border-radius: 4px;}
+.hd_heart_sub.on {
+    z-index: 29;
+    display: inline-block;
+}
 /* footer */
 footer {
     height: 104px;
@@ -590,6 +614,7 @@ footer .footer_area {
     
 }
 
+
 /* 위젯 끝 */
 /* 메인 콘텐츠 스크롤 */
 
@@ -612,6 +637,9 @@ footer .footer_area {
 }
 .main_article .art_account {
     font-weight: bold;
+}
+#feed_roll #feed_box{
+    width: 604px;
 }
 
 .article_header {

@@ -63,28 +63,28 @@
 										</div>
 										<div class="wget_hot_categories">
 											<div class="hot_category">
-												<a href="">여행</a>
+												<a href="./main_search.jsp?tag=여행">여행</a>
 											</div>
 											<div class="hot_category">
-												<a href="">예술</a>
+												<a href="./main_search.jsp?tag=예술">예술</a>
 											</div>
 											<div class="hot_category">
-												<a href="">음식</a>
+												<a href="./main_search.jsp?tag=음식">음식</a>
 											</div>
 											<div class="hot_category">
-												<a href="">스타일</a>
+												<a href="./main_search.jsp?tag=style">스타일</a>
 											</div>
 											<div class="hot_category">
-												<a href="">건축</a>
+												<a href="./main_search.jsp?tag=건축">건축</a>
 											</div>
 											<div class="hot_category">
-												<a href="">TV 및 영화</a>
+												<a href="./main_search.jsp?tag=영화">TV 및 영화</a>
 											</div>
 											<div class="hot_category">
-												<a href="">예술</a>
+												<a href="./main_search.jsp?tag=예술">예술</a>
 											</div>
 											<div class="hot_category">
-												<a href="">음악</a>
+												<a href="./main_search.jsp?tag=음악">음악</a>
 											</div>
 										</div>
 										<div class="wget_hot_carousel">
@@ -145,7 +145,7 @@
 									<div class="widget_recommend_box">
 										<div class="wget_recommend_header">
 											<p>회원님을 위한 추천</p>
-											<a href="" class="recommend_btnAll">모두 보기</a>
+											<a href="follow.jsp" class="recommend_btnAll">모두 보기</a>
 										</div>
 										<div class="wget_recommend_list">
 
