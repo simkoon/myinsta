@@ -229,7 +229,7 @@ $(() => {
                                     <div class="art_header_opt"><a href="">···</a></div>
                                 </div>
                                 <div class="img_container">
-                                    <img src="uploads/${one_article.img ? one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="" />
+                                    <img src="${ ("uploads/"+one_article.img) ? ("uploads/"+one_article.img) : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="" />
                                 </div>
                                 <div class="article_content">
                                     <div class="art_content_btns">
@@ -247,7 +247,7 @@ $(() => {
                                             <span>&nbsp;${getAtlink(getTaglink(one_article.content))}</span>
                                         </p>
                                         <div >
-                                            <div><a href="./" class="see_allCmt">댓글 ${one_article.cntcmt}개 모두 보기</a></div>
+                                            <div><a href="./contentPage.jsp?b_idx=${one_article.idx}" class="see_allCmt">댓글 ${one_article.cntcmt}개 모두 보기</a></div>
                                             <div class="con_cmts">
                                             ${cmts}
                                             </div>

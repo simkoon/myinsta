@@ -17,6 +17,8 @@
 	if(mem_dao.login(member) != null){
 		session.setAttribute("id", member.getM_userid());
 		session.setAttribute("idx", member.getM_idx());
+		session.setAttribute("name", member.getM_username());
+		System.out.println(member.getM_username()+member.getM_userid());
 %>
 	<script>
 		alert("로그인 되었습니다.");

@@ -197,3 +197,63 @@ $(function() {
 		}
 	});
 });
+
+
+//팝업
+$(function(){
+    $("#popbtn5").click(function(){
+        $("#pop5").fadeIn();
+    });
+    $("#pop5").click(function(){
+        $("#pop5").fadeOut();
+    });
+    $("#mybtn5_1").click(function(){
+        $("#pop6").fadeIn();
+    });
+    $(".pop6_btn").click(function(){
+        $("#pop6").fadeOut();
+    });
+    $("#mybtn5_2").click(function(){
+        $("#pop7").fadeIn();
+    });
+    $("#pop7").click(function(){
+        $("#pop7").fadeOut();
+    });
+    $("#popbtn5").click(function(){
+        $("#pop5").fadeIn();
+    });
+    $("#pop5").click(function(){
+        $("#pop5").fadeOut();
+    });
+    $("#mybtn5_1").click(function(){
+        $("#pop6").fadeIn();
+    });
+    $(".pop6_btn").click(function(){
+        $("#pop6").fadeOut();
+    });
+    $("#mybtn5_2").click(function(){
+        $("#pop7").fadeIn();
+    });
+    $("#pop7").click(function(){
+        $("#pop7").fadeOut();
+    });
+
+    // Get the modal
+    var modal = document.getElementById('pop8');
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("pop8_open");
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+}); 

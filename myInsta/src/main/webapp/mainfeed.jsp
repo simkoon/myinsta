@@ -52,9 +52,9 @@
 										</div>
 										<div class="widget_my_account">
 											<div>
-												<a id="myaccountId" href="All/mypage.jsp">${sessionScope.id }</a>
+												<a id="myaccountId" href="./mypage.jsp">${sessionScope.id }</a>
 											</div>
-											<div class="my_account_name">심호길</div>
+											<div class="my_account_name">${sessionScope.name }</div>
 										</div>
 									</div>
 									<div class="widget_hotissue_box">
@@ -162,6 +162,7 @@
 													<div class="recom_item_account">
 														<div>
 															<a href="">${item.m_userid }</a>
+															
 														</div>
 														<div class="recom_account_reason">회원님을 위한 추천</div>
 													</div>
@@ -218,6 +219,11 @@
 			</div>
 
 		</form>
+		 
+		 <div class="num">
+		 <%@ include file="contentPage.jsp"%>
+		 </div>
+		
 	</div>
 </body>
 </html>

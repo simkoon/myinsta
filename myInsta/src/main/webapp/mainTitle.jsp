@@ -20,6 +20,5 @@
                     $("#popup2").fadeOut();
                 });
             }); 
-      );  
         	   
     </script>

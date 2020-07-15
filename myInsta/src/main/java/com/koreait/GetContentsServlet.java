@@ -30,8 +30,8 @@ public class GetContentsServlet extends HttpServlet {
 		int useridx = (int) session.getAttribute("idx");
 		String userid = request.getParameter("userid");
 		int start = Integer.parseInt(request.getParameter("start"));
-		System.out.println("서블릿스타트:" + start);
-		System.out.println(useridx);
+		//System.out.println("서블릿스타트:" + start);
+		//System.out.println(useridx);
 		response.getWriter().write(getJSON(start, useridx));
 
 	}
@@ -46,7 +46,7 @@ public class GetContentsServlet extends HttpServlet {
 		for (int i = 0; i < artList.size(); i++) {
 			int mcidx = artList.get(i).getMc_idx();
 			article.put("idx", artList.get(i).getMc_idx());
-			System.out.println("idx는 서블릿에서 : " + artList.get(i).getMc_idx());
+			//System.out.println("idx는 서블릿에서 : " + artList.get(i).getMc_idx());
 			article.put("content", artList.get(i).getMc_content());
 			article.put("img", artList.get(i).getMc_imageurl());
 			article.put("account", artList.get(i).getMc_useridx());
@@ -63,7 +63,7 @@ public class GetContentsServlet extends HttpServlet {
 		ObjectNode setResult = mapper.createObjectNode();
 		setResult.set("result", result);
 		String strResult = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(setResult);
-		System.out.println(strResult);
+		//System.out.println(strResult);
 		return strResult;
 	}
 
