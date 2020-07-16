@@ -266,6 +266,15 @@ public class ContentDAO {
 		sqlsession.close();
 		return memberList;
 	}
+	
+public List<MemberDTO> getMemberLists(int start) {
+		
+		sqlsession = sessionf.openSession(true);
+		List<MemberDTO> memberList = sqlsession.selectList("Content.selectMemberLists", start);
+		sqlsession.close();
+		return memberList;
+	}
+	
 
 	// 태그 게시물 수 가져오기
 	public String getCntTag(String tag) {

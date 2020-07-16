@@ -11,7 +11,7 @@
 	</script>
 </c:if>
 
-<c:set var="memberList" value="${contentDAO.getMemberList(0) }" />
+<c:set var="memberLists" value="${contentDAO.getMemberLists(0) }" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -149,7 +149,7 @@
 										</div>
 										<div class="wget_recommend_list">
 
-											<c:forEach var="item" items="${memberList }">
+											<c:forEach var="item" items="${memberLists }">
 											<c:if test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
 												<div class="recom_list_item" style="margin-bottom: 5px;">
 													<div class="recom_item_img">

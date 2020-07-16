@@ -45,6 +45,9 @@
   	INSERT INTO tb_following(fi_useridx, fi_followingid) VALUES(#{fi_useridx}, #{fi_followingid}) 
 	</insert>
 	<select id="selectMemberList" resultType="insta.member.MemberDTO" parameterType="_int">
+ 	SELECT m_idx, m_userid, m_username FROM tb_member 
+	</select>
+	<select id="selectMemberLists" resultType="insta.member.MemberDTO" parameterType="_int">
  	SELECT m_idx, m_userid, m_username FROM tb_member LIMIT ${start}, 5
 	</select>
 	<select id="selectFollowingById" resultType="String" parameterType="int">
