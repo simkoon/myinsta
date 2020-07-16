@@ -12,7 +12,7 @@
 </c:if>
 
 <c:set var="memberLists" value="${contentDAO.getMemberLists(0) }" />
-
+<c:set var="contentList" value="${contentDAO.getContentsForIssue() }" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,8 +43,8 @@
 								<div class="widget" id="widget">
 									<div class="widget_my_box">
 										<div class="widget_my_img">
-											<a class="off_story" href="#"> <a class="on_story"
-												href="All/mypage.jsp"> <img
+											<a class="off_story" href="./mypage.jsp"> <a
+												class="on_story" href="./mypage.jsp"> <img
 													src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/101066874_250369176291217_8457202342863831040_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=MIG0PVCGXmkAX_nqjce&oh=340b25f50b734ba354cb0dd7ee994921&oe=5F1DC758"
 													alt="" />
 											</a>
@@ -89,47 +89,14 @@
 										</div>
 										<div class="wget_hot_carousel">
 											<div class="carousel_imgs" style="right: 0px;">
-												<div>
-													<a href=""><img
-														src="https://i.pinimg.com/originals/58/be/37/58be37b384c9232b8482d62053bac2fc.png"
-														alt="" /></a>
-												</div>
-												<div>
-													<a href=""><img
-														src="https://file.moyiza.kr/data/moyiza/document_files/images/2017/04/26/33cff99aed5d97fd56ddbe933cbfd1b7.jpg"
-														alt="" /></a>
-												</div>
-												<div>
-													<a href=""><img
-														src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2016/0516/IE001963941_STD.jpg"
-														alt="" /></a>
-												</div>
-												<div>
-													<a href=""><img
-														src="https://i.pinimg.com/originals/58/be/37/58be37b384c9232b8482d62053bac2fc.png"
-														alt="" /></a>
-												</div>
-												<div>
-													<a href=""><img
-														src="https://file.moyiza.kr/data/moyiza/document_files/images/2017/04/26/33cff99aed5d97fd56ddbe933cbfd1b7.jpg"
-														alt="" /></a>
-												</div>
-												<div>
-													<a href=""><img
-														src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2016/0516/IE001963941_STD.jpg"
-														alt="" /></a>
-												</div>
-												<div>
-													<a href=""><img
-														src="https://i.pinimg.com/originals/58/be/37/58be37b384c9232b8482d62053bac2fc.png"
-														alt="" /></a>
-												</div>
-												<div>
-													<a href=""><img
-														src="https://file.moyiza.kr/data/moyiza/document_files/images/2017/04/26/33cff99aed5d97fd56ddbe933cbfd1b7.jpg"
-														alt="" /></a>
-												</div>
+												<c:forEach var="item" items="${contentList }">
+													<div>
+														<a href="./contentPage.jsp?b_idx=${item.mc_idx }"><img
+															src="uploads/${item.mc_imageurl }"
+															alt="" /></a>
+													</div>
 
+												</c:forEach>
 											</div>
 
 											<div class="carousel_nav">
@@ -150,33 +117,36 @@
 										<div class="wget_recommend_list">
 
 											<c:forEach var="item" items="${memberLists }">
-											<c:if test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
-												<div class="recom_list_item" style="margin-bottom: 5px;">
-													<div class="recom_item_img">
-														<a class="off_story" href="#"> <a class="on_story"
-															href=""> <img
-																src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/101066874_250369176291217_8457202342863831040_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=MIG0PVCGXmkAX_nqjce&oh=340b25f50b734ba354cb0dd7ee994921&oe=5F1DC758"
-																alt="" />
-														</a>
-														</a>
-													</div>
-													<div class="recom_item_account">
-														<div>
-															<a href="">${item.m_userid }</a>
+												<c:if
+													test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+													<div class="recom_list_item" style="margin-bottom: 5px;">
+														<div class="recom_item_img">
+															<a class="off_story" href="#"> <a class="on_story"
+																href=""> <img
+																	src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/101066874_250369176291217_8457202342863831040_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=MIG0PVCGXmkAX_nqjce&oh=340b25f50b734ba354cb0dd7ee994921&oe=5F1DC758"
+																	alt="" />
+															</a>
+															</a>
 														</div>
-														<div class="recom_account_reason">회원님을 위한 추천</div>
-													</div>
-													<div class="recom_item_btnFollow">
-														<c:if
-															test="${0<contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
-															<button class="item_btnFollow" style="background-Color: white; color:black;">팔로잉</button>
-														</c:if>
-															<c:if test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
-															<button class="item_btnFollow">팔로우</button>
+														<div class="recom_item_account">
+															<div>
+																<a href="">${item.m_userid }</a>
+															</div>
+															<div class="recom_account_reason">회원님을 위한 추천</div>
+														</div>
+														<div class="recom_item_btnFollow">
+															<c:if
+																test="${0<contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+																<button class="item_btnFollow"
+																	style="background-Color: white; color: black;">팔로잉</button>
 															</c:if>
-														<input type="hidden" name="mIdx" value="${item.m_idx }">
+															<c:if
+																test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+																<button class="item_btnFollow">팔로우</button>
+															</c:if>
+															<input type="hidden" name="mIdx" value="${item.m_idx }">
+														</div>
 													</div>
-												</div>
 												</c:if>
 											</c:forEach>
 										</div>
@@ -220,8 +190,8 @@
 			</div>
 
 		</form>
-		 
-		
+
+
 	</div>
 </body>
 </html>

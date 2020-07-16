@@ -11,7 +11,7 @@
 	co_Mcidx as coMcidx,
 	TIMESTAMPDIFF(MINUTE, NOW(),tb_comment.co_regdate) as coRegdate
 	FROM tb_comment JOIN tb_member 
-	ON m_idx=co_useridx WHERE co_mcidx=${mcidx};
+	ON m_idx=co_useridx WHERE co_mcidx=${mcidx} order by co_idx desc;
 	</select>
 
 	<select id="selectContent" resultType="com.koreait.Content" parameterType="map">
@@ -93,5 +93,21 @@
 	<select id="selectOtherPage" resultType="insta.member.MemberDTO" parameterType="String">
    	SELECT m_idx, m_username FROM tb_member WHERE m_userid = #{userid}
  	</select>
-
+	<select id="selectCntFollower" resultType="_int" parameterType="_int">
+	SELECT COUNT(fi_idx) FROM tb_following 
+ 	JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx
+ 	JOIN tb_member m2 ON tb_following.fi_followingid = m2.m_idx  WHERE fi_followingid = #{mIdx};
+	</select>
+	<select id="selectCntFollow" resultType="_int" parameterType="_int">
+	SELECT COUNT(fi_idx) FROM tb_following 
+ 	JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx
+ 	JOIN tb_member m2 ON tb_following.fi_followingid = m2.m_idx  WHERE fi_useridx = #{mIdx};
+	</select>
+	<select id="selectContentsForIssue" resultType="com.koreait.SearchDTO">
+  	SELECT mc_idx,
+	mc_imageurl FROM tb_mycontent order by mc_idx desc LIMIT 0, 8 ;
+	</select>
+	<select id="selectCntContent" resultType="_int" parameterType="_int">
+	SELECT COUNT(mc_idx) FROM tb_mycontent where mc_useridx = #{userIdx}
+	</select>
 </mapper>

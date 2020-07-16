@@ -17,7 +17,7 @@
 		 
 		<%
 	}else{
-
+	
 	List<MemberDTO> conList = contentDAO.getOtherpage(otherId);
 	List<Content> otherConList = contentDAO.getMyContents(conList.get(0).getM_idx());
 	String userid = (String)session.getAttribute("id");
@@ -41,17 +41,17 @@
              <ul id="p_myTN1">
                  <li class="p_myTN1_list">
                      <span class="p_lText">게시물
-                         <span class="p_lNum">0</span>
+                         <span class="p_lNum"><%=contentDAO.getCntContentById(conList.get(0).getM_idx()) %></span>
                      </span>
                  </li>
                  <li class="p_myTN1_list">
                      <a class="p_lText" href="#">팔로워
-                         <span class="p_lNum">19</span>
+                         <span class="p_lNum"><%=contentDAO.getCntFollower(conList.get(0).getM_idx()) %></span>
                      </a>
                  </li>
                  <li class="p_myTN1_list">
                      <a class="p_lText" href="#">팔로우
-                         <span class="p_lNum">7</span>
+                         <span class="p_lNum"><%=contentDAO.getCntFollow(conList.get(0).getM_idx()) %></span>
                      </a>
                  </li>
              </ul>

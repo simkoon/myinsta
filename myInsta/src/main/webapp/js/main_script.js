@@ -187,7 +187,7 @@ $(() => {
             let cmtHtml =
                 /*html*/
                 `<p>
-                    <a class="art_account" href="/${oneCmt.coUserid}">${oneCmt.coUserid}</a>
+                    <a class="art_account" href="./other/otherperson.jsp?userid=${oneCmt.coUserid}">${oneCmt.coUserid}</a>
                     <span>&nbsp;${getTaglink(oneCmt.coText)}</span>
                 </p>`;
             sumCmt += cmtHtml;
@@ -219,7 +219,7 @@ $(() => {
                         `<div class="main_article">
                                 <div class="article_header">
                                     <div class="art_header_img">
-                                        <a class="off_story" href="#">
+                                        <a class="off_story" href="./other/otherperson.jsp?userid=${one_article.account}">
                                             <a class="on_story" href="">
                                                 <img
                                                     src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/101066874_250369176291217_8457202342863831040_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=MIG0PVCGXmkAX_nqjce&oh=340b25f50b734ba354cb0dd7ee994921&oe=5F1DC758"
@@ -231,7 +231,7 @@ $(() => {
                                     <div class="art_header_account">
                                         <a href="./other/otherperson.jsp?userid=${one_article.account}"><p class="art_account">${one_article.account}</p></a>
                                     </div>
-                                    <div class="art_header_opt"><a href="">···</a></div>
+                                    <div class="art_header_opt"><a href=""></a></div>
                                 </div>
                                 <div class="img_container">
                                     <img src="${"uploads/" + one_article.img ? "uploads/" + one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="" />
@@ -239,16 +239,16 @@ $(() => {
                                 <div class="article_content">
                                     <div class="art_content_btns">
                                         <img class="con_btnLike" src="./images/emptyheart.png" alt="" />
-                                        <img class="con_btnCmt" src="./images/comment.png" alt="" />
+                                        <a href="./contentPage.jsp?b_idx=${one_article.idx}"><img class="con_btnCmt" src="./images/comment.png" alt="" /></a>
                                         <img class="con_btnShare" src="./images/share.png" alt="" />
                                         <img class="con_btnSave" src="./images/emptysave.png" alt="" />
                                     </div>
                                     <div class="art_content_likes">
-                                        <a href=""><span class="con_likes">좋아요 <span class="con_cntlikes">${one_article.like}</span>개</span></a>
+                                        <a href="./contentPage.jsp?b_idx=${one_article.idx}"><span class="con_likes">좋아요 <span class="con_cntlikes">${one_article.like}</span>개</span></a>
                                     </div>
                                     <div class="art_content_summary">
                                         <p>
-                                            <a class="art_account" href=""><span>${one_article.account}</span></a>
+                                            <a class="art_account" href="./other/otherperson.jsp?userid=${one_article.account}"><span>${one_article.account}</span></a>
                                             <span>&nbsp;${getAtlink(getTaglink(one_article.content))}</span>
                                         </p>
                                         <div >

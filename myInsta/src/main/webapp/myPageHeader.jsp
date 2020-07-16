@@ -2,64 +2,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-	$(document).ready(function(){
-	    $(".p_lText").click(function(){
-	        $(".fp").fadeIn();
-	    });
-	    $(".exit_btn").click(function(){
-	        $(".fp").fadeOut();
-	    });
-	});
-	
-	$(document).ready(function(){
-	    $(".p_lText2").click(function(){
-	        $(".fp2").fadeIn();
-	    });
-	    $(".exit_btn").click(function(){
-	        $(".fp2").fadeOut();
-	    });
-	});
-	
-	// 팔로우 버튼
-	$(function(){
-	  $(".fw_btn").on("click", function () {
-        const btnFollow = $(this);
-        let followingid = $(this).next().val();	
-        console.log("팔로우아이디" + followingid);
-        console.log(btnFollow.text());
-        axios
-            .post("./FollowServlet", "followingid=" + followingid)
-            .then(function (response) {
-                
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-	  })
-    });
-	
-		$(function() {
-			$(".fw_btn").on(
-					"click",
-					function() {
-						if ($(this).val() == "팔로우") {
-							$(this).css("background-color", "#fff");
-							$(this).val("팔로잉").css("color", "#000").css("border",
-									"1px solid #ccc");
-						} else {
-							$(this).css("background-color", "#0095f6");
-							$(this).val("팔로우").css("color", "#fff");
-						}
-					});
-		});
-
-</script>
-
+<script src="./js/myPageHeader_script.js"></script>
+<style>
+.p_lText, .p_lText2 {
+	font-size: 16px;
+	border: none;
+	background: none;
+	height: 21px;
+}
+</style>
 <div id="p_myTitle">
 	<div id="p_mTimg">
 		<div class="p_mTi">
@@ -159,179 +114,194 @@
 
 			</div>
 		</div>
+		<%
+			ContentDAO cdao = new ContentDAO();
+		%>
 		<ul id="p_myTN1">
-			<li class="p_myTN1_list"><span class="p_lText">게시물 <span
-					class="p_lNum">0</span>
+			<li class="p_myTN1_list"><span class="p_lText0">게시물 <span
+					class="p_lNum"><%=cdao.getCntContentById(Integer.parseInt(String.valueOf(session.getAttribute("idx")))) %></span>
 			</span></li>
-			<li class="p_myTN1_list"><button class="p_lText" href="#">팔로워 <span
-					class="p_lNum">19</span>
-			</button></li>
-	<div class="fp">
-    <div class="follower_pop">
-        <div class="fw_pop">
-            <div class="pop_header">
-                <div class="hd_left">
+			<li class="p_myTN1_list"><button class="p_lText" href="#"
+					style="cursor: pointer;">
+					팔로워 <span class="p_lNum cntfollower"> <%=cdao.getCntFollower(Integer.parseInt(String.valueOf(session.getAttribute("idx"))))%>
+					</span>
+				</button></li>
+			<div class="fp">
+				<div class="follower_pop">
+					<div class="fw_pop">
+						<div class="pop_header">
+							<div class="hd_left"></div>
+							<h1 class="hd_h1">팔로워</h1>
+							<div class="hd_right">
+								<button class="exit_btn">&times;</button>
+							</div>
+						</div>
+						<div class="pop_body">
+							<ul>
+								<div class="body_ing">
+									<%
+										request.setCharacterEncoding("UTF-8");
+									int m_idx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 
-                </div>
-                <h1 class="hd_h1">
-                    	팔로워
-                </h1>
-                <div class="hd_right">
-                    <button class="exit_btn">&times;</button>
-                </div>
-            </div>
-            <div class="pop_body">
-                <ul>
-                    <div class="body_ing">
-<%
-request.setCharacterEncoding("UTF-8");
-int m_idx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
+									System.out.println("m_idx = " + m_idx);
+									Connection conn = null;
+									PreparedStatement pstmt = null;
+									ResultSet rs = null;
 
-System.out.println("m_idx = " + m_idx);
-Connection conn = null;
-PreparedStatement pstmt= null;
-ResultSet rs = null;
-ContentDAO cdao = new ContentDAO();
-String sql = "";
-String url = "jdbc:mariadb://localhost:3306/insta";
-String uid = "root";
-String upw = "1234";
+									String sql = "";
+									String url = "jdbc:mariadb://localhost:3306/insta";
+									String uid = "root";
+									String upw = "1234";
 
-try {
-	Class.forName("org.mariadb.jdbc.Driver");
-	conn = DriverManager.getConnection(url, uid, upw);
-	if(conn != null) {
-		sql = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, tb_following.fi_useridx  FROM tb_following" ;
-		sql	+=	" JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
-		sql	+= " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, m_idx);
-		rs = pstmt.executeQuery();
-		while(rs.next()) {
-			int followingid = rs.getInt("fi_useridx");
-			System.out.println("followingid = " +followingid);
-			
+									try {
+										Class.forName("org.mariadb.jdbc.Driver");
+										conn = DriverManager.getConnection(url, uid, upw);
+										if (conn != null) {
+											sql = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, tb_following.fi_useridx  FROM tb_following";
+											sql += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
+											sql += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
+											pstmt = conn.prepareStatement(sql);
+											pstmt.setInt(1, m_idx);
+											rs = pstmt.executeQuery();
+											while (rs.next()) {
+										int followingid = rs.getInt("fi_useridx");
+										System.out.println("followingid = " + followingid);
+									%>
+									<li>
+										<div class="ing_li">
+											<div class="li_img">
+												<a href="#"><img src="./images/person_icon.jpg" alt="프사"></a>
+											</div>
+											<div class="li_id">
+												<p><%=rs.getString("otherfollow")%></p>
+											</div>
+											<div class="li_btn">
+												<%
+													if (cdao.getFollowingById(m_idx, followingid) > 0) {
+												%>
+												<input type="button" style="cursor: pointer;" value="팔로잉"
+													class="fw_btn">
 
-%>
-                        <li>
-                            <div class="ing_li">
-                                <div class="li_img">
-                                    <a href="#"><img src="./images/person_icon.jpg" alt="프사"></a>
-                                </div>
-                                <div class="li_id">
-                                    <p><%=rs.getString("otherfollow") %></p>
-                                </div>
-                                <div class="li_btn">
-                                <%if(cdao.getFollowingById(m_idx, followingid)>0){ %>
-                                    <input type="button" value="팔로우" class="fw_btn" style="background-color: #0095f6; color: white;">
-                                    <%}else{ %>
-                                     <input type="button" value="팔로잉" class="fw_btn">
-                                    <%} %>
-                                    <input type="hidden" value="<%=followingid %>">
-                                </div>
-                            </div>
-                        </li>
-<%
-			}
-		}
-	}catch(Exception e) {
-			e.printStackTrace();
-		}
-%>
-                    </div>
-                </ul>
-                
-                <div class="body_h1">
-                    <h1>회원님을 위한 추천</h1>
-                </div>
-                <ul>
-                    <div class="body_ing">
-                        <li>
-                            <div class="ing_li">
-                                <div class="li_img">
-                                    <a href="#"><img src="./images/person_icon.jpg" alt="프사"></a>
-                                </div>
-                                <div class="li_id">
-                                    <p>id</p>
-                                </div>
-                                <div class="li_btn li_btn2">
-                                    <input type="button" value="팔로우" class="fw_btn">
-                                </div>
-                   
-                            </div>
-                        </li>
-                    </div>
-                </ul>
-               
-            </div>
-        </div>
-    </div>
-</div>
-			<li class="p_myTN1_list"><button class="p_lText2" href="#">팔로우 <span
-					class="p_lNum">7</span>
-			</button></li>
+												<%
+													} else {
+												%>
+												<input type="button" value="팔로우"
+													class="fw_btn"
+													style="background-color: #0095f6; color: white;cursor: pointer;">
+
+												<%
+													}
+												%>
+												<input type="hidden" value="<%=followingid%>">
+											</div>
+										</div>
+									</li>
+									<%
+										}
+									}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+									%>
+								</div>
+							</ul>
+
+							<!--	<div class="body_h1">
+								 <h1>회원님을 위한 추천</h1>
+							</div>
+							<ul>
+								<div class="body_ing">
+									<li>
+										<div class="ing_li">
+											<div class="li_img">
+												<a href="#"><img src="./images/person_icon.jpg" alt="프사"></a>
+											</div>
+											<div class="li_id">
+												<p>id</p>
+											</div>
+											<div class="li_btn li_btn2">
+												<input type="button" value="팔로우" class="fw_btn">
+											</div>
+
+										</div>
+									</li>
+								</div>
+							</ul>-->
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<li class="p_myTN1_list"><button class="p_lText2" href="#"
+					style="cursor: pointer;">
+					팔로우 <span class="p_lNum cntfollow"> <%=cdao.getCntFollow(m_idx)%></span>
+				</button></li>
 			<div class="fp2">
-    <div class="follower_pop">
-        <div class="fw_pop">
-            <div class="pop_header">
-                <div class="hd_left">
+				<div class="follower_pop">
+					<div class="fw_pop">
+						<div class="pop_header">
+							<div class="hd_left"></div>
+							<h1 class="hd_h1">팔로워</h1>
+							<div class="hd_right">
+								<button class="exit_btn">&times;</button>
+							</div>
+						</div>
+						<div class="pop_body">
+							<ul>
+								<div class="body_ing">
+									<%
+										try {
+										Class.forName("org.mariadb.jdbc.Driver");
+										conn = DriverManager.getConnection(url, uid, upw);
+										if (conn != null) {
+											sql = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_useridx  FROM tb_following";
+											sql += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
+											sql += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_useridx = ?";
+											pstmt = conn.prepareStatement(sql);
+											pstmt.setInt(1, m_idx);
+											rs = pstmt.executeQuery();
+											while (rs.next()) {
+										int followingid = rs.getInt("fi_useridx");
+										System.out.println("followingid = " + followingid);
+									%>
+									<li><input type="hidden" value="">
+										<div class="ing_li">
+											<div class="li_img">
+												<a href="#"><img src="./images/person_icon.jpg" alt="#"></a>
+											</div>
+											<div class="li_id">
+												<p><%=rs.getString("ifollow")%></p>
+											</div>
+											<div class="li_btn">
+												<%
+													if (cdao.getFollowingById(m_idx, followingid) > 0) {
+												%>
+												<input type="button" style="cursor: pointer;" value="팔로잉"
+													class="fw_btn">
+												<%
+													} else {
+												%>
+												<input type="button"  value="팔로우"
+													class="fw_btn"
+													style="background-color: #0095f6; color: white;cursor: pointer;">
 
-                </div>
-                <h1 class="hd_h1">
-                    팔로워
-                </h1>
-                <div class="hd_right">
-                    <button class="exit_btn">&times;</button>
-                </div>
-            </div>
-            <div class="pop_body">
-                <ul>
-                    <div class="body_ing">
-<%
-    try {
-	Class.forName("org.mariadb.jdbc.Driver");
-	conn = DriverManager.getConnection(url, uid, upw);
-	if(conn != null) {
-		sql = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_useridx  FROM tb_following" ;
-		sql	+=	" JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
-		sql	+= " ON tb_following.fi_followingid = m2.m_idx WHERE fi_useridx = ?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, m_idx);
-		rs = pstmt.executeQuery();
-		while(rs.next()) {
-			int followingid = rs.getInt("fi_useridx");
-			System.out.println("followingid = " +followingid);
-			
-
-%>
-                        <li>
-                            <div class="ing_li">
-                                <div class="li_img">
-                                    <a href="#"><img src="./images/person_icon.jpg" alt="#"></a>
-                                </div>
-                                <div class="li_id">
-                                    <p><%=rs.getString("ifollow") %></p>
-                                </div>
-                                <div class="li_btn">
-                                    <%if(cdao.getFollowingById(m_idx, followingid)==0){ %>
-                                    <input type="button" value="팔로우" class="fw_btn" style="background-color: #0095f6; color: white;">
-                                    <%}else{ %>
-                                     <input type="button" value="팔로잉" class="fw_btn">
-                                    <%} %>
-                                    <input type="hidden" value="<%=followingid %>">
-                                </div>
-                            </div>
-                        </li>
- <%
-			}
-		}
-	}catch(Exception e) {
-			e.printStackTrace();
-		}
-%>
-                    </div>
-                </ul>
-                <!--  
+												<%
+													}
+												%>
+												<input type="hidden" value="<%=followingid%>">
+											</div>
+										</div>
+									</li>
+									<%
+										}
+									}
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+									%>
+								</div>
+							</ul>
+							<!--  
                 <div class="body_h1">
                     <h1>회원님을 위한 추천</h1>
                 </div>
@@ -353,10 +323,10 @@ try {
                     </div>
                 </ul>
                 -->
-            </div>
-        </div>
-    </div>
-</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</ul>
 		<div id="p_myTN3">

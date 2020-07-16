@@ -266,15 +266,14 @@ public class ContentDAO {
 		sqlsession.close();
 		return memberList;
 	}
-	
-public List<MemberDTO> getMemberLists(int start) {
-		
+
+	public List<MemberDTO> getMemberLists(int start) {
+
 		sqlsession = sessionf.openSession(true);
 		List<MemberDTO> memberList = sqlsession.selectList("Content.selectMemberLists", start);
 		sqlsession.close();
 		return memberList;
 	}
-	
 
 	// 태그 게시물 수 가져오기
 	public String getCntTag(String tag) {
@@ -302,19 +301,16 @@ public List<MemberDTO> getMemberLists(int start) {
 		sqlsession.delete("Content.deleteComment", co_idx);
 		sqlsession.close();
 	}
-	
-	
-	public List<MemberDTO> getSearchMem (String userStr){
+
+	public List<MemberDTO> getSearchMem(String userStr) {
 		sqlsession = sessionf.openSession(true);
-		List<MemberDTO> memList= sqlsession.selectList("Content.selectSearchMem", userStr);
+		List<MemberDTO> memList = sqlsession.selectList("Content.selectSearchMem", userStr);
 		sqlsession.close();
 		return memList;
 	}
-	
-	
-	//마이페이지
 
-	
+	// 마이페이지
+
 	public List<Content> getMyContents(int idx) {
 		sqlsession = sessionf.openSession(true);
 		List<Content> conList = sqlsession.selectList("Content.selectMypageComment", idx);
@@ -322,7 +318,7 @@ public List<MemberDTO> getMemberLists(int start) {
 		sqlsession.close();
 		return conList;
 	}
-	
+
 	public List<Content> getSaveContent(int b_idx) {
 		sqlsession = sessionf.openSession(true);
 		List<Content> conList = sqlsession.selectList("Content.selectSaveContent", b_idx);
@@ -330,7 +326,7 @@ public List<MemberDTO> getMemberLists(int start) {
 		sqlsession.close();
 		return conList;
 	}
-	
+
 	public List<Content> getTageContent(String userid) {
 		sqlsession = sessionf.openSession(true);
 		List<Content> conList = sqlsession.selectList("Content.selectTageContent", userid);
@@ -338,12 +334,47 @@ public List<MemberDTO> getMemberLists(int start) {
 		sqlsession.close();
 		return conList;
 	}
-	
+
 	public List<MemberDTO> getOtherpage(String userid) {
 		sqlsession = sessionf.openSession(true);
 		List<MemberDTO> conList = sqlsession.selectList("Content.selectOtherPage", userid);
 		System.out.println(conList);
 		sqlsession.close();
 		return conList;
+	}
+
+	// 나의 팔로우 수들
+	public int getCntFollow(int mIdx) {
+		sqlsession = sessionf.openSession(true);
+		int cnt= sqlsession.selectOne("Content.selectCntFollow", mIdx);
+		
+		sqlsession.close();
+		return cnt;
+	}
+	// 나를 팔로우하는 팔로워의 수
+	public int getCntFollower(int mIdx) {
+		sqlsession = sessionf.openSession(true);
+		int cnt= sqlsession.selectOne("Content.selectCntFollower", mIdx);
+		
+		sqlsession.close();
+		return cnt;
+	}
+	//메인피드 회전목마
+	public List<Content> getContentsForIssue() {
+		sqlsession = sessionf.openSession(true);
+		
+		List<Content> conList = sqlsession.selectList("Content.selectContentsForIssue");
+	
+		sqlsession.close();
+		return conList;
+	}
+	// 유저 인덱스에 따른 게시물 수
+	public int getCntContentById(int userIdx) {
+		
+		sqlsession = sessionf.openSession(true);
+		int cnt= sqlsession.selectOne("Content.selectCntContent", userIdx);
+		
+		sqlsession.close();
+		return cnt;
 	}
 }
