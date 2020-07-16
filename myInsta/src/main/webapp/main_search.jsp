@@ -45,6 +45,8 @@
 			$(this).children(".popup_box").removeClass("on");
 		});
 	});
+	(()={})();
+	
 </script>
 </head>
 <body>

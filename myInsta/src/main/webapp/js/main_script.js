@@ -129,13 +129,18 @@ $(() => {
                 .find(".art_btnSubmitCmt")
                 .on("click", function () {
                     let textVal = $(newArticle).find(".art_con_cmt").val();
-                    console.log(textVal);
+                    let cntCmtt = $(newArticle).find(".see_cntCmtt");
+                    let cntcomment = Number(cntCmtt.text());
                     axios
                         .post("./CommentServlet", "contentidx=" + contentidx + "&cotext=" + textVal)
                         .then(function (response) {
                             $(newArticle).find(".art_con_cmt").val("");
+                            $(newArticle).find(".art_btnSubmitCmt").css({
+                                "pointer-events": "none",
+                                opacity: ".3",
+                            });
+                            cntCmtt.text(cntcomment + 1);
                             let myaccount = $("#myaccountId").text();
-                            console.log(myaccount);
                             let cmtHtml =
                                 /*html*/
                                 `<p>
@@ -229,7 +234,7 @@ $(() => {
                                     <div class="art_header_opt"><a href="">···</a></div>
                                 </div>
                                 <div class="img_container">
-                                    <img src="${ ("uploads/"+one_article.img) ? ("uploads/"+one_article.img) : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="" />
+                                    <img src="${"uploads/" + one_article.img ? "uploads/" + one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="" />
                                 </div>
                                 <div class="article_content">
                                     <div class="art_content_btns">
@@ -247,7 +252,7 @@ $(() => {
                                             <span>&nbsp;${getAtlink(getTaglink(one_article.content))}</span>
                                         </p>
                                         <div >
-                                            <div><a href="./contentPage.jsp?b_idx=${one_article.idx}" class="see_allCmt">댓글 ${one_article.cntcmt}개 모두 보기</a></div>
+                                            <div><a href="./contentPage.jsp?b_idx=${one_article.idx}" class="see_allCmt">댓글 <span class="see_cntCmtt">${one_article.cntcmt}</span>개 모두 보기</a></div>
                                             <div class="con_cmts">
                                             ${cmts}
                                             </div>
