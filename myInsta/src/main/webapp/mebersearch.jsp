@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="memberList" value="${contentDAO.getMemberList(0) }" />
+<c:set var="userStr" value="${param.userid}" />
+<c:set var="memberList" value="${contentDAO.getSearchMem(userStr) }" />
 <c:if test="${empty sessionScope.id }">
 	<script>
 		alert("로그인 후 이용해주세요.");
@@ -76,7 +77,7 @@
 													<span class="people__username"> <a href="#">
 															${item.m_userid } </a> <img src="" />
 													</span> <span class="people__full-name">${item.m_username }</span>
-													<p class="people__full-name">회원님을 위한 추천</p>
+										
 												</div>
 											</div>
 											<div class="people__column">
@@ -94,9 +95,7 @@
 									</c:forEach>
 									<li class="people__person">
 										<div class="people__column">
-											<a href="./mainfeed.jsp"> <input type="button"
-												id="startbutton" value="시작하기" />
-											</a>
+										
 										</div>
 									</li>
 								</ul>

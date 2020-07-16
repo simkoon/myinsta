@@ -62,5 +62,15 @@
 	<delete id="deleteComment" parameterType="int">
     DELETE FROM tb_comment WHERE co_idx = #{co_idx}
 	</delete>
-	
+	<select id="selectSearchMem" resultType="insta.member.MemberDTO" parameterType="String">
+  SELECT *
+	FROM tb_member WHERE concat(m_userid, m_username) LIKE '%${userStr}%'
+	ORDER BY case when m_userid like '${userStr}%' then 1 
+	when m_userid like '${userStr}%' then 2 
+	when m_username like '${userStr}%' then 2 
+	when m_userid LIKE '%${userStr}%' then 3 
+	when m_userid LIKE '%${userStr}' then 4 
+	ELSE 5 END 
+	</select>
+
 </mapper>

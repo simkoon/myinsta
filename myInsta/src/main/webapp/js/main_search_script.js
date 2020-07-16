@@ -1,10 +1,15 @@
+function getParam(name) {
+    if ((name = new RegExp("[?&]" + encodeURIComponent(name) + "=([^&]*)").exec(location.search))) return decodeURIComponent(name[1]);
+}
+if (getParam("tag").includes("@")) {
+    location.href = "./mebersearch.jsp?userid="+getParam("tag").substr(1);
+}
+
 $(() => {
     let start = 0;
     let pending = false;
     //url에서 get 파라메터 가져오기
-    function getParam(name) {
-        if ((name = new RegExp("[?&]" + encodeURIComponent(name) + "=([^&]*)").exec(location.search))) return decodeURIComponent(name[1]);
-    }
+
     (() => {
         $(".search_name_h1").text("#" + getParam("tag"));
     })();
@@ -60,7 +65,7 @@ $(() => {
                             </p>
                            
                         </div>
-                       <img src="${ ("uploads/"+one_article.img) ? ("uploads/"+one_article.img) : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="#" />
+                       <img src="${"uploads/" + one_article.img ? "uploads/" + one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="#" />
                         </div></a>
                         `;
                     if ((i + 1) % 3 == 0 || i + 1 == newthing.result.length) {

@@ -57,7 +57,7 @@ public class ContentDAO {
 			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}
 		return cnt;
@@ -83,8 +83,8 @@ public class ContentDAO {
 			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			DBConn.close(conn, pstmt,rs);
+		} finally {
+			DBConn.close(conn, pstmt, rs);
 		}
 		return isOk;
 	}
@@ -118,7 +118,7 @@ public class ContentDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBConn.close(conn, pstmt);
 		}
 		System.out.println("result=" + result);
@@ -145,8 +145,8 @@ public class ContentDAO {
 			System.out.println(rs);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			DBConn.close(conn, pstmt,rs);
+		} finally {
+			DBConn.close(conn, pstmt, rs);
 		}
 		return isOk;
 	}
@@ -179,7 +179,7 @@ public class ContentDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBConn.close(conn, pstmt);
 		}
 		System.out.println("result=" + result);
@@ -227,7 +227,7 @@ public class ContentDAO {
 	// 팔로잉 팔로우
 
 	public int editFollowing(int fi_useridx, int fi_followingid) {
-		
+
 		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
 
 		dataMap.put("fi_useridx", fi_useridx);
@@ -266,6 +266,7 @@ public class ContentDAO {
 		sqlsession.close();
 		return memberList;
 	}
+
 	// 태그 게시물 수 가져오기
 	public String getCntTag(String tag) {
 		sqlsession = sessionf.openSession(true);
@@ -275,19 +276,29 @@ public class ContentDAO {
 		sqlsession.close();
 		return cntTag;
 	}
+
+	// mc_idx, m_userid as mc_useridx, mc_content, mc_regdate, mc_location,
+	// mc_imageurl 가져오기
+	public List<Content> getOneContent(int b_idx) {
+		sqlsession = sessionf.openSession(true);
+		List<Content> conList = sqlsession.selectList("Content.selectOneContent", b_idx);
+		System.out.println(conList);
+		sqlsession.close();
+		return conList;
+	}
+
+	// 댓글 삭제
+	public void deleteComment(int co_idx) {
+		sqlsession = sessionf.openSession(true);
+		sqlsession.delete("Content.deleteComment", co_idx);
+		sqlsession.close();
+	}
 	
-	// mc_idx, m_userid as mc_useridx, mc_content, mc_regdate, mc_location, mc_imageurl 가져오기
-		public List<Content> getOneContent(int b_idx) {
-			sqlsession = sessionf.openSession(true);
-			List<Content> conList = sqlsession.selectList("Content.selectOneContent", b_idx);
-			System.out.println(conList);
-			sqlsession.close();
-			return conList;
-		}
-		//댓글 삭제
-		public void deleteComment(int co_idx) {
-			sqlsession = sessionf.openSession(true);
-			sqlsession.delete("Content.deleteComment", co_idx);
-			sqlsession.close();
-		}
+	
+	public List<MemberDTO> getSearchMem (String userStr){
+		sqlsession = sessionf.openSession(true);
+		List<MemberDTO> memList= sqlsession.selectList("Content.selectSearchMem", userStr);
+		sqlsession.close();
+		return memList;
+	}
 }
