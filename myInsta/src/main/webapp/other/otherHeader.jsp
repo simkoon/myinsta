@@ -9,18 +9,19 @@
 <jsp:useBean id="memberDTO" class="insta.member.MemberDTO" />
 <%
 	String otherId = request.getParameter("userid");
-	//if(session.getAttribute("id").equals(otherId)){
+	if(session.getAttribute("id").equals(otherId)){
 		%>
-<!-- 		<script>
+ 		<script>
 			location.href="../mypage.jsp";
 		</script>
-		 -->
+		 
 		<%
-	//}else{
+	}else{
 
 	List<MemberDTO> conList = contentDAO.getOtherpage(otherId);
 	List<Content> otherConList = contentDAO.getMyContents(conList.get(0).getM_idx());
-	List<Content> TagList = contentDAO.getTageContent(otherId);
+	String userid = (String)session.getAttribute("id");
+	List<Content> TagList = contentDAO.getTageContent(userid);
 %>
 <div id="p_myTitle">
          <div id="p_mTimg">
@@ -59,6 +60,3 @@
              </div>
          </section>
      </div>
-<%
-	//}
-%>

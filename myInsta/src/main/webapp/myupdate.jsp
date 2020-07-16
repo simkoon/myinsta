@@ -113,7 +113,7 @@ $(function(){
 			$(".taglist").css("display","none");
 			data = $(".modal2__content.on").append('<p id="madallist" class="madallist">@ '+($(this).val())+'  <button type="button" class="modal2_close"> &times;</button></p>');
 			setbtnAction();
-			let dataforinpout =$(this).val();
+			let dataforinpout = "@"+$(this).val()+",";
 		$("#tagaddtn").click(function() {
 			$("#taglistvalue").append(data);
 			$(".taglistvalue1").val(dataforinpout);

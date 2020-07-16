@@ -84,7 +84,7 @@
  	</select>
 
 	<select id="selectTageContent" resultType="com.koreait.Content" parameterType="String">
-   	SELECT mc_idx, mc_imageurl FROM tb_mycontent WHERE mc_taggedid = #{taggedid}
+   	SELECT mc_idx, mc_imageurl FROM tb_mycontent WHERE mc_taggedid like "%@${taggedid},%"
  	</select>
  	 
 	<select id="selectOtherPage" resultType="insta.member.MemberDTO" parameterType="String">
