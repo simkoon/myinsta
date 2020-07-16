@@ -64,7 +64,6 @@
 
 
 									<c:forEach var="item" items="${memberList}" varStatus="status">
-									  <c:if test="${item.m_userid ne sessionScope.id }">
 										<c:if test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
 										<li class="people__person">
 											<div class="people__column">
@@ -93,9 +92,7 @@
 											</div>
 										</li>
 									</c:if>
-									</c:if>
 									</c:forEach>
-							
 									<li class="people__person">
 										<div class="people__column">
 											<a href="./mainfeed.jsp"> <input type="button"
