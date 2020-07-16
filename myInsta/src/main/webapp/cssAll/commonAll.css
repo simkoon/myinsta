@@ -2475,6 +2475,10 @@ line-height: 1.5em;
      background-size: 85%;
     width: 25px;
     height: 25px; 
+}.content_box .content_textbox .content_like .btn_keep.on{
+ 
+    background: url(../images/save.png) no-repeat !important;
+ 
 }
 /* 댓글 입력창 박스*/
 .content_box .content_textbox .reply_text {

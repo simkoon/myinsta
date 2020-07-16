@@ -24,6 +24,11 @@ System.out.println(cnt);
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./js/contentPage_script.js">
+	
 <%@ include file="mainTitle.jsp"%>
 </head>
 <body>
@@ -49,10 +54,10 @@ System.out.println(cnt);
 									<a href="#">
 										<div class="profile_img"></div>
 										<div class="content_userid"><%=conList.get(0).getMc_useridx()%></div>
-									</a> <span>•</span>
+									</a> <!--<span>•</span>
 
 
-									<button class="content_follow">팔로우</button>
+									<button class="content_follow">팔로우</button>-->
 									<button class="content_option" id="popbtn5">•••</button>
 								</div>
 								<div class="content_reply">
@@ -103,7 +108,7 @@ System.out.println(cnt);
 									<button class="btn_keep"></button>
 									<p class="like_cun">
 										좋아요
-										<%=cnt%>개
+										<span class="cntlikes"><%=cnt%></span>개
 									</p>
 									<p class="contentPage_date"><%=conList.get(0).getMc_regdate()%></p>
 								</div>
@@ -149,7 +154,7 @@ System.out.println(cnt);
     </div>
     <div id="pop7">
         <div id="pop7_menu">
-            <div class="pop7_box"><span class="pop7_id">Gyomin_100</span> 님의 <br>팔로우를 취소하시겠어요?</div>
+            <div class="pop7_box"><span class="pop7_id"><%=conList.get(0).getMc_useridx()%></span> 님의 <br>팔로우를 취소하시겠어요?</div>
             <button class="mybtn7">팔로우 취소</button>
             <button class="">취소</button>
         </div>
