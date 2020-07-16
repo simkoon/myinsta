@@ -72,5 +72,23 @@
 	when m_userid LIKE '%${userStr}' then 4 
 	ELSE 5 END 
 	</select>
+	
+	<select id="selectMypageComment" resultType="com.koreait.Content" parameterType="int">
+	SELECT  mc_idx, mc_useridx, mc_imageurl FROM tb_mycontent WHERE mc_useridx = #{useridx} 
+	</select>
+	
+	<select id="selectSaveContent" resultType="com.koreait.Content" parameterType="_int">
+   	SELECT s_useridx as mc_useridx, 
+   	mc_imageurl,mc_idx  FROM tb_save 
+    JOIN tb_mycontent ON tb_save.s_mcidx = mc_idx WHERE s_useridx=#{useridx}
+ 	</select>
+
+	<select id="selectTageContent" resultType="com.koreait.Content" parameterType="String">
+   	SELECT mc_idx, mc_imageurl FROM tb_mycontent WHERE mc_taggedid = #{taggedid}
+ 	</select>
+ 	 
+	<select id="selectOtherPage" resultType="insta.member.MemberDTO" parameterType="String">
+   	SELECT m_idx, m_username FROM tb_member WHERE m_userid = #{userid}
+ 	</select>
 
 </mapper>

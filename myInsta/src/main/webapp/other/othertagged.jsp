@@ -15,7 +15,7 @@
             <div id="page_myPage"> 
                 <%@ include file="otherHeader.jsp" %>
                 <div id="p_myList">
-                    <a class="p_myL" href="./otherperson.jsp">
+                    <a class="p_myL" href="./otherperson.jsp?userid=<%=otherId%>">
                         <span class="p_mLimg">
                             <svg aria-label="게시물" class="ico_btn" fill="#262626" height="12" viewBox="0 0 48 48" width="12">
                                 <path clip-rule="evenodd" d="M45 1.5H3c-.8 0-1.5.7-1.5 1.5v42c0 .8.7 1.5 1.5 1.5h42c.8 0 1.5-.7 1.5-1.5V3c0-.8-.7-1.5-1.5-1.5zm-40.5 3h11v11h-11v-11zm0 14h11v11h-11v-11zm11 25h-11v-11h11v11zm14 0h-11v-11h11v11zm0-14h-11v-11h11v11zm0-14h-11v-11h11v11zm14 28h-11v-11h11v11zm0-14h-11v-11h11v11zm0-14h-11v-11h11v11z" fill-rule="evenodd"></path>
@@ -33,6 +33,9 @@
                     </a>
                 </div>
                 <div id="p_myContent">
+                <%
+					if(conList.size() == 0){
+				%>
                     <div class="ts_Box">
                         <div class="t_Box">
                             <div class="t_bImg">
@@ -41,6 +44,22 @@
                             <h2>게시물 없음</h2>
                         </div>
                     </div>
+                <%
+					}
+					for(int i=0; i<conList.size(); i++){
+					
+				%>
+					<ul class="p_myCBox">
+						<li>
+							<a class="" href="contentPage.jsp?b_idx=<%=TagList.get(i).getMc_idx()%>">
+							<img class="p_myCBoxImg" alt="" src="../uploads/<%=TagList.get(i).getMc_imageurl()%>">									
+							</a>
+						</li>
+					</ul>
+				<%
+					}
+				%>
+                      
                 </div>
             </div>
         </div>

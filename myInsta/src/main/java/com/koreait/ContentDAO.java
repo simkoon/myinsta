@@ -301,4 +301,40 @@ public class ContentDAO {
 		sqlsession.close();
 		return memList;
 	}
+	
+	
+	//마이페이지
+
+	
+	public List<Content> getMyContents(int idx) {
+		sqlsession = sessionf.openSession(true);
+		List<Content> conList = sqlsession.selectList("Content.selectMypageComment", idx);
+		System.out.println(conList);
+		sqlsession.close();
+		return conList;
+	}
+	
+	public List<Content> getSaveContent(int b_idx) {
+		sqlsession = sessionf.openSession(true);
+		List<Content> conList = sqlsession.selectList("Content.selectSaveContent", b_idx);
+		System.out.println(conList);
+		sqlsession.close();
+		return conList;
+	}
+	
+	public List<Content> getTageContent(String userid) {
+		sqlsession = sessionf.openSession(true);
+		List<Content> conList = sqlsession.selectList("Content.selectTageContent", userid);
+		System.out.println(conList);
+		sqlsession.close();
+		return conList;
+	}
+	
+	public List<MemberDTO> getOtherpage(String userid) {
+		sqlsession = sessionf.openSession(true);
+		List<MemberDTO> conList = sqlsession.selectList("Content.selectOtherPage", userid);
+		System.out.println(conList);
+		sqlsession.close();
+		return conList;
+	}
 }

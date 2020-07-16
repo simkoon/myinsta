@@ -1,5 +1,26 @@
+<%@page import="com.koreait.CommentDTO"%>
+<%@page import="com.koreait.Content"%>
+<%@page import="insta.member.MemberDTO"%>
+<%@page import="insta.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<jsp:useBean id="memberDTO" class="insta.member.MemberDTO" />
+<%
+	String otherId = request.getParameter("userid");
+	//if(session.getAttribute("id").equals(otherId)){
+		%>
+		<script>
+			location.href="../mypage.jsp";
+		</script>
+		<%
+	//}else{
+
+	List<MemberDTO> conList = contentDAO.getOtherpage(otherId);
+	List<Content> otherConList = contentDAO.getMyContents(conList.get(0).getM_idx());
+	List<Content> TagList = contentDAO.getTageContent(otherId);
+%>
 <div id="p_myTitle">
          <div id="p_mTimg">
              <div class="p_mTi">
@@ -11,7 +32,7 @@
          <section id="p_myTName">
              <div id="p_myTN1">
              	<div class="otherp">
-                 <h2>gyomini_100</h2>
+                 <h2><%=otherId %></h2>   
                  <input class="p_myTNpa p_myTNBtn otherbtn btnFolloing"  type="button" onclick="Color(event)" value="팔로우">
              	</div>
              </div>
@@ -37,3 +58,6 @@
              </div>
          </section>
      </div>
+<%
+	//}
+%>

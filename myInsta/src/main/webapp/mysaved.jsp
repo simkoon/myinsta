@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@page import="com.koreait.CommentDTO"%>
+<%@page import="com.koreait.Content"%>
+<%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="mainTitle.jsp" %>
+<%
+	int useridx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
+	List<Content> conList = contentDAO.getSaveContent(useridx);
+%>
 </head>
 <body>
 <div id="wrap">
-<form id="h_reform">
+<form id="h_reform" method="post" action="myupdate_ok.jsp" enctype="multipart/form-data">
 	<%@ include file="mainHead.jsp" %>
     <div id="container">
         <div class="main_rolling_pc box_inner">
@@ -49,6 +58,9 @@
                             </a>
                         </div>
                         <div id="p_myContent">
+                        <%
+							if(conList.size() == 0){
+						%>
                             <div class="ts_Box">
                                 <div class="t_Box">
                                     <div class="t_bImg">
@@ -58,7 +70,25 @@
                                     <p>다시 보고 싶은 사진과 동영상을 저장하세요. 콘텐츠를 저장해도 다른 사람에게 알림이 전송되지 않으며, 저장된 콘텐츠는 회원님만 볼 수 있습니다.</p>
                                 </div>
                             </div>
+						
+						<%
+							}
+							for(int i=0; i<conList.size(); i++){
+							
+						%>
+							<ul class="p_myCBox">
+								<li>
+									<a class="" href="contentPage.jsp?b_idx=<%=conList.get(i).getMc_idx()%>">
+									<img class="p_myCBoxImg" alt="" src="./uploads/<%=conList.get(i).getMc_imageurl()%>">									
+									</a>
+								</li>
+							</ul>
+						<%
+							}
+						%>
                         </div>
+                        
+                        
      			
              <!-- End -->   
             </div>

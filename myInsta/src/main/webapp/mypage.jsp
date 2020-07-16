@@ -1,8 +1,25 @@
+<%@page import="com.koreait.CommentDTO"%>
+<%@page import="com.koreait.Content"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
+</c:if>
+<%
+	int useridx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
+	List<Content> conList = contentDAO.getMyContents(useridx);
+%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <%@ include file="mainTitle.jsp"%>
 <style>
 .p_myCBox label {
@@ -29,6 +46,34 @@
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
+.fp { width: 100%; height: 100%;   display: none;
+position: fixed; top:0px; left:0px; background-color: rgba(0,0,0,0.6);}
+.fp2 { width: 100%; height: 100%;   display: none;
+position: fixed; top:0px; left:0px; background-color: rgba(0,0,0,0.6);}
+.follower_pop { width: 400px; height: 400px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #fff;
+border: 1px solid #ccc; border-radius: 12px;}
+.follower_pop .fw_pop { width: 100%; height: 43px; border-bottom: 1px solid #ccc;}
+.follower_pop .fw_pop .pop_header { width: 100%; height: 100%; display: flex;}
+.follower_pop .fw_pop .pop_header .hd_left, .follower_pop .fw_pop .pop_header .hd_right { height: 42px; width: 48px;}
+.follower_pop .fw_pop .hd_h1 { font-size: 16px; text-align: center; margin: 0; height: 42px; width: 304px; font-weight: bold;
+line-height: 24px; justify-content: center;}
+.follower_pop .fw_pop .pop_header .hd_right { padding: 8px; box-sizing: border-box; background: 0 0;}
+.follower_pop .fw_pop .pop_body { height: 357px; min-height: 200px; overflow-y: scroll; overflow-x: hidden;}
+.follower_pop .fw_pop .pop_body ul { margin: 0; padding: 0;}
+.follower_pop .fw_pop .pop_body ul .body_ing li { height: 46px; width: 383px; list-style: none;}
+.body_ing .ing_li { display: flex; height: 46px; padding: 8px 16px; box-sizing: border-box;}
+.body_ing .ing_li .li_img { width: 15%;}
+.body_ing .ing_li .li_id { width: 65%; }
+.body_ing .ing_li .li_btn { width: 20%;}
+.body_ing .ing_li .li_btn input[type="button"] { width: 62px; height: 30px; background-color: #fff; border: 1px solid #ccc; 
+color: #000; border-radius: 4px; font-weight: bold;}
+.body_ing .ing_li .li_img a img { width: 30px; height: 30px; border: 1px solid #ccc; border-radius: 50%;}
+.body_ing .ing_li .li_id p { font-size: 13px; line-height: 10px;}
+.pop_body .body_h1 { width: 100%; height: 30px; padding-left: 16px;}
+.pop_body .body_h1 h1 { font-size: 16px; font-weight: bold;}
+.body_ing .ing_li .li_btn2 input[type="button"] { width: 62px; height: 30px; background-color: #0095f6; border: 1px solid #ccc; 
+border-radius: 4px; font-weight: bold; color: white;}
+.exit_btn { border: none; backgroun-color: white; height: 20px; width: 20px;}
 </style>
 </head>
 <body>
@@ -75,17 +120,22 @@
 							</a>
 						</div>
 						<div id="p_myContent">
-							<div class="p_myCTitle">시작하기</div>
 							<div class="p_myCon">
-								<div class="p_myCBox">
-									<div class="imgBox">
-										<img src="images/camera_icon.PNG" alt="프로필사진을 추가해주세요">
-									</div>
-									<h2 class="p_title">프로필 사진 추가</h2>
-									<P class="p_con">친구들이 회원님을 알아볼수 있도록 프로필사진을 추가하세요.</P>
-									<label for="ex_filename">프로필 사진 추가</label> <input type="file"
-										id="ex_filename" class="upload-hidden">
-								</div>
+							<%
+								for(int i=0; i<conList.size(); i++){
+							%>
+								<ul class="p_myCBox">
+									<li>
+										<a class="" href="contentPage.jsp?b_idx=<%=conList.get(i).getMc_idx()%>">
+										<img class="p_myCBoxImg" alt="" src="./uploads/<%=conList.get(i).getMc_imageurl()%>">									
+										</a>
+									</li>
+								</ul>
+							<%
+								}
+							%>
+								
+								
 							</div>
 						</div>
 

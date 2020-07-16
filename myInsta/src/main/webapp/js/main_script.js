@@ -229,7 +229,7 @@ $(() => {
                                         </a>
                                     </div>
                                     <div class="art_header_account">
-                                        <a href="#"><p class="art_account">${one_article.account}</p></a>
+                                        <a href="./other/otherperson.jsp?userid=${one_article.account}"><p class="art_account">${one_article.account}</p></a>
                                     </div>
                                     <div class="art_header_opt"><a href="">···</a></div>
                                 </div>

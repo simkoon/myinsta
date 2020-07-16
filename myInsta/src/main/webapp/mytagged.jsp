@@ -1,9 +1,19 @@
+<%@page import="com.koreait.CommentDTO"%>
+<%@page import="com.koreait.Content"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="mainTitle.jsp" %>
+<%
+String userid = (String)session.getAttribute("id");
+List<Content> conList = contentDAO.getTageContent(userid);
+%>
 </head>
 <body>
 <div id="wrap">
@@ -49,6 +59,9 @@
                             </a>
                         </div>
                         <div id="p_myContent">
+                        <%
+							if(conList.size() == 0){
+						%>
                             <div class="ts_Box">
                                 <div class="t_Box">
                                     <div class="t_bImg">
@@ -58,6 +71,21 @@
                                     <p>사람들이 회원님을 사진에 태그하면 태그된 사진이 여기에 표시됩니다.</p>
                                 </div>
                             </div>
+                        <%
+							}
+							for(int i=0; i<conList.size(); i++){
+							
+						%>
+							<ul class="p_myCBox">
+								<li>
+									<a class="" href="contentPage.jsp?b_idx=<%=conList.get(i).getMc_idx()%>">
+									<img class="p_myCBoxImg" alt="" src="./uploads/<%=conList.get(i).getMc_imageurl()%>">									
+									</a>
+								</li>
+							</ul>
+						<%
+							}
+						%>
                         </div>
      			
              <!-- End -->   

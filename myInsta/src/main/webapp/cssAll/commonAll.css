@@ -752,7 +752,13 @@ height: 780px;
     padding-top: 54px;
     background-color: rgb(250, 250, 250);
 }
-#page_myPage {display: block; width: 930px; height: 780px; margin: 0 auto; }
+#page_myPage {
+	display: block; 
+	width: 930px; 
+	min-height: 780px; 
+	margin: 0 auto; 
+}
+
 #p_myTitle{padding-top: 40px; margin-bottom: 44px; display: flex;}
 #p_mTimg{height: 150px; width: 150px; margin: 0 auto; display: block; float: left; margin-left: 70px; margin-right: 90px;}
 #p_mTimg .p_mTi {
@@ -877,17 +883,23 @@ a.p_Using, a.p_Using:visited {
 }
 .p_mLimg .p_mLText {margin-left: 6px; line-height: 5px;}
 
-#p_myContent {padding: 10px; margin-left: 10px;}
+#p_myContent {padding: 10px; display: flow-root;}
 #p_myContent .p_myCTitle {margin-bottom: 10px; font-weight: bold; font-size: 14px;}
+
+
 #p_myContent .p_myCBox {
-	background-color:#fff;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 12px;
-    width: 250px;
+    border: 1px solid #f0f0f0;
+    width: 280px;
+    height: 280px;
     text-align: center;
+    display: inline-block;
+    margin-bottom: 20px;
+    float: left;
+    margin-right: 34px;
 }
+#p_myContent .p_myCBox:nth-child(3n) {margin-right: 0;}
+#p_myContent .p_myCBox:nth-child(3n+1) { clear: both }
 .p_myCBox .imgBox {height: 60px; width: 60px; margin: 0 auto;}
 .p_myCBox .imgBox img {height: 100%;}
 .p_myCBox .p_title {font-size: 16px; line-height: 24px; font-weight: bold; margin: -6px 0 -6px; margin-top: 16px;}
@@ -898,6 +910,7 @@ a.p_Using, a.p_Using:visited {
     font-size: 14px;
     padding: 0 5px;
     line-height: 18px;
+    text-align: justify;
 }
 .p_myCBox .p_myCBtn {
     color: #fff;
@@ -2565,4 +2578,28 @@ line-height: 1.5em;
     font-size: 15px;
     color: #0095f6;
     font-weight: bold;
+}
+
+
+
+.popcss {
+	display: inline-flex;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 190px;
+    object-fit: cover;
+    height: 190px;
+    background-color: #fff;
+}
+.popcss img {
+	object-fit: cover;
+	height: 190px;
+	width: 190px;
+}
+.p_myCBoxImg{
+    object-fit: cover;
+    width: 100%;
+    height: 280px;
 }
