@@ -119,7 +119,7 @@
 		%>
 		<ul id="p_myTN1">
 			<li class="p_myTN1_list"><span class="p_lText0">게시물 <span
-					class="p_lNum"><%=cdao.getCntContentById(Integer.parseInt(String.valueOf(session.getAttribute("idx")))) %></span>
+					class="p_lNum"><%=cdao.getCntContentById(Integer.parseInt(String.valueOf(session.getAttribute("idx"))))%></span>
 			</span></li>
 			<li class="p_myTN1_list"><button class="p_lText" href="#"
 					style="cursor: pointer;">
@@ -185,9 +185,8 @@
 												<%
 													} else {
 												%>
-												<input type="button" value="팔로우"
-													class="fw_btn"
-													style="background-color: #0095f6; color: white;cursor: pointer;">
+												<input type="button" value="팔로우" class="fw_btn"
+													style="background-color: #0095f6; color: white; cursor: pointer;">
 
 												<%
 													}
@@ -254,14 +253,14 @@
 										Class.forName("org.mariadb.jdbc.Driver");
 										conn = DriverManager.getConnection(url, uid, upw);
 										if (conn != null) {
-											sql = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_useridx  FROM tb_following";
+											sql = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_followingid  FROM tb_following";
 											sql += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
 											sql += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_useridx = ?";
 											pstmt = conn.prepareStatement(sql);
 											pstmt.setInt(1, m_idx);
 											rs = pstmt.executeQuery();
 											while (rs.next()) {
-										int followingid = rs.getInt("fi_useridx");
+										int followingid = rs.getInt("fi_followingid");
 										System.out.println("followingid = " + followingid);
 									%>
 									<li><input type="hidden" value="">
@@ -281,17 +280,15 @@
 												<%
 													} else {
 												%>
-												<input type="button"  value="팔로우"
-													class="fw_btn"
-													style="background-color: #0095f6; color: white;cursor: pointer;">
+												<input type="button" value="팔로우" class="fw_btn"
+													style="background-color: #0095f6; color: white; cursor: pointer;">
 
 												<%
 													}
 												%>
 												<input type="hidden" value="<%=followingid%>">
 											</div>
-										</div>
-									</li>
+										</div></li>
 									<%
 										}
 									}
