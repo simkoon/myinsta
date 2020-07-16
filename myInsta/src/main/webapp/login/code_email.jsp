@@ -3,7 +3,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-
+	String email = request.getParameter("email");
 	
 %>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@
                         <div class="aut_imgemail"></div>
                         <h3>마지막 단계</h3>
                         <p class="txtalert"></p>
-                        <p><span class="useremail"></span>으로 전송된 6자리 코드를 입력하세요</p>
+                        <p><%=email %>으로 전송된 6자리 코드를 입력하세요</p>
                         <div class="authentication">
                             <div class="txtinput">
                                 <input name="email_code" id="email_aut" class="aut_txt" type="text" placeholder="######" maxlength="6">

@@ -284,4 +284,10 @@ public class ContentDAO {
 			sqlsession.close();
 			return conList;
 		}
+		//댓글 삭제
+		public void deleteComment(int co_idx) {
+			sqlsession = sessionf.openSession(true);
+			sqlsession.delete("Content.deleteComment", co_idx);
+			sqlsession.close();
+		}
 }

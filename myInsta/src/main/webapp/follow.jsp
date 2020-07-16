@@ -64,7 +64,7 @@
 
 
 									<c:forEach var="item" items="${memberList}" varStatus="status">
-
+										<c:if test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
 										<li class="people__person">
 											<div class="people__column">
 												<div class="people__avatar-container">
@@ -91,6 +91,7 @@
 												<input type="hidden" name="mIdx" value="${item.m_idx}">
 											</div>
 										</li>
+									</c:if>
 									</c:forEach>
 									<li class="people__person">
 										<div class="people__column">

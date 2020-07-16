@@ -237,7 +237,14 @@ $(function(){
     $("#pop7").click(function(){
         $("#pop7").fadeOut();
     });
-
+    $("#contentDelete").click(function(){
+    	$("#pop5").fadeOut();
+    	$("#delectOk").fadeIn();
+    });
+    $("#deleteBtnNo").click(function(){
+    	$("#delectOk").fadeOut();
+    });
+    
     // Get the modal
     var modal = document.getElementById('pop8');
     

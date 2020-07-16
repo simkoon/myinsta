@@ -7,6 +7,8 @@
 	<select id="selectComment" resultType="com.koreait.CommentDTO" parameterType="int">
 	SELECT m_userid as coUserid, 
 	co_text as coText,
+	co_idx as coIdx,
+	co_Mcidx as coMcidx,
 	TIMESTAMPDIFF(MINUTE, NOW(),tb_comment.co_regdate) as coRegdate
 	FROM tb_comment JOIN tb_member 
 	ON m_idx=co_useridx WHERE co_mcidx=${mcidx};
@@ -57,6 +59,8 @@
 	FROM tb_mycontent  WHERE mc_taggedname LIKE #{tag}
 	</select>
 	
-	
+	<delete id="deleteComment" parameterType="int">
+    DELETE FROM tb_comment WHERE co_idx = #{co_idx}
+	</delete>
 	
 </mapper>

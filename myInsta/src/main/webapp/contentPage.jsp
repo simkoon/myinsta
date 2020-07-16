@@ -22,6 +22,8 @@
 int b_idx = Integer.parseInt(String.valueOf(request.getParameter("b_idx")));
 int m_idx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 
+String m_userid = (String)session.getAttribute("id");
+
 List<Content> conList = con_dao.getOneContent(b_idx);
 List<CommentDTO> comList = con_dao.getComment(b_idx);
 
@@ -87,7 +89,13 @@ System.out.println(cnt);
 										</a>
 										<div class="c_reply">
 											<a href="#"><%=comList.get(i).getCoUserid()%></a>
+
 											<%=comList.get(i).getCoText()%>
+											<%
+											if(m_userid.equals(comList.get(i).getCoUserid()) || m_userid.equals(conList.get(0).getMc_useridx())){
+											%>
+											<a href="replyDelete.jsp?coidx=<%=comList.get(i).getCoIdx()%>&b_idx=<%=b_idx%>"> &times;</a>
+											<%} %>
 										</div>
 									</div>
 									<%
@@ -140,7 +148,11 @@ System.out.println(cnt);
            <%} else {%>
            <button class="mybtn5" id="mybtn5_2" style="color: #0095f6;">팔로우</button>
            <%}%>
-           
+           <%
+			if(m_userid.equals(conList.get(0).getMc_useridx())){
+		   %>
+           <button class="contentDelete" id="contentDelete">게시물 삭제</button>
+           <%} %>
            <button class="">링크복사</button>
            <button class="">취소</button>
         </div>
@@ -181,6 +193,13 @@ System.out.println(cnt);
         </div>
     </div>
 	
+	<div id="delectOk">
+        <div id="delectOk_menu">
+            <div class="delectOk_box">게시물을 삭제하겠습니까?</div>
+            <button class="deleteBtnOk" id="deleteBtnOk" onclick="location.href='contentDelete.jsp?b_idx=<%=b_idx%>'">확인</button>
+            <button class="deleteBtnNo" id="deleteBtnNo">취소</button>
+        </div>
+    </div>
 	
 	
 </body>

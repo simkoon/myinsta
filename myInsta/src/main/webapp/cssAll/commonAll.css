@@ -1141,7 +1141,7 @@ letter-spacing: 0px;}
     top: 50%;
     transform: translate(-50%,-50%);
     width: 400px;
-    height: 190px;
+    height: 240px;
     text-align: center;
     background: #fff;
     border-radius: 15px;
@@ -1390,7 +1390,55 @@ letter-spacing: 0px;}
     visibility: visible;
 }
 
+/* 게시물 삭제 */
+#delectOk {
+    display: none; /*숨기기*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 1000;
+    float: left;
+}
 
+#delectOk_menu {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 190px;
+    text-align: center;
+    background: #fff;
+    border-radius: 15px;
+    /* border: 1px solid #ccc; */
+}
+
+#delectOk_menu .delectOk_box{
+    margin: 22px 0;
+    text-align: center;
+    line-height: 1.6;
+}
+
+#delectOk_menu button {
+    display: block;
+    width: 400px;
+    height: 48px;
+    border-top: 1px solid #dbdbdb !important;
+    border: none;
+    padding: 4px 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#delectOk_menu .deleteBtnOk{
+    font-weight: bold;
+    color: #f00;
+}
 
 
 
@@ -2290,9 +2338,10 @@ line-height: 1.5em;
 }
 /* 이미지 */
 .content_box .content_imgbox .content_img {
+    object-fit:cover;
     background-size: 100%;
-    width: 100%;
-    height: 100%;
+    width: 598px;
+    height: 598px;
 }
 /* 댓글 박스 */
 .content_box .content_textbox {
@@ -2420,7 +2469,7 @@ line-height: 1.5em;
     height: 88px;
     
 }
-/*복붙*/
+
 /* 누른 하트 버튼*/
 .content_box .content_textbox .content_like .btn_heart.on{
     margin-top: 15px;
@@ -2443,7 +2492,7 @@ line-height: 1.5em;
        width: 25px;
        height: 25px;
 }
-/*복붙 끝*/
+
 /* 리뷰 버튼 */
 .content_box .content_textbox .content_like .btn_reply{
     margin-top: 15px;
@@ -2492,7 +2541,6 @@ line-height: 1.5em;
 .reply_textarea {
 
     padding-top:15px;
-    /*복붙 끝*/
     width: 250px;
     resize: none;
     line-height: 18px;

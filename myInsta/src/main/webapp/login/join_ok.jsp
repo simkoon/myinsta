@@ -55,5 +55,5 @@
 	xhr.open("GET", "../send?email=<%=email%>&code=<%=code%>", true);
 	xhr.send();
 	
-	location.href="code_email.jsp";
+	location.href="code_email.jsp?email=<%=email%>";
 </script>

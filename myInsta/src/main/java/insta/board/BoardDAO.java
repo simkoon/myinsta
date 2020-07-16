@@ -124,4 +124,20 @@ public class BoardDAO {
 		return boardDTO;
 	}
 	
+	// 게시물 삭제		
+			public void deleteBoard(int b_idx) {
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				try {
+					conn = DBConn.getConnection();
+					String sql = " DELETE FROM tb_mycontent WHERE mc_idx = ? ";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, b_idx);
+					pstmt.executeUpdate();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					DBConn.close(conn, pstmt);
+				}
+			}
 }

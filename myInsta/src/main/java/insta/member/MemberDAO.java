@@ -88,7 +88,7 @@ public class MemberDAO {
 	}
 	
 	public MemberDTO login(MemberDTO member) {
-		String sql = "SELECT m_idx , m_userid FROM tb_member WHERE (m_userid=? OR m_email=?) "
+		String sql = "SELECT m_idx , m_userid, m_username FROM tb_member WHERE (m_userid=? OR m_email=?) "
 				+ "AND m_password=PASSWORD(?)";
 
 		try {
@@ -101,6 +101,7 @@ public class MemberDAO {
 			if(rs.next()){
 				member.setM_idx(Integer.parseInt(rs.getString("m_idx")));
 				member.setM_userid(rs.getString("m_userid"));
+				member.setM_username(rs.getString("m_username"));
 				return member;
 			}
 		}catch(Exception e) {
