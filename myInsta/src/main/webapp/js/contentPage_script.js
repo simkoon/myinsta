@@ -1,5 +1,6 @@
 $(() => {
     const contentidx = $("#content_bidx").val();
+    const followingid = $("#content_mcuseridx").val();
     $(".btn_heart").on("click", function () {
         const btnheart = $(this);
         axios
@@ -36,14 +37,20 @@ $(() => {
     });
     $(".mybtn7").on("click", function () {
         const btnFollow = $(this);
+        console.log("팔로우아이디" + followingid);
+        console.log(btnFollow.text());
         axios
-            .post("./FollowServlet", "contentidx=" + contentidx)
+            .post("./FollowServlet", "followingid=" + followingid)
             .then(function (response) {
-                if (btnkeep.text() == "팔로우 취소") {
-                    btnkeep.text("팔로우").css("color","#0095f6");
-                } else {
-                    btnkeep.text("팔로우 취소");
-                }
+                setTimeout(function () {
+                    if (btnFollow.text() == "팔로우 취소") {
+                        $("#mybtn5_2").text("팔로우").css("color", "#0095f6");
+                        btnFollow.text("팔로우").css("color", "#0095f6");
+                    } else {
+                        $("#mybtn5_2").text("팔로우 취소").css("color", "#f00");
+                        btnFollow.text("팔로우 취소").css("color", "#f00");
+                    }
+                },300);
             })
             .catch(function (error) {
                 console.log(error);

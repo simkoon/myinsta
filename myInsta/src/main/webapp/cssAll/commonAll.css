@@ -1356,6 +1356,7 @@ letter-spacing: 0px;}
 #pop7_menu .mybtn7{
     font-weight: bold;
     color: #f00;
+    
 }
 
 /* 팔로루8 */
@@ -2468,7 +2469,7 @@ line-height: 1.5em;
 /* 저장 버튼 */
 .content_box .content_textbox .content_like .btn_keep{
     margin-top: 15px;
-    margin-left: 150px;
+    margin-left: 180px;
     background-color: #fff;
     border: none;
      background: url(../images/emptysave.png) no-repeat;

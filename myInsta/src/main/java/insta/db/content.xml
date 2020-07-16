@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="selectOneContent" resultType="com.koreait.Content" parameterType="_int">
- 		SELECT mc_idx, m_userid as mc_useridx, 
+ 		SELECT mc_idx, m_userid as mc_useridx, mc_useridx as m_idx, 
   	mc_content, mc_regdate, mc_location, mc_imageurl 
  	FROM tb_mycontent JOIN tb_member on mc_useridx=m_idx WHERE mc_idx = #{b_idx};
   </select>

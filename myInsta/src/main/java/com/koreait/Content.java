@@ -2,6 +2,7 @@ package com.koreait;
 
 public class Content {
 	private int mc_idx;
+	private int m_idx;
 	private String mc_useridx;
 	private String mc_content;
 	private String mc_taggedid;
@@ -104,6 +105,14 @@ public class Content {
 
 	public void setCntLikes(int cntLikes) {
 		this.cntLikes = cntLikes;
+	}
+
+	public int getM_idx() {
+		return m_idx;
+	}
+
+	public void setM_idx(int m_idx) {
+		this.m_idx = m_idx;
 	}
 
 }

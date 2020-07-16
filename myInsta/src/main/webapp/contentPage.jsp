@@ -3,8 +3,18 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean class="com.koreait.ContentDAO" id="con_dao" />
+
+
+
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
+</c:if>
 
 
 <%
@@ -24,10 +34,9 @@ System.out.println(cnt);
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="./js/contentPage_script.js">
+<script src="./js/contentPage_script.js"></script>
 	
 <%@ include file="mainTitle.jsp"%>
 </head>
@@ -46,8 +55,7 @@ System.out.println(cnt);
 					<div class="visualRoll">
 						<div class="content_box">
 							<div class="content_imgbox">
-								<img class="content_img"
-									src="./uploads/<%=conList.get(0).getMc_imageurl()%>" />
+								<img class="content_img" src="./uploads/<%=conList.get(0).getMc_imageurl()%>">
 							</div>
 							<div class="content_textbox">
 								<div class="content_profile">
@@ -87,25 +95,24 @@ System.out.println(cnt);
 									%>
 								</div>
 								<div class="content_like">
-
+								
 									<input type="hidden" id="content_bidx" value="<%=b_idx%>">
 									<input type="hidden" id="content_midx" value="<%=m_idx%>">
-									<%
-										if (con_dao.getLikeById(b_idx, m_idx)) {
-									%>
+									<input type="hidden" id="content_mcuseridx" value="<%=conList.get(0).getM_idx()%>">
+									<%if (con_dao.getLikeById(b_idx, m_idx)) {%>
 									<input type="button" class="btn_heart on" />
-									<%
-										} else {
-									%>
+									<%} else {%>
 									<input type="button" class="btn_heart off" />
 
-									<%
-										}
-									%>
+									<%}%>
 
 									<button class="btn_reply"></button>
 									<button class="btn_share"></button>
+									<%if (con_dao.getSaveById(b_idx, m_idx)) {%>
+									<button class="btn_keep on"></button>
+									<%} else {%>
 									<button class="btn_keep"></button>
+									<%}%>
 									<p class="like_cun">
 										좋아요
 										<span class="cntlikes"><%=cnt%></span>개
@@ -128,7 +135,12 @@ System.out.println(cnt);
 	<div id="pop5">
         <div id="pop5_menu">
            <button class="mybtn5" id="mybtn5_1">부적절한 콘텐츠 신고</button>
+           <%if (con_dao.getFollowingById(m_idx, conList.get(0).getM_idx()) > 0) {%>  
            <button class="mybtn5" id="mybtn5_2">팔로우 취소</button>
+           <%} else {%>
+           <button class="mybtn5" id="mybtn5_2" style="color: #0095f6;">팔로우</button>
+           <%}%>
+           
            <button class="">링크복사</button>
            <button class="">취소</button>
         </div>
@@ -144,18 +156,27 @@ System.out.println(cnt);
                     </button>
                 </div>
                 <br>
-                <button><a href="po6_2">스팸<span class="po6_2_1">></span></a></button>
+                <button><a href="po6_2">스팸<span class="po6_2_1"></span></a></button>
                 <br>
-                <button class="po6_2"><a href="./edit/edit3.jsp">부적절합니다<span class="po6_2_1" style="
-                line-height: 2.2;
-            ">></span></a></button>
+                <button class="po6_2"><a href="./edit/edit3.jsp">부적절합니다<span class="po6_2_1" style="line-height: 2.2;">
+                </span></a></button>
             </div>
         </div>
     </div>
     <div id="pop7">
         <div id="pop7_menu">
-            <div class="pop7_box"><span class="pop7_id"><%=conList.get(0).getMc_useridx()%></span> 님의 <br>팔로우를 취소하시겠어요?</div>
+            <div class="pop7_box"><span class="pop7_id"><%=conList.get(0).getMc_useridx()%></span> 님의 <br>팔로우를 
+            <%if (con_dao.getFollowingById(m_idx, conList.get(0).getM_idx()) > 0) {%>       
+   	         취소
+            <%} else {%> 
+            <%}%>
+            하시겠어요?</div>
+           <%if (con_dao.getFollowingById(m_idx, conList.get(0).getM_idx()) > 0) {%>
+            
             <button class="mybtn7">팔로우 취소</button>
+            <%} else {%>
+            <button class="mybtn7" style="color: #0095f6;">팔로우</button>
+            <%}%>
             <button class="">취소</button>
         </div>
     </div>
