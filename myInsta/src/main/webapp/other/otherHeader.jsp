@@ -11,9 +11,10 @@
 	String otherId = request.getParameter("userid");
 	//if(session.getAttribute("id").equals(otherId)){
 		%>
-		<script>
+<!-- 		<script>
 			location.href="../mypage.jsp";
 		</script>
+		 -->
 		<%
 	//}else{
 
