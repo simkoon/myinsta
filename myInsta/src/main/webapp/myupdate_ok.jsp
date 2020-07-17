@@ -19,16 +19,18 @@
 		int mc_useridx = (int)session.getAttribute("idx");
 		String mc_content = multi.getParameter("mc_content");
 		String mc_taggedid = multi.getParameter("mc_taggedid");
+		String mc_taggedname = multi.getParameter("mc_taggedname");
 		uploadFile = multi.getFilesystemName("mc_file"); // form의 input file객체이며, 실제로 업로드된 파일명
 
 		System.out.println("mc_useridx : " + mc_useridx);
 		System.out.println("mc_content : " + mc_content);
 		System.out.println("mc_taggedid : " + mc_taggedid);
+		System.out.println("mc_taggedname : " + mc_taggedname);
 		System.out.println("uploadFile : " + uploadFile);
 
 		File file = new File(savePath + "/" + uploadFile);
 		out.println("file : " + file);
-		if(fs.fileUpload(mc_useridx, mc_content, mc_taggedid, file)){
+		if(fs.fileUpload(mc_useridx, mc_content, mc_taggedid, mc_taggedname, file)){
 			response.sendRedirect("mypage.jsp");
 		}else{
 			out.print("<script>history.back();</script>");

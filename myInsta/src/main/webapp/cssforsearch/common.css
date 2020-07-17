@@ -138,6 +138,8 @@ font-size: 12px;
     cursor: pointer;
 }
 .my_p{
+	border-radius:25px;
+	height:100%;
     width: 100%;
 }
 .hd_heart { position: relative;}

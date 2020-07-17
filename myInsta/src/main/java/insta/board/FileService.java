@@ -17,12 +17,13 @@ public class FileService {
 		return sdf.format(c.getTime());
 	}
 	
-	public boolean  fileUpload(int mc_useridx, String mc_content, String mc_taggedid, File file)  {
+	public boolean  fileUpload(int mc_useridx, String mc_content, String mc_taggedid, String mc_taggedname, File file)  {
 		System.out.println("dddd");
 		BoardDTO boardDTO = new BoardDTO();
 		boardDTO.setMcUseridx(mc_useridx);
 		boardDTO.setMcContent(mc_content);
 		boardDTO.setMcTaggedid(mc_taggedid);
+		boardDTO.setMcTaggedname(mc_taggedname);
 		boardDTO.setMcImageurl(file.getName());
 		boardDTO = boardDAO.insertBoard(boardDTO);
 		System.out.println("최종 파일 정보 : " + boardDTO);

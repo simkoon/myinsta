@@ -54,6 +54,7 @@ public class GetContentsServlet extends HttpServlet {
 			article.put("cntcmt", dao.getCntComment(mcidx));
 			article.put("islikeon", dao.getLikeById(artList.get(i).getMc_idx(), useridx));
 			article.put("issaveon", dao.getSaveById(artList.get(i).getMc_idx(), useridx));
+			article.put("profile", artList.get(i).getM_filepath());
 			article.put("date", artList.get(i).getMc_regdate());
 			article.set("comment", convertList(dao.getComment(artList.get(i).getMc_idx())));
 			result.add(article);

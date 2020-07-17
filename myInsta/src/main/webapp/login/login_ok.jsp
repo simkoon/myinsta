@@ -18,6 +18,7 @@
 		session.setAttribute("id", member.getM_userid());
 		session.setAttribute("idx", member.getM_idx());
 		session.setAttribute("name", member.getM_username());
+		session.setAttribute("profile", member.getM_filepath());
 		System.out.println(member.getM_username()+member.getM_userid());
 %>
 	<script>

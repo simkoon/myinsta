@@ -6,6 +6,7 @@
 	<%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean class="com.koreait.ContentDAO" id="con_dao" />
+<jsp:useBean class="insta.member.MemberDAO" id="mem_dao" />
 
 
 
@@ -61,8 +62,8 @@ System.out.println(cnt);
 							</div>
 							<div class="content_textbox">
 								<div class="content_profile">
-									<a href="#">
-										<div class="profile_img"></div>
+									<a href="other/otherperson.jsp?userid=<%=conList.get(0).getMc_useridx()%>">
+										<img class="profile_img" src="./uploads/<%=mem_dao.profile(0,conList.get(0).getMc_useridx())%>"/>
 										<div class="content_userid"><%=conList.get(0).getMc_useridx()%></div>
 									</a> <!--<span>•</span>
 
@@ -72,11 +73,11 @@ System.out.println(cnt);
 								</div>
 								<div class="content_reply">
 									<div class="content_user">
-										<a href="#">
-											<div class="replyuser_img"></div>
+										<a href="other/otherperson.jsp?userid=<%=conList.get(0).getMc_useridx()%>">
+											<img class="profile_img" src="./uploads/<%=mem_dao.profile(0,conList.get(0).getMc_useridx())%>"/>
 										</a>
 										<div class="c_reply">
-											<a href="#"><%=conList.get(0).getMc_useridx()%></a>
+											<a href="other/otherperson.jsp?userid=<%=conList.get(0).getMc_useridx()%>"><%=conList.get(0).getMc_useridx()%></a>
 											<%=conList.get(0).getMc_content()%>
 										</div>
 									</div>
@@ -84,11 +85,11 @@ System.out.println(cnt);
 										for (int i = 0; i < comList.size(); i++) {
 									%>
 									<div class="content_user">
-										<a href="#">
-											<div class="replyuser_img"></div>
+										<a href="other/otherperson.jsp?userid=<%=comList.get(i).getCoUserid()%>">
+											<img class="replyuser_img" src="./uploads/<%=mem_dao.profile(0,comList.get(i).getCoUserid())%>"/>
 										</a>
 										<div class="c_reply">
-											<a href="#"><%=comList.get(i).getCoUserid()%></a>
+											<a href="other/otherperson.jsp?userid=<%=comList.get(i).getCoUserid()%>"><%=comList.get(i).getCoUserid()%></a>
 
 											<%=comList.get(i).getCoText()%>
 											<%

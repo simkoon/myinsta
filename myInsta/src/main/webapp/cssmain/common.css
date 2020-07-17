@@ -329,7 +329,9 @@ header .header_area {
 .mypage {
     cursor: pointer;
 }
-.my_p {
+.my_p{
+	border-radius:25px;
+	height:100%;
     width: 100%;
 }
 .hd_heart { position: relative;}

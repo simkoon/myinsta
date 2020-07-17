@@ -11,6 +11,16 @@ public class Content {
 	private String mc_location;
 	private String mc_imageurl;
 	private int cntLikes;
+	private String m_filepath;
+
+	public String getM_filepath() {
+		return m_filepath;
+	}
+
+	public void setM_filepath(String m_filepath) {
+		this.m_filepath = m_filepath;
+	}
+
 	public Content() {
 
 	}

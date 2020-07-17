@@ -3,6 +3,8 @@
 <jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="memberList" value="${contentDAO.getMemberList(0) }" />
+<jsp:useBean class="insta.member.MemberDAO" id="mem_dao" />
+<c:set var="memberDao" value="<%=mem_dao %>" />
 <c:if test="${empty sessionScope.id }">
 	<script>
 		alert("로그인 후 이용해주세요.");
@@ -68,7 +70,7 @@
 										<li class="people__person">
 											<div class="people__column">
 												<div class="people__avatar-container">
-													<a href="#"> <img src="images/follower.png"
+													<a href="#"> <img src="./uploads/${memberDao.profile(item.m_idx,'') }"
 														class="people__avatar" />
 													</a>
 												</div>

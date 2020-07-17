@@ -1,4 +1,6 @@
 <%@page import="java.io.Console"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="insta.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
@@ -9,10 +11,13 @@
 <jsp:setProperty property="*" name="member"/>
 <jsp:useBean class="insta.board.BoardDTO" id="boardDTO"/>
 <%
-	
+	String keyWord = request.getParameter("keyWord");
+	ArrayList<MemberDTO> list = mem_dao.getMemberlist();
+	ArrayList<MemberDTO> keyWordlist = mem_dao.getMemberlist(keyWord);
 	
 %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC
+ "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <%@ include file="mainTitle.jsp" %>
@@ -70,11 +75,13 @@ $(document).ready(function (e){
             str += '<img src="'+e.target.result+'" title="'+f.name+'" width=100% />';
             str += '</li></div>';
             $(str).appendTo('.u_Bimg');
+            $(".upbtn_on").addClass("on");
           } 
           reader.readAsDataURL(f);
         }else{
           str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100% height=100% />';
           $(str).appendTo('.imgboxs');
+          $(".upbtn_on").addClass("on");
         }
       });//arr.forEach
     }
@@ -107,13 +114,13 @@ $(function(){
 		$(".modal2__content").addClass("on");
 	});
 	
-	
+	let dataforinpout="";
 	let data;	
 	$(".taglist").on("click", function(){
-			$(".taglist").css("display","none");
+			$(this).css("display","none");
 			data = $(".modal2__content.on").append('<p id="madallist" class="madallist">@ '+($(this).val())+'  <button type="button" class="modal2_close"> &times;</button></p>');
 			setbtnAction();
-			let dataforinpout = "@"+$(this).val()+",";
+			dataforinpout += "@"+$(this).val()+",";
 		$("#tagaddtn").click(function() {
 			$("#taglistvalue").append(data);
 			$(".taglistvalue1").val(dataforinpout);
@@ -129,7 +136,66 @@ $(function(){
 		
 	});
 	
+	$("#upbtn_on").on("click", function(){
+		const getAt = (str) => {
+		    const emptyFilter = (arrs) => {
+		        return arrs.filter(function (item) {
+		            return item !== null && item !== undefined && item !== "";
+		        });
+		    };
+
+		    str = str.split(" ");
+		    let strmap = /*html*/ ``;
+		    str.map((x) => {
+		        if (x.includes("#")) {
+		            if (x.indexOf("#") != 0) {
+		                let notTag = x.trim().split("#");
+		                notTag = emptyFilter(notTag);
+		                notTag[0] = null;
+		                notTag = emptyFilter(notTag);
+		                console.log(notTag);
+		                for (str2 of notTag) {
+		                    strmap += "#" + str2 + ",";
+		                }
+		                return;
+		            }
+		            if (x.match(/#/g).length > 1) {
+		                console.log(x.indexOf("#"));
+		                let sphash = x.trim().split("#");
+
+		                sphash = emptyFilter(sphash);
+
+		                for (strel of sphash) {
+		                    strmap += "#" + strel + ",";
+		                }
+
+		                return;
+		            }
+
+		            strmap += x + ",";
+		            return;
+		        }
+		    });
+		    return strmap;
+		};
+		let mc_taggedname =	getAt($("#utextarea").val());
+		 $(".mc_taggedname").val(mc_taggedname);
+		console.log(getAt($("#utextarea").val()));
+	});
+	
 });
+
+
+function searchCheck(frm){
+    //검색
+   
+    if(frm.keyWord.value ==""){
+        frm.keyWord.focus();
+        return;
+    }
+    frm.submit();      
+}
+
 
 </script>
 <body>
@@ -193,6 +259,7 @@ $(function(){
                                     </div>
                                     <div class="u_text">
                                         <textarea id="utextarea" name="mc_content"  placeholder="What's happening?"></textarea>
+                                        <input type="hidden" value="" name="mc_taggedname" class="mc_taggedname" >
                                     </div>
                                     <!-- 팝업 -->
                                     <a href="#modal" class="modal-open">
@@ -207,25 +274,54 @@ $(function(){
                                     </div>
                                     </a>
                                     
-                                    <!-- 팝업창  -->
+                              
+                                    
+                                    
+                                    <div id="taglistvalue" class="taglistvalue" ></div>
+                                    <input class="taglistvalue1" type="hidden"  name="mc_taggedid" value="">
+                                    <div class="upbtn"><input type="submit" value="게시물 올리기" class="upbtn_on"  id="upbtn_on"></div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+     			
+             <!-- End -->   
+            </div>
+        </div>
+    </div>
+	<%@ include file="mainFooter.jsp" %>
+</div>
+                       
+                           <!-- 팝업창  -->
+                                    <form id="h_reform" method="post" name="serach">
                                     <div class="modal" id="modal">
 									    <div class="modal__content">
 									        <div class="modal__haad">
 									            <div class="modal__heading">
-									                <input type="text" placeholder="사람검색..." class="modal__heading2">
+									                <input type="text" placeholder="사람검색..." class="modal__heading2" name="keyWord" onclick="searchCheck(form)" >
 									                <a href="#" class="modal__close">&times;</a>
 									            </div>
 									        </div>
 									        <!-- 사람 목록 -->
 									        <div class="modal__paragraph">
 									            <ul>
+                           <%
+						 	for(MemberDTO memberDTO : list){
+						 		System.out.println("아이디:" + memberDTO.getM_userid());
+						   %>
 									                <li>
-									                	<button class="taglist" type="button" value="gyomin_s">
+									                	<button class="taglist" type="button" value="<%=memberDTO.getM_userid() %>">
+									                    
 									                    <div class="tag_userimg"><img src="./images/person_icon.jpg" alt="사람이미지"></div>
-									                    <p class="tag_userid">gyomin_s</p>
-									                    <p class="tag_username">백교민</p>
+									                    <p class="tag_userid"><%=memberDTO.getM_userid() %></p>
+									                    <p class="tag_username"><%=memberDTO.getM_username() %></p>
+									                    
 									                    </button>
 									                </li>
+					         <%
+						 		
+							   }
+							 %>
 									            </ul>
 									        </div>
 									        <div class="modal2__content">
@@ -238,21 +334,6 @@ $(function(){
 									        </div>
 									    </div>
 									</div>
-                                    
-                                    
-                                    <div id="taglistvalue" class="taglistvalue" ></div>
-                                    <input class="taglistvalue1" type="hidden"  name="mc_taggedid" value="">
-                                    <div class="upbtn"><input type="submit" value="게시물 올리기" class="upbtn_on" ></div>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
-     			
-             <!-- End -->   
-            </div>
-        </div>
-    </div>
-	<%@ include file="mainFooter.jsp" %>
-</div>
+									</form>
 </body>
 </html>

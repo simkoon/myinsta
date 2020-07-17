@@ -45,7 +45,7 @@
 										<div class="widget_my_img">
 											<a class="off_story" href="./mypage.jsp"> <a
 												class="on_story" href="./mypage.jsp"> <img
-													src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/101066874_250369176291217_8457202342863831040_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=MIG0PVCGXmkAX_nqjce&oh=340b25f50b734ba354cb0dd7ee994921&oe=5F1DC758"
+													src="./uploads/${sessionScope.profile}"
 													alt="" />
 											</a>
 											</a>
@@ -59,7 +59,7 @@
 									</div>
 									<div class="widget_hotissue_box">
 										<div class="wget_hotissue_header">
-											<a href="#">HOT ISSUE</a>
+											<a href="#">추천</a>
 										</div>
 										<div class="wget_hot_categories">
 											<div class="hot_category">

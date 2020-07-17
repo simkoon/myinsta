@@ -19,10 +19,13 @@
 	<div id="p_mTimg">
 		<div class="p_mTi">
 			<button class="p_mTiBtn" title="프로필사진 추가">
-				<img alt="프로필 사진추가"
-					src="https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_ohc=ZMRBdU8i2AoAX-ijcJe&oh=203ab59c04f149c10ed366b8f365a578&oe=5F13AC8F&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2">
+					<img alt="프로필 사진추가"
+					src="./uploads/${sessionScope.profile}">
 			</button>
 		</div>
+		<form method="post" action="profile_edit.jsp" enctype="multipart/form-data">
+			<p><input type="file" name="f_file" class="filebtn"> <input type="submit" value="변경" class="filebtn"></p>
+		</form>
 	</div>
 	<section id="p_myTName">
 		<div id="p_myTN1">

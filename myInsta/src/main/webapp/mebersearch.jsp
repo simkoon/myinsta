@@ -57,7 +57,7 @@
 
 
 						<main class="explore">
-							<h2 class=extitle>활동</h2>
+							<h2 class=extitle>검색</h2>
 							<section class="people">
 								<ul class="people__list">
 

@@ -19,7 +19,7 @@ public class BoardDAO {
 		try {
 			conn = DBConn.getConnection();
 			String sql = "SELECT mc_idx, mc_useridx, mc_content, mc_regdate, mc_filepath, mc_imageurl, "
-					+ "mc_taggedid FROM tb_myContent order by mc_idx desc";
+					+ "mc_taggedid,mc_taggedname FROM tb_myContent order by mc_idx desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -31,6 +31,7 @@ public class BoardDAO {
 				board.setMcFilepath(rs.getString("mc_filepath"));
 				board.setMcImageurl(rs.getString("mc_imageurl"));
 				board.setMcTaggedid(rs.getString("mc_taggedid"));
+				board.setMcTaggedname(rs.getString("mc_taggedname"));
 				boardList.add(board);
 			}
 		}catch(Exception e) {
@@ -49,14 +50,15 @@ public class BoardDAO {
 		try {
 
 			conn = DBConn.getConnection();
-			String sql = "INSERT INTO tb_myContent(mc_useridx, mc_content,  mc_imageurl, mc_taggedid) "
-					+ " values (?, ?,  ?, ?)";
+			String sql = "INSERT INTO tb_myContent(mc_useridx, mc_content,  mc_imageurl, mc_taggedid, mc_taggedname) "
+					+ " values (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql, generatedColumns);
 			pstmt.setInt(1, boardDTO.getMcUseridx());
 			pstmt.setString(2, boardDTO.getMcContent());
 		//	pstmt.setString(3, boardDTO.getMcRegdate());
 			pstmt.setString(3, boardDTO.getMcImageurl());
 			pstmt.setString(4, boardDTO.getMcTaggedid());
+			pstmt.setString(5, boardDTO.getMcTaggedname());
 			rows = pstmt.executeUpdate();
 		
 			try (ResultSet geneResultKey = pstmt.getGeneratedKeys()){
@@ -84,7 +86,7 @@ public class BoardDAO {
 		BoardDTO board = new BoardDTO();
 		try {
 			conn = DBConn.getConnection();
-			String sql = "SELECT mc_idx, mc_useridx, mc_content, mc_regdate, mc_imageurl, mc_taggedid FROM tb_myContent WHERE mc_idx=?";
+			String sql = "SELECT mc_idx, mc_useridx, mc_content, mc_regdate, mc_imageurl, mc_taggedid, mc_taggedname FROM tb_myContent WHERE mc_idx=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, board.getMcIdx());
 			rs = pstmt.executeQuery();
@@ -95,6 +97,7 @@ public class BoardDAO {
 				board.setMcRegdate(rs.getString("mc_regdate"));
 				board.setMcImageurl(rs.getString("mc_imageurl"));
 				board.setMcTaggedid(rs.getString("mc_taggedid"));				
+				board.setMcTaggedname(rs.getString("mc_taggedname"));				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
