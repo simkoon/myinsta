@@ -19,6 +19,7 @@
 
 
 <%
+if (session.getAttribute("idx") != null) {
 	request.setCharacterEncoding("utf-8");
 int b_idx = Integer.parseInt(String.valueOf(request.getParameter("b_idx")));
 int m_idx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
@@ -205,3 +206,6 @@ System.out.println(cnt);
 	
 </body>
 </html>
+<%
+}
+%>

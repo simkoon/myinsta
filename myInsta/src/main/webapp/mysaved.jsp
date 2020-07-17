@@ -5,11 +5,18 @@
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="mainTitle.jsp" %>
 <%
+	if (session.getAttribute("idx") != null) {
 	int useridx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 	List<Content> conList = contentDAO.getSaveContent(useridx);
 %>
@@ -99,3 +106,6 @@
 </div>
 </body>
 </html>
+<%
+}
+%>

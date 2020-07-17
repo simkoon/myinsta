@@ -1020,6 +1020,27 @@ a.p_Using, a.p_Using:visited {
 .t_Box p {margin-bottom: 24px; justify-content: flex-start; font-size: 14px; line-height: 18px; display: block;}
 
 
+/*프로필
+.p_mTi .p_mTiBtn {font-size: 16px; font-weight: 600; padding-top: 30px;}
+.p_mTi input[type="file"] { 
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top:0;
+  left:0;
+  padding: 0;
+  margin: -1px;
+  z-index:-1;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+.filebtn{
+	background-color: #fff;
+	border: 1px solid rgb(219, 219, 219);
+}
+
+*/
+
 
 /* edit페이지  */
 /* 공통부분 */

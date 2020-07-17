@@ -18,13 +18,16 @@
 <div id="p_myTitle">
 	<div id="p_mTimg">
 		<div class="p_mTi">
-			<button class="p_mTiBtn" title="프로필사진 추가">
+			<div class="p_mTiBtn">
 					<img alt="프로필 사진추가"
 					src="./uploads/${sessionScope.profile}">
-			</button>
+			</div>
 		</div>
 		<form method="post" action="profile_edit.jsp" enctype="multipart/form-data">
-			<p><input type="file" name="f_file" class="filebtn"> <input type="submit" value="변경" class="filebtn"></p>
+			<p>
+			<input type="file" name="f_file" class="filebtn" title="변경하기"> 
+			<input type="submit" value="프로필 변경하기" class="filebtn">
+			</p>
 		</form>
 	</div>
 	<section id="p_myTName">

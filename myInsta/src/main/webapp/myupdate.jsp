@@ -7,17 +7,24 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean class="insta.member.MemberDAO" id="mem_dao"/>
 <jsp:useBean class="insta.member.MemberDTO" id="member"/>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
+</c:if>
 <jsp:setProperty property="*" name="member"/>
 <jsp:useBean class="insta.board.BoardDTO" id="boardDTO"/>
 <%
+	if (session.getAttribute("idx") != null) {
 	String keyWord = request.getParameter("keyWord");
 	ArrayList<MemberDTO> list = mem_dao.getMemberlist();
 	ArrayList<MemberDTO> keyWordlist = mem_dao.getMemberlist(keyWord);
 	
 %>
-<!DOCTYPE html PUBLIC
- "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <%@ include file="mainTitle.jsp" %>
@@ -337,3 +344,6 @@ function searchCheck(frm){
 									</form>
 </body>
 </html>
+<%
+}
+%>

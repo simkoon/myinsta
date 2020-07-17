@@ -4,6 +4,15 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page import="java.io.File"%>
 <%@ page import="insta.board.FileService"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
+</c:if>
 <%
 	FileService fs = new FileService();
 	int maxSize = 10 * 1024 * 1024; // 10MB

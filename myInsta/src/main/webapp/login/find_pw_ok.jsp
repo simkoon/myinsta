@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("잘못된 경로입니다.");
+		location.href = "login.jsp";
+	</script>
+</c:if>
 <jsp:useBean id="mem_dao" class="insta.member.MemberDAO"/>
 <%
 	request.setCharacterEncoding("UTF-8");

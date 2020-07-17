@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<c:if test="${empty param.email }">
+	<script>
+		alert("잘못된경로입니다.");
+		location.href = "login.jsp";
+	</script>
+</c:if>
 <%
 	request.setCharacterEncoding("UTF-8");
 
 	String email = request.getParameter("email");
 	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
