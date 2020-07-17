@@ -20,6 +20,16 @@ $(() => {
         let strmap = /*html*/ ``;
         str.map((x) => {
             if (x.includes("#")) {
+                if (x.indexOf("#") != 0) {
+                    let notTag = x.trim().split("#");
+                    notTag = emptyFilter(notTag);
+                    strmap += notTag[0];
+                    for (let i = 1; i < notTag.length; i++) {
+                        strmap += setlink("#" + notTag[i]);
+                    }
+                    strmap += " ";
+                    return;
+                }
                 if (x.match(/#/g).length > 1) {
                     let sphash = x.trim().split("#");
 
@@ -52,16 +62,26 @@ $(() => {
                 return item !== null && item !== undefined && item !== "";
             });
         };
-
+    
         str = str.split(" ");
         let strmap = /*html*/ ``;
         str.map((x) => {
             if (x.includes("@")) {
+                if (x.indexOf("@") != 0) {
+                    let notTag = x.trim().split("@");
+                    notTag = emptyFilter(notTag);
+                    strmap += notTag[0];
+                    for (let i = 1; i < notTag.length; i++) {
+                        strmap += setlink("@" + notTag[i]);
+                    }
+                    strmap += " ";
+                    return;
+                }
                 if (x.match(/@/g).length > 1) {
                     let sphash = x.trim().split("@");
-
+    
                     sphash = emptyFilter(sphash);
-
+    
                     for (strel of sphash) {
                         strmap += setlink("@" + strel);
                     }

@@ -138,7 +138,7 @@
 						</div>
 						<div class="pop_body">
 							<ul>
-								<div class="body_ing">
+								<div class="body_ing myFollower">
 									<%
 										request.setCharacterEncoding("UTF-8");
 									int m_idx = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
@@ -167,7 +167,7 @@
 										int followingid = rs.getInt("fi_useridx");
 										System.out.println("followingid = " + followingid);
 									%>
-									<li>
+									<li><input type="hidden" value="<%=rs.getString("otherfollow")%>">
 										<div class="ing_li">
 											<div class="li_img">
 												<a href="#"><img src="./images/person_icon.jpg" alt="프사"></a>
@@ -247,7 +247,7 @@
 						</div>
 						<div class="pop_body">
 							<ul>
-								<div class="body_ing">
+								<div class="body_ing myFollow">
 									<%
 										try {
 										Class.forName("org.mariadb.jdbc.Driver");
@@ -263,7 +263,8 @@
 										int followingid = rs.getInt("fi_followingid");
 										System.out.println("followingid = " + followingid);
 									%>
-									<li><input type="hidden" value="">
+									<li class="<%=rs.getString("ifollow")%>"><input
+										type="hidden" value="<%=rs.getString("ifollow")%>">
 										<div class="ing_li">
 											<div class="li_img">
 												<a href="#"><img src="./images/person_icon.jpg" alt="#"></a>
