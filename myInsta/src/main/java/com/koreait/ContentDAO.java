@@ -207,7 +207,12 @@ public class ContentDAO {
 	public List<SearchDTO> getSearchList(int start, String tag) {
 		sqlsession = sessionf.openSession(true);
 		StringBuilder tagSB = new StringBuilder();
-		tagSB.append("%#").append(tag).append(",%");
+		if (tag.equals("")) {
+			tagSB.append("%").append("").append("%");
+		} else {
+			tagSB.append("%#").append(tag).append(",%");
+		}
+		System.out.println("tag는"+tag);
 		HashMap<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("start", start);
 		dataMap.put("tag", tagSB.toString());
@@ -249,8 +254,8 @@ public class ContentDAO {
 
 	public int getFollowingById(int useridx, int followingid) {
 		sqlsession = sessionf.openSession(true);
-		System.out.println("useridx : " + useridx);
-		System.out.println("fi_followingid : " + followingid);
+		// System.out.println("useridx : " + useridx);
+		// System.out.println("fi_followingid : " + followingid);
 		HashMap<String, Integer> dataMap = new HashMap<String, Integer>();
 		dataMap.put("useridx", useridx);
 		dataMap.put("followingid", followingid);
@@ -279,7 +284,11 @@ public class ContentDAO {
 	public String getCntTag(String tag) {
 		sqlsession = sessionf.openSession(true);
 		StringBuilder tagSB = new StringBuilder();
-		tagSB.append("%#").append(tag).append(",%");
+		if (tag.equals("")) {
+			tagSB.append("%").append("").append("%");
+		} else {
+			tagSB.append("%#").append(tag).append(",%");
+		}
 		String cntTag = sqlsession.selectOne("Content.selectCNTTag", tagSB.toString());
 		sqlsession.close();
 		return cntTag;
@@ -346,34 +355,37 @@ public class ContentDAO {
 	// 나의 팔로우 수들
 	public int getCntFollow(int mIdx) {
 		sqlsession = sessionf.openSession(true);
-		int cnt= sqlsession.selectOne("Content.selectCntFollow", mIdx);
-		
+		int cnt = sqlsession.selectOne("Content.selectCntFollow", mIdx);
+
 		sqlsession.close();
 		return cnt;
 	}
+
 	// 나를 팔로우하는 팔로워의 수
 	public int getCntFollower(int mIdx) {
 		sqlsession = sessionf.openSession(true);
-		int cnt= sqlsession.selectOne("Content.selectCntFollower", mIdx);
-		
+		int cnt = sqlsession.selectOne("Content.selectCntFollower", mIdx);
+
 		sqlsession.close();
 		return cnt;
 	}
-	//메인피드 회전목마
+
+	// 메인피드 회전목마
 	public List<Content> getContentsForIssue() {
 		sqlsession = sessionf.openSession(true);
-		
+
 		List<Content> conList = sqlsession.selectList("Content.selectContentsForIssue");
-	
+
 		sqlsession.close();
 		return conList;
 	}
+
 	// 유저 인덱스에 따른 게시물 수
 	public int getCntContentById(int userIdx) {
-		
+
 		sqlsession = sessionf.openSession(true);
-		int cnt= sqlsession.selectOne("Content.selectCntContent", userIdx);
-		
+		int cnt = sqlsession.selectOne("Content.selectCntContent", userIdx);
+
 		sqlsession.close();
 		return cnt;
 	}

@@ -7,7 +7,19 @@
 <%@page import="java.util.List"%>
 <jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
 <jsp:useBean id="memberDTO" class="insta.member.MemberDTO" />
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
+</c:if>
+
 <%
+	
+
+
 	String otherId = request.getParameter("userid");
 	if(session.getAttribute("id").equals(otherId)){
 		%>

@@ -38,7 +38,8 @@
 
 	<select id="selectSearch" resultType="com.koreait.SearchDTO" parameterType="map">
   	SELECT mc_idx,
-	mc_imageurl FROM tb_mycontent  WHERE mc_taggedname LIKE #{tag} LIMIT #{start}, 12;
+	mc_imageurl FROM tb_mycontent  WHERE mc_taggedname LIKE #{tag} order by mc_idx desc LIMIT #{start}, 12 
+	;
 	</select>
 	<select id="selectCNTComment" resultType="String" parameterType="_int">
  	SELECT count(co_idx) FROM tb_comment WHERE co_mcidx=#{mcidx}

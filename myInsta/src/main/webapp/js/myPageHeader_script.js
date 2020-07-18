@@ -38,7 +38,7 @@ $(function () {
                 if (btnFollow.val() == "팔로우") {
                     btnFollow.css("background-color", "#fff");
                     btnFollow.val("팔로잉").css("color", "#000").css("border", "1px solid #ccc");
-                    $(".cntfollow").tejklxt(cntfollow + 1);
+                    $(".cntfollow").text(cntfollow + 1);
                     $(".body_ing.myFollow").append(clone);
                 } else {
                     btnFollow.css("background-color", "#0095f6");

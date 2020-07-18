@@ -70,12 +70,12 @@
 										<li class="people__person">
 											<div class="people__column">
 												<div class="people__avatar-container">
-													<a href="#"> <img src="./uploads/${memberDao.profile(item.m_idx,'') }"
+													<a href="./other/otherperson.jsp?userid=${item.m_userid }"> <img src="./uploads/${memberDao.profile(item.m_idx,'') }"
 														class="people__avatar" />
 													</a>
 												</div>
 												<div class="people__info">
-													<span class="people__username"> <a href="#">
+													<span class="people__username"> <a href="./other/otherperson.jsp?userid=${item.m_userid }">
 															${item.m_userid } </a> <img src="" />
 													</span> <span class="people__full-name">${item.m_username }</span>
 													<p class="people__full-name">회원님을 위한 추천</p>

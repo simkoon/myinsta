@@ -45,8 +45,6 @@
 			$(this).children(".popup_box").removeClass("on");
 		});
 	});
-	(()={})();
-	
 </script>
 </head>
 <body>
@@ -69,18 +67,22 @@
 								<a href="#"><div class="search_img1"></div></a>
 							</div>
 							<div class="search_name">
-								<h1 class="search_name_h1">#하늘</h1>
+								<h1 class="search_name_h1">#최근 게시물</h1>
 								<p class="search_name_p1">
 									게시물 <span>${cntTag }</span> 개
 								</p>
-								<p class="search_name_p2"></p>
+								<p class="search_name_p2"><c:if test="${cntTag ==0 }">
+									<div">찾는 게시물이 없습니다</div>
+									</c:if></p>
 								<p class="search_name_p3"></p>
 							</div>
 						</div>
-						<div class="search_images">
+						<div class="search_images" >
 							<div class="images_items">
 								<div class="items_box">
-									<h2 class="box_h2">최근 사진</h2>
+									<c:if test="${cntTag !=0 }">
+										<h2 class="box_h2">최근 사진</h2>
+									</c:if>
 								</div>
 							</div>
 						</div>

@@ -26,7 +26,7 @@
 						</a>
 					</div>
 					<div class="h_meunlist">
-						<a href="./main_search.jsp"> <svg aria-label="타임라인"
+						<a href="./main_search.jsp?tag="> <svg aria-label="타임라인"
 								class="ico_btn" fill="#262626" height="24" viewBox="0 0 48 48"
 								width="24">
                             <path clip-rule="evenodd"
