@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class FileService {
 	private BoardDAO boardDAO =null;
-	public static String SAVE_PATH = "D:/javaCros/mytomcat/myinsta/myInsta/src/main/webapp/uploads";
+	public static String SAVE_PATH = "C:/Users/simkoon/Desktop/myinsta-master/myInsta/src/main/webapp/uploads";
 	public FileService() {
 		boardDAO = new BoardDAO();
 	}

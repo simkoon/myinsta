@@ -17,6 +17,7 @@
 
 <%@ include file="mainTitle.jsp"%>
 <script src="./js/heart_script.js"></script>
+<script src="./js/main_search_script.js"></script>
 <script>
 	$(function() {
 		$("#f_btn").on(
