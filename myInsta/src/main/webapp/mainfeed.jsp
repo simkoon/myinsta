@@ -1,0 +1,292 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
+<script src="./js/heart_script.js"></script>
+<c:if test="${empty sessionScope.id }">
+	<script>
+		alert("로그인 후 이용해주세요.");
+		location.href = "./login/login.jsp";
+	</script>
+</c:if>
+
+<c:set var="memberLists" value="${contentDAO.getMemberLists(0) }" />
+<c:set var="contentList" value="${contentDAO.getContentsForIssue() }" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<%@ include file="mainTitle.jsp" %>
+</head>
+<body>
+	<div id="wrap">
+		<form id="h_reform" action="./main_search.jsp" method="GET"
+			name="searchform">
+<header id="header">
+	<div class="header_area box_inner clear">
+		<nav>
+			<div class="header_img">
+				<a href="mainfeed.jsp"> <img class="h_imgsize"
+					src="images/instalogo.png">
+				</a>
+			</div>
+			<div class="header_search">
+				<form id="h_reform" action="./main_search.jsp" method="GET"
+					name="searchform">
+					<input class="h_Search" type="text" name="tag" placeholder="검색">
+				</form>
+			</div>
+			<div class="header_meun">
+				<div class="h_meun">
+					<div class="h_meunlist">
+						<a href="mainfeed.jsp"> <svg aria-label="홈" class="ico_btn"
+								fill="#262626" height="22" viewBox="0 0 48 48" width="22">
+                            <path
+									d="M45.5 48H30.1c-.8 0-1.5-.7-1.5-1.5V34.2c0-2.6-2.1-4.6-4.6-4.6s-4.6 2.1-4.6 4.6v12.3c0 .8-.7 1.5-1.5 1.5H2.5c-.8 0-1.5-.7-1.5-1.5V23c0-.4.2-.8.4-1.1L22.9.4c.6-.6 1.6-.6 2.1 0l21.5 21.5c.3.3.4.7.4 1.1v23.5c.1.8-.6 1.5-1.4 1.5z"></path>
+                        </svg>
+						</a>
+					</div>
+					<div class="h_meunlist">
+						<a href="./main_search.jsp"> <svg aria-label="타임라인"
+								class="ico_btn" fill="#262626" height="24" viewBox="0 0 48 48"
+								width="24">
+                            <path clip-rule="evenodd"
+									d="M24 0C10.8 0 0 10.8 0 24s10.8 24 24 24 24-10.8 24-24S37.2 0 24 0zm0 45C12.4 45 3 35.6 3 24S12.4 3 24 3s21 9.4 21 21-9.4 21-21 21zm10.2-33.2l-14.8 7c-.3.1-.6.4-.7.7l-7 14.8c-.3.6-.2 1.3.3 1.7.3.3.7.4 1.1.4.2 0 .4 0 .6-.1l14.8-7c.3-.1.6-.4.7-.7l7-14.8c.3-.6.2-1.3-.3-1.7-.4-.5-1.1-.6-1.7-.3zm-7.4 15l-5.5-5.5 10.5-5-5 10.5z"
+									fill-rule="evenodd"></path>
+                        </svg>
+						</a>
+					</div>
+					<div class="h_meunlist">
+						<a class="m_like" href="#"> <svg aria-label="활동피드"
+								class="ico_btn hd_heart" fill="#262626" height="22"
+								viewBox="0 0 48 48" width="22">
+                            <path
+									d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
+                        </svg>
+							<div class="hd_heart_sub">
+								<div class="sub_prices">
+									<!-- <input type="hidden" value="no" class="sub_hide"> -->
+									<div class="pr1">
+										<a href="#"><img src="./images/sky.png" alt="img"></a>
+									</div>
+									<div class="pr2">
+										<p>id : asdsadasdas</p>
+										<p>님이 회원님을 팔로우하기 시작했습니다</p>
+									</div>
+									<div class="pr3">
+										<p>
+											<input type="button" value="팔로잉" class="f_btn">
+										</p>
+									</div>
+								</div>
+								<div class="sub_prices">
+									<div class="pr1">
+										<a href="#"><img src="./images/sky.png" alt="img"></a>
+									</div>
+									<div class="pr2">
+										<p>id : asdsadasdas</p>
+										<p>님이 회원님을 팔로우하기 시작했습니다</p>
+									</div>
+									<div class="pr3">
+										<p>
+											<input type="button" value="팔로잉" class="f_btn">
+										</p>
+									</div>
+								</div>
+								<div class="sub_prices">
+									<div class="pr1">
+										<a href="#"><img src="./images/sky.png" alt="img"></a>
+									</div>
+									<div class="pr2">
+										<p>id : asdsadasdas</p>
+										<p>님이 회원님을 팔로우하기 시작했습니다</p>
+									</div>
+									<div class="pr3">
+										<p>
+											<input type="button" value="팔로잉" class="f_btn">
+										</p>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="h_meunlist">
+						<a class="m_like" href="mypage.jsp"> <span
+							class="mpage_img mypage" role="link" tabindex="0"
+							style="width: 22px; height: 22px;"> <img alt="프로필 사진"
+								class="my_p" draggable="false"
+								src="./uploads/${sessionScope.profile}">
+						</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
+			<!-- 내용부분 -->
+			<div id="container">
+				<div class="main_rolling_pc box_inner">
+					<!-- 이 아래부터는 각자알아서 알맞게 -->
+					<div id="main_feed">
+						<div id="feed_roll">
+							<div id="feed_box"></div>
+							<div class="widget_box" id="widget_container">
+								<div class="widget" id="widget">
+									<div class="widget_my_box">
+										<div class="widget_my_img">
+											<a class="off_story" href="./mypage.jsp"> <a
+												class="on_story" href="./mypage.jsp"> <img
+													src="./uploads/${sessionScope.profile}"
+													alt="" />
+											</a>
+											</a>
+										</div>
+										<div class="widget_my_account">
+											<div>
+												<a id="myaccountId" href="./mypage.jsp">${sessionScope.id }</a>
+											</div>
+											<div class="my_account_name">${sessionScope.name }</div>
+										</div>
+									</div>
+									<div class="widget_hotissue_box">
+										<div class="wget_hotissue_header">
+											<a href="#">추천</a>
+										</div>
+										<div class="wget_hot_categories">
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=여행">여행</a>
+											</div>
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=예술">예술</a>
+											</div>
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=음식">음식</a>
+											</div>
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=style">스타일</a>
+											</div>
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=건축">건축</a>
+											</div>
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=영화">TV 및 영화</a>
+											</div>
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=예술">예술</a>
+											</div>
+											<div class="hot_category">
+												<a href="./main_search.jsp?tag=음악">음악</a>
+											</div>
+										</div>
+										<div class="wget_hot_carousel">
+											<div class="carousel_imgs" style="right: 0px;">
+												<c:forEach var="item" items="${contentList }">
+													<div>
+														<a href="./contentPage.jsp?b_idx=${item.mc_idx }"><img
+															src="uploads/${item.mc_imageurl }"
+															alt="" /></a>
+													</div>
+
+												</c:forEach>
+											</div>
+
+											<div class="carousel_nav">
+												<div class="car_nav_btnBefore">
+													<span class="nav_btnBefore"></span>
+												</div>
+												<div class="car_nav_btnNext">
+													<span class="nav_btnNext"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="widget_recommend_box">
+										<div class="wget_recommend_header">
+											<p>회원님을 위한 추천</p>
+											<a href="follow.jsp" class="recommend_btnAll">모두 보기</a>
+										</div>
+										<div class="wget_recommend_list">
+
+											<c:forEach var="item" items="${memberLists }">
+												<c:if
+													test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+													<div class="recom_list_item" style="margin-bottom: 5px;">
+														<div class="recom_item_img">
+														<!-- 복붙 -->
+															<a class="off_story" href="./other/otherperson.jsp?userid=${item.m_userid }"> <a class="on_story" 
+															href="./other/otherperson.jsp?userid=${item.m_userid }"> <img
+																	src="uploads/${item.m_filepath}"
+																	alt="" />
+																	
+															</a>
+															</a>
+														</div>
+														<div class="recom_item_account">
+															<div>
+																<a href="./other/otherperson.jsp?userid=${item.m_userid }">${item.m_userid }</a>
+															</div>
+															<!-- 복붙 끝 -->
+															<div class="recom_account_reason">회원님을 위한 추천</div>
+														</div>
+														<div class="recom_item_btnFollow">
+															<c:if
+																test="${0<contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+																<button class="item_btnFollow"
+																	style="background-Color: white; color: black;">팔로잉</button>
+															</c:if>
+															<c:if
+																test="${0==contentDAO.getFollowingById(sessionScope.idx,item.m_idx) }">
+																<button class="item_btnFollow">팔로우</button>
+															</c:if>
+															<input type="hidden" name="mIdx" value="${item.m_idx }">
+														</div>
+													</div>
+												</c:if>
+											</c:forEach>
+										</div>
+									</div>
+									<footer id="mainfooter">
+										<div class="mainfooter_area box_inner clear"
+											style="width: 100%; text-align: left; padding: 0px;">
+											<div class="mainf_area1">
+												<ul>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://about.instagram.com/about-us">소개</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://help.instagram.com/">도움말</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://about.instagram.com/blog/">홍보 센터</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://www.instagram.com/developer/">API</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://www.instagram.com/about/jobs/">채용 정보</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://www.instagram.com/directory/hashtags/">해시태그</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://help.instagram.com/519522125107875">개인정보처리방법</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://help.instagram.com/581066165581870">약관</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://www.instagram.com/explore/locations/">위치</a></li>
+													<li><a style="color: rgb(200, 200, 200);"
+														href="https://www.instagram.com/directory/profiles/">인기계정</a></li>
+													<li><a style="color: rgb(200, 200, 200);" href="">언어</a></li>
+												</ul>
+											</div>
+											<div class="f_area2">© 2020 INSTAGRAM FROM 페스타그램</div>
+										</div>
+									</footer>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+
+
+	</div>
+</body>
+</html>
