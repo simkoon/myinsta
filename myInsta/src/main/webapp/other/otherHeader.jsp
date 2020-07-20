@@ -1,68 +1,79 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="insta.db.DBConn"%>
 <%@page import="com.koreait.CommentDTO"%>
 <%@page import="com.koreait.Content"%>
 <%@page import="insta.member.MemberDTO"%>
 <%@page import="insta.member.MemberDAO"%>
 <%@page import="com.koreait.ContentDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*"%>
 <jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
 <jsp:useBean id="memberDTO" class="insta.member.MemberDTO" />
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
-$(function () {
-    $(".new_div1").click(function () {
-        $(".fp").fadeIn();
-    });
-    $(".exit_btn").click(function () {
-        $(".fp").fadeOut();
-    });
-});
+	$(function() {
+		$(".new_div1").click(function() {
+			$(".fp").fadeIn();
+		});
+		$(".exit_btn").click(function() {
+			$(".fp").fadeOut();
+		});
+	});
 
-$(function () {
-    $(".new_div2").click(function () {
-        $(".fp2").fadeIn();
-    });
-    $(".exit_btn").click(function () {
-        $(".fp2").fadeOut();
-    });
-});
-
+	$(function() {
+		$(".new_div2").click(function() {
+			$(".fp2").fadeIn();
+		});
+		$(".exit_btn").click(function() {
+			$(".fp2").fadeOut();
+		});
+	});
 </script>
 
 <c:if test="${empty sessionScope.id }">
 	<script>
 		alert("로그인 후 이용해주세요.");
-		location.href = "./login/login.jsp";
+		location.href = "../login/login.jsp";
 	</script>
 </c:if>
 
+<%	
+	String otherId = "";
+
+if (null != request.getParameter("userid")) {
+
+	otherId = request.getParameter("userid");
+}
+
+if (session.getAttribute("id")!=null &&session.getAttribute("id").equals(otherId)) {
+%>
+<script>
+	location.href = "../mypage.jsp";
+</script>
+
 <%
-	String otherId = request.getParameter("userid");
-	if(session.getAttribute("id").equals(otherId)){
-		%>
- 		<script>
-			location.href="../mypage.jsp";
-		</script>
-		 
-		<%
-	}else {
-		
-	
-	
-	List<MemberDTO> conList = contentDAO.getOtherpage(otherId);
-	List<Content> otherConList = contentDAO.getMyContents(conList.get(0).getM_idx());
-	String userid = (String)session.getAttribute("id");
-	List<Content> TagList = contentDAO.getTageContent(userid);
-	int m_idx2 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
-	ContentDAO cdao = new ContentDAO();
-	
-	System.out.println(otherId);
-	System.out.println("userid = " + userid);
-	
-	
+	}
+
+List<MemberDTO> conList = contentDAO.getOtherpage(otherId);
+List<Content> otherConList = new ArrayList<Content>();
+
+if (conList.size() >= 1) {
+otherConList = contentDAO.getMyContents(conList.get(0).getM_idx());
+}
+String userid = (String) session.getAttribute("id");
+List<Content> TagList = contentDAO.getTageContent(userid);
+int m_idx2 = -1;
+
+if (session.getAttribute("idx") != null) {
+m_idx2 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
+}
+ContentDAO cdao = new ContentDAO();
+
+System.out.println(otherId);
+System.out.println("userid = " + userid);
 %>
 <style>
 .p_lText, .p_lText2 {
@@ -72,13 +83,17 @@ $(function () {
 	height: 21px;
 	cursor: pointer;
 }
+
 .new_div1, .new_div2 {
 	width: 73px;
 	height: 21px;
 	font-size: 16px;
-
 }
-.otherp{margin-right: 20px;}
+
+.otherp {
+	margin-right: 20px;
+}
+
 .fp {
 	width: 100%;
 	height: 100%;
@@ -235,35 +250,30 @@ $(function () {
 }
 </style>
 <div id="p_myTitle">
-         <div id="p_mTimg">
-             <div class="p_mTi">
-                 <button class="p_mTiBtn" title="프로필사진 ">
-                     <img alt="프로필 사진" src="../uploads/profile.jpg">
-                 </button>
-             </div>
-         </div>
-        
-         <section id="p_myTName">
-             <div id="p_myTN1">
-             	<div class="otherp">
-                 <h2><%=otherId %></h2>   
-                 <input class="p_myTNpa p_myTNBtn otherbtn btnFolloing"  type="button" onclick="Color(event)" value="팔로우">
-             	</div>
-             </div>
-             <ul id="p_myTN1">
-                 <li class="p_myTN1_list">
-                     <span class="p_lText">게시물
-                         <span class="p_lNum"><%=cdao.getCntContentById(Integer.parseInt(String.valueOf(session.getAttribute("idx"))))%></span>
-                     </span>
-                 </li>
-                 <li class="p_myTN1_list">
-                 
-                     <span class="new_div1">팔로워
-                         <span class="p_lNum cntfollower"><%=cdao.getCntFollower(Integer.parseInt(String.valueOf(session.getAttribute("idx"))))%></span>
-                     </span>
-                    
-                 </li>
-                 <div class="fp">
+	<div id="p_mTimg">
+		<div class="p_mTi">
+			<button class="p_mTiBtn" title="프로필사진 ">
+				<img alt="프로필 사진" src="../uploads/profile.jpg">
+			</button>
+		</div>
+	</div>
+
+	<section id="p_myTName">
+		<div id="p_myTN1">
+			<div class="otherp">
+				<h2><%=otherId%></h2>
+				<input class="p_myTNpa p_myTNBtn otherbtn btnFolloing" type="button"
+					onclick="Color(event)" value="팔로우">
+			</div>
+		</div>
+		<ul id="p_myTN1">
+			<li class="p_myTN1_list"><span class="p_lText">게시물 <span
+					class="p_lNum"><%=cdao.getCntContentById(m_idx2)%></span>
+			</span></li>
+			<li class="p_myTN1_list"><span class="new_div1">팔로워 <span
+					class="p_lNum cntfollower"><%=cdao.getCntFollower(m_idx2)%></span>
+			</span></li>
+			<div class="fp">
 				<div class="follower_pop">
 					<div class="fw_pop">
 						<div class="pop_header">
@@ -273,90 +283,89 @@ $(function () {
 								<span class="exit_btn">&times;</span>
 							</div>
 						</div>
-						
+
 						<div class="pop_body">
 							<ul>
 								<div class="body_ing myFollower">
-<%	
-System.out.println("m_idx2 = " + m_idx2);
-Connection conn2 = null;
-PreparedStatement pstmt2 = null;
-ResultSet rs2 = null;
+									<%
+										System.out.println("m_idx2 = " + m_idx2);
+									Connection conn2 = null;
+									PreparedStatement pstmt2 = null;
+									ResultSet rs2 = null;
 
-String sql2 = "";
-String url2 = "jdbc:mariadb://localhost:3306/insta";
-String uid2 = "root";
-String upw2 = "1234";
-int other_idx = 0; 
+									String sql2 = "";
+									String url2 = "jdbc:mariadb://localhost:3306/insta";
+									String uid2 = "root";
+									String upw2 = "1234";
+									int other_idx = 0;
 
-try { 
-	Class.forName("org.mariadb.jdbc.Driver");
-	conn2 = DriverManager.getConnection(url2, uid2, upw2);
-	if(conn2 != null) {
-		sql2 = "select m_idx from tb_member where m_userid = (?)";
-		pstmt2 = conn2.prepareStatement(sql2);
-		pstmt2.setString(1, otherId);
-		rs2 = pstmt2.executeQuery();
-		while(rs2.next()) {
-			other_idx = rs2.getInt("m_idx");
-			System.out.println("other_idx = " + other_idx);
-		}
-	}
-}catch(Exception e2) {
-	e2.printStackTrace();
-}
+									try {
+										Class.forName("org.mariadb.jdbc.Driver");
+										conn2 = DriverManager.getConnection(url2, uid2, upw2);
+										if (conn2 != null) {
+											sql2 = "select m_idx from tb_member where m_userid = (?)";
+											pstmt2 = conn2.prepareStatement(sql2);
+											pstmt2.setString(1, otherId);
+											rs2 = pstmt2.executeQuery();
+											while (rs2.next()) {
+										other_idx = rs2.getInt("m_idx");
+										System.out.println("other_idx = " + other_idx);
+											}
+										}
+									} catch (Exception e2) {
+										e2.printStackTrace();
+									}
 
-
-try {
-	Class.forName("org.mariadb.jdbc.Driver");
-	conn2 = DriverManager.getConnection(url2, uid2, upw2);
-	if (conn2 != null) {
-		sql2 = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, tb_following.fi_useridx  FROM tb_following";
-		sql2 += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
-		sql2 += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
-		pstmt2 = conn2.prepareStatement(sql2);
-		pstmt2.setInt(1, other_idx);
-		rs2 = pstmt2.executeQuery();
-		while (rs2.next()) {
-	int followingid2 = rs2.getInt("fi_useridx");
-	System.out.println("otherheader페이지 followingid1_1 = " + followingid2);
-%>
-									<li><input type="hidden" value='<%=rs2.getString("otherfollow")%>'/>
+									try {
+										Class.forName("org.mariadb.jdbc.Driver");
+										conn2 = DriverManager.getConnection(url2, uid2, upw2);
+										if (conn2 != null) {
+											sql2 = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, tb_following.fi_useridx  FROM tb_following";
+											sql2 += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
+											sql2 += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
+											pstmt2 = conn2.prepareStatement(sql2);
+											pstmt2.setInt(1, other_idx);
+											rs2 = pstmt2.executeQuery();
+											while (rs2.next()) {
+										int followingid2 = rs2.getInt("fi_useridx");
+										System.out.println("otherheader페이지 followingid1_1 = " + followingid2);
+									%>
+									<li><input type="hidden"
+										value='<%=rs2.getString("otherfollow")%>' />
 										<div class="ing_li">
 											<div class="li_img">
-												<a href="#"><img src="../images/person_icon.jpg" alt="프사"></a>
+												<a href="#"><img src="../images/person_icon.jpg"
+													alt="프사"></a>
 											</div>
 											<div class="li_id">
 												<p><%=rs2.getString("otherfollow")%></p>
 											</div>
 											<div class="li_btn">
-<%
-	if (cdao.getFollowingById(m_idx2, followingid2) > 0) {
-%>
+												<%
+													if (cdao.getFollowingById(m_idx2, followingid2) > 0) {
+												%>
 												<input type="button" style="cursor: pointer;" value="팔로잉"
 													class="fw_btn">
 
-<%
-} else {
-%>
+												<%
+													} else {
+												%>
 												<input type="button" value="팔로우" class="fw_btn"
-													style="background-color: #0095f6; color: white; cursor: pointer;"/>
+													style="background-color: #0095f6; color: white; cursor: pointer;" />
 
-<%
-}
-%>
-												<input type="hidden" value="<%=followingid2%>"/>
+												<%
+													}
+												%>
+												<input type="hidden" value="<%=followingid2%>" />
 											</div>
-										</div>
-									</li>
-<%
-	}
-}
-} catch (Exception e2) {
-	e2.printStackTrace();
-}
-
-%>
+										</div></li>
+									<%
+										}
+									}
+									} catch (Exception e2) {
+									e2.printStackTrace();
+									}
+									%>
 								</div>
 							</ul>
 
@@ -364,14 +373,10 @@ try {
 					</div>
 				</div>
 			</div>
-                 <li class="p_myTN1_list">
-
-                     <span class="new_div2">팔로우
-                         <span class="p_lNum cntfollow"><%=cdao.getCntFollow(m_idx2)%></span>
-                     </span>
-
-                 </li>
-                 <div class="fp2">
+			<li class="p_myTN1_list"><span class="new_div2">팔로우 <span
+					class="p_lNum cntfollow"><%=cdao.getCntFollow(m_idx2)%></span>
+			</span></li>
+			<div class="fp2">
 				<div class="follower_pop">
 					<div class="fw_pop">
 						<div class="pop_header">
@@ -384,24 +389,23 @@ try {
 						<div class="pop_body">
 							<ul>
 								<div class="body_ing myFollow">
-<%
-
-	try {
-	Class.forName("org.mariadb.jdbc.Driver");
-	conn2 = DriverManager.getConnection(url2, uid2, upw2);
-	if (conn2 != null) {
-		sql2 = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_followingid  FROM tb_following";
-		sql2 += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
-		sql2 += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_useridx = ?";
-		pstmt2 = conn2.prepareStatement(sql2);
-		pstmt2.setInt(1, other_idx);
-		rs2 = pstmt2.executeQuery();
-		while (rs2.next()) {
-	int followingid2 = rs2.getInt("fi_followingid");
-	System.out.println("otherheader페이지 followingid1_2 = " + followingid2);
-%>
+									<%
+										try {
+										Class.forName("org.mariadb.jdbc.Driver");
+										conn2 = DriverManager.getConnection(url2, uid2, upw2);
+										if (conn2 != null) {
+											sql2 = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_followingid  FROM tb_following";
+											sql2 += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
+											sql2 += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_useridx = ?";
+											pstmt2 = conn2.prepareStatement(sql2);
+											pstmt2.setInt(1, other_idx);
+											rs2 = pstmt2.executeQuery();
+											while (rs2.next()) {
+										int followingid2 = rs2.getInt("fi_followingid");
+										System.out.println("otherheader페이지 followingid1_2 = " + followingid2);
+									%>
 									<li class='<%=rs2.getString("ifollow")%>'><input
-										type="hidden" value='<%=rs2.getString("ifollow")%>'/>
+										type="hidden" value='<%=rs2.getString("ifollow")%>' />
 										<div class="ing_li">
 											<div class="li_img">
 												<a href="#"><img src="../images/person_icon.jpg" alt="#"></a>
@@ -410,33 +414,32 @@ try {
 												<p><%=rs2.getString("ifollow")%></p>
 											</div>
 											<div class="li_btn">
-<%
-	if (cdao.getFollowingById(m_idx2, followingid2) > 0) {
-%>
+												<%
+													if (cdao.getFollowingById(m_idx2, followingid2) > 0) {
+												%>
 												<input type="button" style="cursor: pointer;" value="팔로잉"
 													class="fw_btn">
-<%
-	} else {
-%>
+												<%
+													} else {
+												%>
 												<input type="button" value="팔로우" class="fw_btn"
 													style="background-color: #0095f6; color: white; cursor: pointer;">
 
-<%
-	}
-%>
-												<input type="hidden" value="<%=followingid2%>"/>
+												<%
+													}
+												%>
+												<input type="hidden" value="<%=followingid2%>" />
 											</div>
-										</div>
-									</li>
-<%
-		
-	}
-}
-} catch (Exception e2) {
-	e2.printStackTrace();
-}
-
-%>
+										</div></li>
+									<%
+										}
+									}
+									} catch (Exception e2) {
+									e2.printStackTrace();
+									} finally {
+									DBConn.close(conn2, pstmt2, rs2);
+									}
+									%>
 								</div>
 							</ul>
 
@@ -444,10 +447,10 @@ try {
 					</div>
 				</div>
 			</div>
-             </ul>
-             <div id="p_myTN3">
-                 <h1 class="rhpdm">안녕하세요.</h1>
-             </div>
-         </section>
-     </div>
+		</ul>
+		<div id="p_myTN3">
+			<h1 class="rhpdm">안녕하세요.</h1>
+		</div>
+	</section>
+</div>
 
