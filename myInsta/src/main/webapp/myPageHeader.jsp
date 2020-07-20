@@ -1,3 +1,4 @@
+<%@page import="insta.db.DBConn"%>
 <%@page import="com.koreait.ContentDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -227,7 +228,7 @@ $(document).ready(function (e){
 										Class.forName("org.mariadb.jdbc.Driver");
 										conn = DriverManager.getConnection(url, uid, upw);
 										if (conn != null) {
-											sql = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, m1.m_filepath As profile tb_following.fi_useridx  FROM tb_following";
+											sql = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, m1.m_filepath As profile, tb_following.fi_useridx  FROM tb_following";
 											sql += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
 											sql += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
 											pstmt = conn.prepareStatement(sql);
@@ -365,6 +366,8 @@ $(document).ready(function (e){
 									}
 									} catch (Exception e) {
 										e.printStackTrace();
+									}finally {
+										DBConn.close(conn, pstmt, rs);
 									}
 									%>
 								</div>

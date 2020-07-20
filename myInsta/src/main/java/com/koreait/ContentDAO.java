@@ -24,7 +24,7 @@ public class ContentDAO {
 
 	public ContentDAO() {
 		sqlsession = sessionf.openSession(true);
-		System.out.println("mybatis setting success!");
+	
 	}
 
 	public List<Content> getContents(int start, int useridx) {
@@ -33,7 +33,7 @@ public class ContentDAO {
 		dataMap.put("useridx", useridx);
 		dataMap.put("start", start);
 		List<Content> conList = sqlsession.selectList("Content.selectContent", dataMap);
-		System.out.println(conList);
+	
 		sqlsession.close();
 		return conList;
 	}
@@ -54,7 +54,7 @@ public class ContentDAO {
 			if (rs.next()) {
 				cnt = rs.getInt(1);
 			}
-			System.out.println(rs);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -80,7 +80,7 @@ public class ContentDAO {
 			if (rs.next()) {
 				isOk = true;
 			}
-			System.out.println(rs);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -105,7 +105,7 @@ public class ContentDAO {
 				pstmt.setInt(1, contentidx);
 				pstmt.setInt(2, useridx);
 				result = pstmt.executeUpdate();
-				System.out.println(result);
+			
 			} else {
 				conn = DBConn.getConnection();
 				sql = "DELETE FROM tb_like WHERE l_mcidx=? AND l_useridx=?";
@@ -114,14 +114,14 @@ public class ContentDAO {
 				pstmt.setInt(1, contentidx);
 				pstmt.setInt(2, useridx);
 				result = pstmt.executeUpdate();
-				System.out.println(result);
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBConn.close(conn, pstmt);
 		}
-		System.out.println("result=" + result);
+	
 		return result;
 	}
 
@@ -142,7 +142,7 @@ public class ContentDAO {
 			if (rs.next()) {
 				isOk = true;
 			}
-			System.out.println(rs);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -166,7 +166,7 @@ public class ContentDAO {
 				pstmt.setInt(1, contentidx);
 				pstmt.setInt(2, useridx);
 				result = pstmt.executeUpdate();
-				System.out.println(result);
+			
 			} else {
 				conn = DBConn.getConnection();
 				sql = "DELETE FROM tb_save WHERE s_mcidx=? AND s_useridx=?";
@@ -175,14 +175,14 @@ public class ContentDAO {
 				pstmt.setInt(1, contentidx);
 				pstmt.setInt(2, useridx);
 				result = pstmt.executeUpdate();
-				System.out.println(result);
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBConn.close(conn, pstmt);
 		}
-		System.out.println("result=" + result);
+	
 		return result;
 	}
 
@@ -215,9 +215,9 @@ public class ContentDAO {
 		HashMap<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("start", start);
 		dataMap.put("tag", tagSB.toString());
-		System.out.println("dao에 start들어옴 " + start);
+	
 		List<SearchDTO> schList = sqlsession.selectList("Content.selectSearch", dataMap);
-		System.out.println(" 리스트 받아옴 " + schList);
+		
 		sqlsession.close();
 		return schList;
 	}
@@ -296,7 +296,7 @@ public class ContentDAO {
 	public List<Content> getOneContent(int b_idx) {
 		sqlsession = sessionf.openSession(true);
 		List<Content> conList = sqlsession.selectList("Content.selectOneContent", b_idx);
-		System.out.println(conList);
+		
 		sqlsession.close();
 		return conList;
 	}
@@ -320,7 +320,7 @@ public class ContentDAO {
 	public List<Content> getMyContents(int idx) {
 		sqlsession = sessionf.openSession(true);
 		List<Content> conList = sqlsession.selectList("Content.selectMypageComment", idx);
-		System.out.println(conList);
+		
 		sqlsession.close();
 		return conList;
 	}
@@ -328,7 +328,7 @@ public class ContentDAO {
 	public List<Content> getSaveContent(int b_idx) {
 		sqlsession = sessionf.openSession(true);
 		List<Content> conList = sqlsession.selectList("Content.selectSaveContent", b_idx);
-		System.out.println(conList);
+
 		sqlsession.close();
 		return conList;
 	}
@@ -336,7 +336,7 @@ public class ContentDAO {
 	public List<Content> getTageContent(String userid) {
 		sqlsession = sessionf.openSession(true);
 		List<Content> conList = sqlsession.selectList("Content.selectTageContent", userid);
-		System.out.println(conList);
+	
 		sqlsession.close();
 		return conList;
 	}
@@ -344,7 +344,7 @@ public class ContentDAO {
 	public List<MemberDTO> getOtherpage(String userid) {
 		sqlsession = sessionf.openSession(true);
 		List<MemberDTO> conList = sqlsession.selectList("Content.selectOtherPage", userid);
-		System.out.println(conList);
+		
 		sqlsession.close();
 		return conList;
 	}

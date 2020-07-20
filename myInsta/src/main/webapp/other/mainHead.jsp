@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header id="header">
 <div class="header_area box_inner clear">
     <nav>
@@ -37,7 +39,7 @@
                 <div class="h_meunlist">
                     <a class="m_like" href="../mypage.jsp">                
                     	<span class="mpage_img mypage" role="link" tabindex="0" style="width: 22px; height: 22px;">
-                            <img alt="프로필 사진" class="my_p" draggable="false" src="https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_ohc=ZMRBdU8i2AoAX-ijcJe&oh=203ab59c04f149c10ed366b8f365a578&oe=5F13AC8F&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2">
+                            <img alt="프로필 사진" class="my_p" draggable="false" src="../uploads/${sessionScope.profile}">
                         </span>
                     </a>
                 </div>

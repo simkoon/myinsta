@@ -294,13 +294,15 @@ $(()=>{
 	};
 
 	let context= ``;
-  context = $(".page_mycontent").text();
+  context = $(".page_mycontent1").text();
   console.log("텍스트는" +context);
 let context1 = ``;
 context1 = getAtlink(getTaglink(context));
  console.log("여기는" + context1);
- $(".page_mycontent").html(context1);
- 
+ $(".page_mycontent1").html(context1);
+
+function x12() { context= ``;
+context1 = ``;}
 });
 //팝업
 $(function(){

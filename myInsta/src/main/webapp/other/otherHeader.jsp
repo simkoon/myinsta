@@ -76,8 +76,9 @@ $(function () {
 	width: 73px;
 	height: 21px;
 	font-size: 16px;
-	border: 1px solid #ccc;
+
 }
+.otherp{margin-right: 20px;}
 .fp {
 	width: 100%;
 	height: 100%;
@@ -237,7 +238,7 @@ $(function () {
          <div id="p_mTimg">
              <div class="p_mTi">
                  <button class="p_mTiBtn" title="프로필사진 ">
-                     <img alt="프로필 사진" src="https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_ohc=ZMRBdU8i2AoAX-ijcJe&oh=203ab59c04f149c10ed366b8f365a578&oe=5F13AC8F&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2">
+                     <img alt="프로필 사진" src="../uploads/profile.jpg">
                  </button>
              </div>
          </div>
@@ -364,11 +365,11 @@ try {
 				</div>
 			</div>
                  <li class="p_myTN1_list">
-                 <div class="new_div">
+
                      <span class="new_div2">팔로우
                          <span class="p_lNum cntfollow"><%=cdao.getCntFollow(m_idx2)%></span>
                      </span>
-                     </div>
+
                  </li>
                  <div class="fp2">
 				<div class="follower_pop">

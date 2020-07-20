@@ -21,7 +21,7 @@ String intro=(String)session.getAttribute("intro");
 	%>		
 	<script>
 		alert("로그인 후 이용해주세요.");
-		location.href = "./login/login.jsp";
+		location.href = "../login/login.jsp";
 	</script>
 </c:if>
 <html>
@@ -72,7 +72,7 @@ if(!hpCheck.test($("#m_number").val())){
                             
 												
 													
-                               <div class="nav1 item_left"><a href="#"><img src="./uploads/${sessionScope.profile}" alt="" width="200"></a></div>
+                               <div class="nav1 item_left"><a href="#"><img src="../uploads/${sessionScope.profile}" alt="" width="200"></a></div>
                                     <div class="nav2 item_right"><br><a href="#" class="a_blue"><p class="profilep">${sessionScope.id}</p></a></div>
                                 </div>
                                 <div class="price2_main">

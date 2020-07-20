@@ -1302,6 +1302,7 @@ height: 780px;
      line-height: 32px; 
      margin: -5px 0 -6px;
      float: left;
+     margin-right: 10px;
 }
 #p_myTN1 .p_myTN {margin-left: 20px; box-sizing: border-box; float: left;}
 .p_myTNBtn {

@@ -11,7 +11,7 @@ $(() => {
 	let start = 0;
 	let pending = false;
 	//url에서 get 파라메터 가져오기
-
+	
 	(() => {
 		let tagss = "최근 게시물"
 		if (getParam("tag") != "") tagss = getParam("tag");
@@ -33,12 +33,12 @@ $(() => {
 	};
 
 	const getEle = async () => {
-		//    console.log("getele 실행됨");
+		   console.log("getele 실행됨");
 		//   console.log(window.scrollY + 1000 > document.querySelector(".images_items").offsetHeight);
 		if (window.scrollY + 1000 > document.querySelector(".images_items").offsetHeight) {
 			console.log("스타트는 " + start);
 			if (pending) {
-				//  console.log("취소됨");
+				  console.log("취소됨");
 				return;
 			}
 			try {

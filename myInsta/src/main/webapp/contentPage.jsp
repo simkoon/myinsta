@@ -90,7 +90,7 @@ System.out.println(cnt);
 										<div class="c_reply">
 											<a
 												href="other/otherperson.jsp?userid=<%=conList.get(0).getMc_useridx()%>"><%=conList.get(0).getMc_useridx()%></a>
-											<span class="page_mycontent"> <%=conList.get(0).getMc_content()%></span>
+											<span class="page_mycontent1"> <%=conList.get(0).getMc_content()%></span>
 										</div>
 									</div>
 									<%
@@ -149,7 +149,7 @@ System.out.println(cnt);
 								</div>
 								<div class="reply_text">
 									<textarea class="reply_textarea" placeholder="댓글 달기..."></textarea>
-									<button class="reply_button" type="button">게시</button>
+									<button class="reply_button" onclick="x12()" type="button">게시</button>
 								</div>
 							</div>
 						</div>
@@ -193,11 +193,11 @@ System.out.println(cnt);
 					</button>
 				</div>
 				<br>
-				<button id="spam">
-					스팸<span class="po6_2_1"></span>
+				<button value="스팸" id="spam">
+					스팸<span  class="po6_2_1"></span>
 				</button>
 				<br>
-				<button class="po6_2" id="inappropriate">
+				<button class="po6_2" value="부적절함" id="inappropriate">
 					부적절합니다<span class="po6_2_1" style="line-height: 2.2;"> </span>
 				</button>
 			</div>
@@ -213,11 +213,7 @@ System.out.println(cnt);
 	    $("#spam,#inappropriate").click(function(){	
 		    	let xhr = new XMLHttpRequest();
 		    	let text = $(this).val();
-		    	xhr.open("GET", "./contentreport?id=<%=m_idx%>
-		&text="
-							+ text + "&content=" +
-	<%=b_idx%>
-		, true);
+		    	xhr.open("GET", "./contentreport?id=<%=m_idx%>&text="+ text + "&content=" +<%=b_idx%>, true);
 					xhr.send();
 					$("#pop6").fadeOut();
 					$("#reportOk").fadeIn();

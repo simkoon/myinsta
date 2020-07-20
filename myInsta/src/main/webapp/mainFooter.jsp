@@ -17,5 +17,5 @@
             <li><a href="">언어</a></li>
         </ul>
     </div>
-    <div class="f_area2">© 2020 INSTAGRAM FROM 페스타그램</div>
+    <div class="f_area2">© 2020 INSTAGRAM FROM 호스타그램</div>
 </footer>

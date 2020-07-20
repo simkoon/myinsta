@@ -16,7 +16,7 @@ int m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 				</a>
 			</div>
 			<div class="header_search">
-				<form id="h_reform" action="./main_search.jsp" method="GET"
+				<form id="h_reform" action="./main_search.jsp?tag=" method="GET"
 					name="searchform">
 					<input class="h_Search" type="text" name="tag" placeholder="검색">
 				</form>
