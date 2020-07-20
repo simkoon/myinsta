@@ -16,7 +16,7 @@
 <head>
 
 <%@ include file="mainTitle.jsp"%>
-<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*"%>
 <%
 request.setCharacterEncoding("UTF-8");
 int m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
@@ -92,60 +92,59 @@ int m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 									</a>
 								</div>
 								<div class="h_meunlist">
-									<a class="m_like" href="#"> 
-									<div class="hd_heart">
-			                  			<img class="hd_heartimg" alt="활동피드" src="./images/2.PNG">
-			                        </div>
+									<a class="m_like" href="#">
+										<div class="hd_heart">
+											<img class="hd_heartimg" alt="활동피드" src="./images/2.PNG">
+										</div>
 										<div class="hd_heart_sub">
 											<%
-									
+												System.out.println("m_idx = " + m_idx1);
+											Connection conn1 = null;
+											PreparedStatement pstmt1 = null;
+											ResultSet rs1 = null;
 
-									System.out.println("m_idx = " + m_idx1);
-									Connection conn1 = null;
-									PreparedStatement pstmt1 = null;
-									ResultSet rs1 = null;
+											String sql1 = "";
+											String url1 = "jdbc:mariadb://localhost:3306/insta";
+											String uid1 = "root";
+											String upw1 = "1234";
 
-									String sql1 = "";
-									String url1 = "jdbc:mariadb://localhost:3306/insta";
-									String uid1 = "root";
-									String upw1 = "1234";
-
-									try {
-										Class.forName("org.mariadb.jdbc.Driver");
-										conn1 = DriverManager.getConnection(url1, uid1, upw1);
-										if (conn1 != null) {
-											sql1 = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, m1.m_filepath AS otherpf,  tb_following.fi_useridx  FROM tb_following";
-											sql1 += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
-											sql1 += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
-											pstmt1 = conn1.prepareStatement(sql1);
-											pstmt1.setInt(1, m_idx1);
-											rs1 = pstmt1.executeQuery();
-											while (rs1.next()) {
-										int followingid = rs1.getInt("fi_useridx");
-										System.out.println("followingid = " + followingid);
-									%>
-								<div class="sub_prices">
-									<!-- <input type="hidden" value="no" class="sub_hide"> -->
-									<div class="pr1">
-										<a href="#"><img src='./uploads/<%=rs1.getString("otherpf") %>' alt="img"></a>
-									</div>
-									<div class="pr2">
-										<p><%=rs1.getString("otherfollow")%></p>
-										<p>님이 회원님을 팔로우하기 시작했습니다</p>
-									</div>
-									<div class="pr3">
-										<p>
-											<input type="button" value="팔로잉" class="f_btn">
-										</p>
-									</div>
-								</div>
-								<%
-										}
-									}
-									} catch (Exception e1) {
-										e1.printStackTrace();
-									}
-									%>
+											try {
+												Class.forName("org.mariadb.jdbc.Driver");
+												conn1 = DriverManager.getConnection(url1, uid1, upw1);
+												if (conn1 != null) {
+													sql1 = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, m1.m_filepath AS otherpf,  tb_following.fi_useridx  FROM tb_following";
+													sql1 += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
+													sql1 += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
+													pstmt1 = conn1.prepareStatement(sql1);
+													pstmt1.setInt(1, m_idx1);
+													rs1 = pstmt1.executeQuery();
+													while (rs1.next()) {
+												int followingid = rs1.getInt("fi_useridx");
+												System.out.println("followingid = " + followingid);
+											%>
+											<div class="sub_prices">
+												<!-- <input type="hidden" value="no" class="sub_hide"> -->
+												<div class="pr1">
+													<a href="#"><img
+														src='./uploads/<%=rs1.getString("otherpf")%>' alt="img"></a>
+												</div>
+												<div class="pr2">
+													<p><%=rs1.getString("otherfollow")%></p>
+													<p>님이 회원님을 팔로우하기 시작했습니다</p>
+												</div>
+												<div class="pr3">
+													<p>
+														<input type="button" value="팔로잉" class="f_btn">
+													</p>
+												</div>
+											</div>
+											<%
+												}
+											}
+											} catch (Exception e1) {
+											e1.printStackTrace();
+											}
+											%>
 										</div>
 									</a>
 								</div>
@@ -187,11 +186,13 @@ int m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 						</div>
 						<div class="search_images">
 							<div class="images_items">
-								<div class="items_box">
-									<c:if test="${cntTag !=0 }">
+								<c:if test="${cntTag !=0 }">
+									<div class="items_box" style=" min-height: 0px;">
+
 										<h2 class="box_h2">최근 사진</h2>
-									</c:if>
-								</div>
+
+									</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

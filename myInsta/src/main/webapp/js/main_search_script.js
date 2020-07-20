@@ -69,7 +69,9 @@ $(() => {
                             </p>
                            
                         </div>
-                       <img src="${"uploads/" + one_article.img ? "uploads/" + one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="#" />
+                       <img src="${"uploads/" + one_article.img ? "uploads/" + one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" 
+						onerror="this.onerror=null;this.src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg';"
+ 						alt="#" />
                         </div></a>
                         `;
 					if ((i + 1) % 3 == 0 || i + 1 == newthing.result.length) {

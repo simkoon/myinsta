@@ -227,7 +227,7 @@ $(document).ready(function (e){
 										Class.forName("org.mariadb.jdbc.Driver");
 										conn = DriverManager.getConnection(url, uid, upw);
 										if (conn != null) {
-											sql = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, tb_following.fi_useridx  FROM tb_following";
+											sql = "SELECT m2.m_userid AS me , m1.m_userid AS otherfollow, m1.m_filepath As profile tb_following.fi_useridx  FROM tb_following";
 											sql += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
 											sql += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_followingid = ?";
 											pstmt = conn.prepareStatement(sql);
@@ -240,7 +240,7 @@ $(document).ready(function (e){
 									<li><input type="hidden" value="<%=rs.getString("otherfollow")%>">
 										<div class="ing_li">
 											<div class="li_img">
-												<a href="#"><img src="./images/person_icon.jpg" alt="프사"></a>
+												<a href="#"><img src="./uploads/<%=rs.getString("profile")%>" alt="프사"></a>
 											</div>
 											<div class="li_id">
 												<p><%=rs.getString("otherfollow")%></p>
@@ -323,7 +323,7 @@ $(document).ready(function (e){
 										Class.forName("org.mariadb.jdbc.Driver");
 										conn = DriverManager.getConnection(url, uid, upw);
 										if (conn != null) {
-											sql = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_followingid  FROM tb_following";
+											sql = "SELECT m1.m_userid AS me , m2.m_userid AS ifollow, tb_following.fi_followingid, m2.m_filepath as profile FROM tb_following";
 											sql += " JOIN tb_member m1 ON tb_following.fi_useridx = m1.m_idx JOIN tb_member m2";
 											sql += " ON tb_following.fi_followingid = m2.m_idx WHERE fi_useridx = ?";
 											pstmt = conn.prepareStatement(sql);
@@ -337,7 +337,7 @@ $(document).ready(function (e){
 										type="hidden" value="<%=rs.getString("ifollow")%>">
 										<div class="ing_li">
 											<div class="li_img">
-												<a href="#"><img src="./images/person_icon.jpg" alt="#"></a>
+												<a href="#"><img src="./uploads/<%=rs.getString("profile") %>" alt="#"></a>
 											</div>
 											<div class="li_id">
 												<p><%=rs.getString("ifollow")%></p>

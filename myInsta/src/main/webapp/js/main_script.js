@@ -2,6 +2,13 @@ $(() => {
 	let start = 0;
 	let pending = false;
 
+	function CopyUrlToClipboard(element) {
+		element.select();  // 해당 값이 선택되도록 select() 합니다
+		document.execCommand("copy"); // 클립보드에 복사합니다.
+		element.blur(); // 선택된 것을 다시 선택안된것으로 바꿈니다.
+		alert("URL이 클립보드에 복사되었습니다");
+	}
+
 	// 태그에 링크걸기
 	const getTaglink = (str) => {
 		const setlink = (tag) => {
@@ -192,6 +199,14 @@ $(() => {
 					}
 				});
 		})();
+		 $(newArticle).find(".con_btnShare").on("click",function(){
+
+    		let texturl=  $(newArticle).find(".urltext");
+            let urlstr = "http://192.168.12.86:8888/insta/contentPage.jsp?b_idx="+contentidx; 
+		 	texturl.val(urlstr);
+    		CopyUrlToClipboard(texturl);
+
+       })
 	};
 
 	// 코멘트 2개만 가져오기
@@ -255,10 +270,13 @@ $(() => {
                                     <div class="art_header_opt"><a href=""></a></div>
                                 </div>
                                 <div class="img_container">
-                                    <img src="${"uploads/" + one_article.img ? "uploads/" + one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" alt="" />
+                                    <img src="${"uploads/" + one_article.img ? "uploads/" + one_article.img : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}" 
+									onerror="this.onerror=null;this.src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg';" 
+									 alt="" />
                                 </div>
                                 <div class="article_content">
                                     <div class="art_content_btns">
+										<input type="text" class="urltext" style="opacity: 0; position: absolute; left: -22222222px; top: -2323232px;" value="/mypage.jsp"> 
                                         <img class="con_btnLike" src="./images/emptyheart.png" alt="" />
                                         <a href="./contentPage.jsp?b_idx=${one_article.idx}"><img class="con_btnCmt" src="./images/comment.png" alt="" /></a>
                                         <img class="con_btnShare" src="./images/share.png" alt="" />

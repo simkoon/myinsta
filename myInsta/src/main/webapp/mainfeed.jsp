@@ -5,17 +5,20 @@
 <jsp:useBean id="contentDAO" class="com.koreait.ContentDAO" />
 <%@ page import="java.sql.*" %>
 
-<%
-request.setCharacterEncoding("UTF-8");
-int m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
-%>
+
 <c:if test="${empty sessionScope.id }">
 	<script>
 		alert("로그인 후 이용해주세요.");
 		location.href = "./login/login.jsp";
 	</script>
 </c:if>
-
+<%
+request.setCharacterEncoding("UTF-8");
+int m_idx1=0;
+if(session.getAttribute("idx")!=null){
+m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
+}
+%>
 <c:set var="memberLists" value="${contentDAO.getMemberLists(0) }" />
 <c:set var="contentList" value="${contentDAO.getContentsForIssue() }" />
 <!DOCTYPE html>
@@ -196,6 +199,7 @@ int m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 													<div>
 														<a href="./contentPage.jsp?b_idx=${item.mc_idx }"><img
 															src="uploads/${item.mc_imageurl }"
+															onerror="this.onerror=null;this.src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg';"
 															alt="" /></a>
 													</div>
 

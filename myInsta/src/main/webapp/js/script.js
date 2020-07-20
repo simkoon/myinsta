@@ -198,7 +198,110 @@ $(function() {
 	});
 });
 
+$(()=>{
+	const getAtlink = (str) => {
+		const setlink = (tag) => {
+			let link =
+				/*html*/
+				`<a style="color: #0095f6" href="./other/otherperson.jsp?userid=${tag.substr(1)}">${tag}</a>`;
 
+			return link;
+		};
+		const emptyFilter = (arrs) => {
+			return arrs.filter(function(item) {
+				return item !== null && item !== undefined && item !== "";
+			});
+		};
+
+		str = str.split(" ");
+		let strmap = /*html*/ ``;
+		str.map((x) => {
+			if (x.includes("@")) {
+				if (x.indexOf("@") != 0) {
+					let notTag = x.trim().split("@");
+					notTag = emptyFilter(notTag);
+					strmap += notTag[0];
+					for (let i = 1; i < notTag.length; i++) {
+						strmap += setlink("@" + notTag[i]);
+					}
+					strmap += " ";
+					return;
+				}
+				if (x.match(/@/g).length > 1) {
+					let sphash = x.trim().split("@");
+
+					sphash = emptyFilter(sphash);
+
+					for (strel of sphash) {
+						strmap += setlink("@" + strel);
+					}
+					strmap += " ";
+					return;
+				}
+				strmap += setlink(x) + " ";
+				return;
+			}
+			strmap += x + " ";
+			return;
+		});
+		return strmap;
+	};
+	const getTaglink = (str) => {
+		const setlink = (tag) => {
+			let link =
+				/*html*/
+				`<a style="color: #0095f6" href="./main_search.jsp?tag=${tag.substr(1)}">${tag}</a>`;
+			return link;
+		};
+		const emptyFilter = (arrs) => {
+			return arrs.filter(function(item) {
+				return item !== null && item !== undefined && item !== "";
+			});
+		};
+
+		str = str.split(" ");
+		let strmap = /*html*/ ``;
+		str.map((x) => {
+			if (x.includes("#")) {
+				if (x.indexOf("#") != 0) {
+					let notTag = x.trim().split("#");
+					notTag = emptyFilter(notTag);
+					strmap += notTag[0];
+					for (let i = 1; i < notTag.length; i++) {
+						strmap += setlink("#" + notTag[i]);
+					}
+					strmap += " ";
+					return;
+				}
+				if (x.match(/#/g).length > 1) {
+					let sphash = x.trim().split("#");
+
+					sphash = emptyFilter(sphash);
+
+					for (strel of sphash) {
+						strmap += setlink("#" + strel);
+					}
+					strmap += " ";
+					return;
+				}
+				strmap += setlink(x) + " ";
+				return;
+			}
+			strmap += x + " ";
+			return;
+		});
+		return strmap;
+	};
+
+	let context= ``;
+  context = $(".page_mycontent").text();
+  console.log("텍스트는" +context);
+let context1 = ``;
+context1 = getAtlink(getTaglink(context));
+ console.log("여기는" + context1);
+ $(".page_mycontent").html(context1);
+ 
+});
 //팝업
 $(function(){
     $("#popbtn5").click(function(){

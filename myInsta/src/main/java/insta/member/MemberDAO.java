@@ -92,7 +92,7 @@ public class MemberDAO {
 	}
 
 	public MemberDTO login(MemberDTO member) {
-		String sql = "SELECT m_idx , m_userid, m_username, m_filepath FROM tb_member WHERE (m_userid=? OR m_email=?) "
+		String sql = "SELECT m_idx , m_userid, m_username, m_filepath,m_intro, m_site, m_gender, m_number FROM tb_member WHERE (m_userid=? OR m_email=?) "
 				+ "AND m_password=PASSWORD(?)";
 
 		try {
@@ -106,7 +106,18 @@ public class MemberDAO {
 				member.setM_idx(Integer.parseInt(rs.getString("m_idx")));
 				member.setM_userid(rs.getString("m_userid"));
 				member.setM_username(rs.getString("m_username"));
-				member.setM_filepath(rs.getString("m_filepath"));
+				member.setM_filepath(rs.getString("m_filepath"));				
+				member.setM_intro(rs.getString("m_intro"));
+				member.setM_site(rs.getString("m_site"));
+				member.setM_number(rs.getString("m_number"));
+				member.setM_gender(rs.getString("m_gender"));
+				
+				
+				
+				
+				
+		
+				
 				return member;
 			}
 		} catch (Exception e) {
@@ -368,5 +379,196 @@ public class MemberDAO {
 		}
 		return null;
 	}
+	
+	
+	
+	
 
+	public int passwordCheck(MemberDTO member) {
+		String sql = "SELECT m_password FROM tb_member WHERE m_userid=?";
+		System.out.println(sql);
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,member.getM_userid());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return 0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				throw new RuntimeException(sqle.getMessage());
+			}
+		}
+		return 1;
+	}
+		
+	public int changePw2(MemberDTO member) {
+		int cnt=0;
+		String sql = "UPDATE tb_member SET m_password=PASSWORD(?) WHERE m_userid=?";
+
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getM_password());
+			pstmt.setString(2, member.getM_userid());
+			 cnt=pstmt.executeUpdate();			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				throw new RuntimeException(sqle.getMessage());
+			}
+		}
+		System.out.print(cnt);
+		return cnt;
+	}
+	public int profiledit(MemberDTO member) {
+		
+		int cnt=0;
+		String sql = "UPDATE tb_member SET m_username=?,m_site=?,m_intro=?,m_number=?,m_gender=? where m_userid=?";
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getM_username());
+			pstmt.setString(2, member.getM_site());
+			pstmt.setString(3, member.getM_intro());
+			pstmt.setString(4, member.getM_number());
+			pstmt.setString(5, member.getM_gender());
+			pstmt.setString(6, member.getM_userid());											
+			 cnt=pstmt.executeUpdate();			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				throw new RuntimeException(sqle.getMessage());
+			}
+		}
+		System.out.print(cnt);
+		return cnt;			
+	}
+	
+
+	public String infoprofile(String id) {
+		String sql = "SELECT * FROM tb_member WHERE m_userid=?";
+
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				
+				String userid = rs.getString("m_userid");
+				String username = rs.getString("m_username");
+				String intro = rs.getString("m_intro");
+				String email = rs.getString("m_email");
+				String number = rs.getString("m_number");
+				String gender = rs.getString("m_gender");
+						
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				throw new RuntimeException(sqle.getMessage());
+			}
+		}
+		return null;
+	}
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*	
+public int modifypassword(String id,String m_password,String m_passwordre) {
+	
+	conn = DBConn.getConnection();
+	String sql="update tb_member set m_password=?";
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, m_password);
+	rs = pstmt.executeQuery();
+	if (rs.next()) {
+	
+	
+	
+}
+*/	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
