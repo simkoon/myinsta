@@ -1,3 +1,4 @@
+<%@page import="insta.db.DBConn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script src="./js/heart_script.js"></script>
@@ -94,6 +95,8 @@ int m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 									}
 									} catch (Exception e1) {
 										e1.printStackTrace();
+									}finally{
+										DBConn.close(conn1, pstmt1, rs1);
 									}
 									%>
 								

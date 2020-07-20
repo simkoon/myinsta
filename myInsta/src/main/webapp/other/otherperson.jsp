@@ -8,7 +8,7 @@
 </head>
 <body>
 <div id="wrap">
-<form id="h_reform">
+
 	<%@ include file="mainHead.jsp" %>
 	<div id="container">
     	<div class="main_rolling_pc box_inner">
@@ -65,7 +65,7 @@
         </div>
     </div>
 	<%@ include file="../mainFooter.jsp" %>
-</form>
+
 </div>
 </body>
 </html>

@@ -41,8 +41,7 @@ m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 				</a>
 			</div>
 			<div class="header_search">
-				<form id="h_reform" action="./main_search.jsp" method="GET"
-					name="searchform">
+				<form id="h_reform" action="./main_search.jsp" method="GET"	name="searchform">
 					<input class="h_Search" type="text" name="tag" placeholder="검색">
 				</form>
 			</div>
@@ -57,7 +56,7 @@ m_idx1 = Integer.parseInt(String.valueOf(session.getAttribute("idx")));
 						</a>
 					</div>
 					<div class="h_meunlist">
-						<a href="./main_search.jsp"> <svg aria-label="타임라인"
+						<a href="./main_search.jsp?tag="> <svg aria-label="타임라인"
 								class="ico_btn" fill="#262626" height="24" viewBox="0 0 48 48"
 								width="24">
                             <path clip-rule="evenodd"

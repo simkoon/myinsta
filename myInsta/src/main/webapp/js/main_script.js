@@ -23,7 +23,7 @@ $(() => {
 			});
 		};
 
-		str = str.split(" ");
+		str = str.replace(/(\r\n|\n|\r)/gm," ").split(" ");
 		let strmap = /*html*/ ``;
 		str.map((x) => {
 			if (x.includes("#")) {
@@ -71,7 +71,7 @@ $(() => {
 			});
 		};
 
-		str = str.split(" ");
+		str = str.replace(/(\r\n|\n|\r)/gm," ").split(" ");
 		let strmap = /*html*/ ``;
 		str.map((x) => {
 			if (x.includes("@")) {

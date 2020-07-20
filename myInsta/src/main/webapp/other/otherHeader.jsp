@@ -39,6 +39,12 @@
 		location.href = "../login/login.jsp";
 	</script>
 </c:if>
+<c:if test="${empty param.userid }">
+	<script>
+		alert("잘못된 접근입니다.");
+		location.href = "../login/login.jsp";
+	</script>
+</c:if>
 
 <%	
 	String otherId = "";
