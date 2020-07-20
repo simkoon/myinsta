@@ -169,13 +169,33 @@ System.out.println(cnt);
                     </button>
                 </div>
                 <br>
-                <button><a href="po6_2">스팸<span class="po6_2_1"></span></a></button>
+                <button id="spam">스팸<span class="po6_2_1"></span></button>
                 <br>
-                <button class="po6_2"><a href="./edit/edit3.jsp">부적절합니다<span class="po6_2_1" style="line-height: 2.2;">
-                </span></a></button>
+                <button class="po6_2" id="inappropriate">부적절합니다<span class="po6_2_1" style="line-height: 2.2;">
+                </span></button>
             </div>
         </div>
     </div>
+     <div id="reportOk">
+        <div id="reportOk_menu">
+            <div class="reportOk_box">신고가 접수 되었습니다.</div>
+            <button type="button" id="ok_btn">확인</button>
+        </div>
+    </div>
+		<script>
+	    $("#spam,#inappropriate").click(function(){	
+		    	let xhr = new XMLHttpRequest();
+		    	let text = $(this).val();
+		    	xhr.open("GET", "./contentreport?id=<%=m_idx%>&text="+text+"&content="+<%=b_idx%>, true);
+		    	xhr.send();
+		    	$("#pop6").fadeOut();
+		    	$("#reportOk").fadeIn();
+	    });
+	    	$("#ok_btn").click(function(){
+		    		$("#reportOk").fadeOut();
+		    });
+	    
+		</script>
     <div id="pop7">
         <div id="pop7_menu">
             <div class="pop7_box"><span class="pop7_id"><%=conList.get(0).getMc_useridx()%></span> 님의 <br>팔로우를 

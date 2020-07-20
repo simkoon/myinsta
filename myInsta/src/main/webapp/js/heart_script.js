@@ -1,10 +1,12 @@
  $(function(){
            $('.hd_heart').on('click', function(){
                if($('.hd_heart_sub').hasClass('on')) {
+                  $(".hd_heartimg").attr("src", "./images/2.PNG");
                    $('.hd_heart_sub').removeClass('on');
                }else {
-                   $('.hd_heart_sub').addClass('on');
                   
+                  $(".hd_heartimg").attr("src", "./images/1.PNG");
+                   $('.hd_heart_sub').addClass('on');
                }
            })
            
